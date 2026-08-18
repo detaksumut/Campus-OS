@@ -295,7 +295,7 @@ function PortalMainLayout() {
 
           {/* 16. PERPUSTAKAAN, ASET & ALUMNI */}
           {(activeTab === 'perpustakaan' || activeTab === 'aset' || activeTab === 'alumni') && (
-            <PerpustakaanWorkspaceView defaultSub={activeTab as any} />
+            <PerpustakaanWorkspaceView defaultSub={activeTab as any} userRole={userRole} />
           )}
 
           {/* 17. LAPORAN & DASHBOARD */}

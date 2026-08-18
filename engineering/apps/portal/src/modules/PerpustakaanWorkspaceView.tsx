@@ -65,7 +65,10 @@ export interface AssetItem {
   lastMaintenanceDate?: string;
 }
 
-export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' | 'aset' | 'alumni' }> = ({ defaultSub = 'perpustakaan' }) => {
+export const PerpustakaanWorkspaceView: React.FC<{ 
+  defaultSub?: 'perpustakaan' | 'aset' | 'alumni';
+  userRole?: string;
+}> = ({ defaultSub = 'perpustakaan', userRole = 'ADMIN' }) => {
   const { profile } = useTenant();
   const [subTab, setSubTab] = useState<'perpustakaan' | 'aset' | 'alumni'>(defaultSub);
   
@@ -762,15 +765,15 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
                 <p className="text-xs text-slate-500 mt-0.5">
                   Kelola kuantitas unit, mutasi lokasi ruangan, pembaruan kondisi fisik, dan nilai buku aset kampus.
                 </p>
-              </div>
-
-              <button
-                onClick={() => setShowAddAssetModal(true)}
-                className="px-4 py-2.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-600/30 flex items-center gap-1.5 hover:scale-105 transition-all shrink-0"
-              >
-                <Plus size={14} />
-                <span>+ Tambah Aset Inventaris Baru</span>
-              </button>
+               {userRole === 'ADMIN' && (
+                <button
+                  onClick={() => setShowAddAssetModal(true)}
+                  className="px-4 py-2.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-600/30 flex items-center gap-1.5 hover:scale-105 transition-all shrink-0"
+                >
+                  <Plus size={14} />
+                  <span>Tambah Aset Inventaris Baru</span>
+                </button>
+              )}
             </div>
 
             {/* Filter & Search Bar */}
@@ -807,7 +810,7 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
                     <th className="p-3">Kode BMN & Barcode</th>
                     <th className="p-3">Nama Alat & Kategori</th>
                     <th className="p-3">Lokasi Ruangan & PIC</th>
-                    <th className="p-3 text-center">Jumlah (Adjust Qty)</th>
+                    <th className="p-3 text-center">Jumlah (Kuantitas)</th>
                     <th className="p-3 text-center">Kondisi Aset</th>
                     <th className="p-3 text-right">Nilai Perolehan</th>
                     <th className="p-3 text-center">Aksi Penyesuaian</th>
@@ -839,29 +842,35 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
                           <span className="text-[10px] text-slate-400">PIC: {asset.pic}</span>
                         </td>
                         <td className="p-3 text-center">
-                          <div className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                            <button
-                              onClick={() => {
-                                setAssetList(prev => prev.map(a => a.id === asset.id ? { ...a, quantity: Math.max(0, a.quantity - 1) } : a));
-                              }}
-                              className="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-black hover:bg-rose-500 hover:text-white transition-colors flex items-center justify-center text-xs shadow-sm"
-                              title="Kurangi 1 unit"
-                            >
-                              -
-                            </button>
-                            <span className="font-mono font-black text-sm px-1.5 text-slate-900 dark:text-white">
+                          {userRole === 'ADMIN' ? (
+                            <div className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                              <button
+                                onClick={() => {
+                                  setAssetList(prev => prev.map(a => a.id === asset.id ? { ...a, quantity: Math.max(0, a.quantity - 1) } : a));
+                                }}
+                                className="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-black hover:bg-rose-500 hover:text-white transition-colors flex items-center justify-center text-xs shadow-sm"
+                                title="Kurangi 1 unit"
+                              >
+                                -
+                              </button>
+                              <span className="font-mono font-black text-sm px-1.5 text-slate-900 dark:text-white">
+                                {asset.quantity} {asset.unit}
+                              </span>
+                              <button
+                                onClick={() => {
+                                  setAssetList(prev => prev.map(a => a.id === asset.id ? { ...a, quantity: a.quantity + 1 } : a));
+                                }}
+                                className="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-black hover:bg-emerald-500 hover:text-white transition-colors flex items-center justify-center text-xs shadow-sm"
+                                title="Tambah 1 unit"
+                              >
+                                +
+                              </button>
+                            </div>
+                          ) : (
+                            <span className="font-mono font-black text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 inline-block">
                               {asset.quantity} {asset.unit}
                             </span>
-                            <button
-                              onClick={() => {
-                                setAssetList(prev => prev.map(a => a.id === asset.id ? { ...a, quantity: a.quantity + 1 } : a));
-                              }}
-                              className="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-black hover:bg-emerald-500 hover:text-white transition-colors flex items-center justify-center text-xs shadow-sm"
-                              title="Tambah 1 unit"
-                            >
-                              +
-                            </button>
-                          </div>
+                          )}
                         </td>
                         <td className="p-3 text-center">
                           <span className={`px-2.5 py-1 text-[10px] font-black rounded-full ${
@@ -878,12 +887,18 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
                           Rp {asset.assetValue.toLocaleString('id-ID')}
                         </td>
                         <td className="p-3 text-center">
-                          <button
-                            onClick={() => setEditingAsset(asset)}
-                            className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition-all hover:scale-105 shadow-sm"
-                          >
-                            ⚙️ Adjust & Edit
-                          </button>
+                          {userRole === 'ADMIN' ? (
+                            <button
+                              onClick={() => setEditingAsset(asset)}
+                              className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition-all hover:scale-105 shadow-sm"
+                            >
+                              ⚙️ Adjust & Edit
+                            </button>
+                          ) : (
+                            <span className="text-[10px] font-medium text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">
+                              Read-Only
+                            </span>
+                          )}
                         </td>
                       </tr>
                     ))}
