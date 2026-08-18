@@ -1,6 +1,6 @@
 import { RegistrationFacade } from '../application/facade/RegistrationFacade';
 import { RegistrationRequestDTO, RegistrationResponseDTO } from '../application/dto/RegistrationDTO';
-import { ExecutionContext } from '../../../../../../application-kernel/src/core/Kernel';
+import { ExecutionContext } from '@campus-os/application-kernel';
 
 /**
  * RegistrationApi

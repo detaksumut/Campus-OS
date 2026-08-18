@@ -1,4 +1,4 @@
-import { ICommand } from '../../../../../../../application-kernel/src/core/Kernel';
+import { ICommand } from '@campus-os/application-kernel';
 import { RegistrationRequestDTO } from '../dto/RegistrationRequestDTO';
 
 export class RegisterStudentCommand implements ICommand {

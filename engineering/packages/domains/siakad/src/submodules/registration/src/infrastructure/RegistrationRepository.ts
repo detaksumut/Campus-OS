@@ -1,4 +1,4 @@
-import { IDatabaseExecutor } from '../../../../../../../platforms/database/src/contracts/DatabaseContracts';
+import { IDatabaseExecutor } from '@campus-os/platform-database';
 
 export class RegistrationRepository {
   // ORM-Agnostic: We only know about IDatabaseExecutor.

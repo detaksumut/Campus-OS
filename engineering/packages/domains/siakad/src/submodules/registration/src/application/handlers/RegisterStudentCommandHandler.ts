@@ -1,5 +1,5 @@
 import { RegisterStudentCommand } from '../commands/RegisterStudentCommand';
-import { ExecutionContext } from '../../../../../../../application-kernel/src/core/Kernel';
+import { ExecutionContext } from '@campus-os/application-kernel';
 import { RegistrationResponseDTO } from '../dto/RegistrationDTO';
 
 export class RegisterStudentCommandHandler {

@@ -16,6 +16,8 @@
     "@campus-os/identity-runtime": "*",
     "@campus-os/observability-runtime": "*",
     "@campus-os/workspace-runtime": "*",
+    "@campus-os/presentation-kernel": "*",
+    "@campus-os/presentation-core": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@tanstack/react-router": "^1.15.1",

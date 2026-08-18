@@ -1,4 +1,4 @@
-import { Mediator, ExecutionContext } from '../../../../../../../application-kernel/src/core/Kernel';
+import { Mediator, ExecutionContext } from '@campus-os/application-kernel';
 import { RegisterStudentCommand } from '../commands/RegisterStudentCommand';
 import { RegistrationRequestDTO, RegistrationResponseDTO } from '../dto/RegistrationDTO';
 

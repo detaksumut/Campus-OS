@@ -1,6 +1,5 @@
 import React from 'react';
-import { GlobalRegistry } from '../../../../../../../../presentation-kernel/src/registry/PresentationRegistry';
-import { ActionRuntime } from '../../../../../../../../presentation-kernel/src/runtime/ActionRuntime';
+import { GlobalRegistry, ActionRuntime } from '@campus-os/presentation-kernel';
 
 const actionRuntime = new ActionRuntime(GlobalRegistry);
 
