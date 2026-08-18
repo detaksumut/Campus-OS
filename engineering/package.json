@@ -3,8 +3,10 @@
   "private": true,
   "workspaces": [
     "apps/*",
+    "packages/*",
     "packages/foundation/*",
     "packages/platform/*",
+    "packages/platforms/*",
     "packages/domains/*",
     "packages/kernel/*",
     "packages/bindings/*",
