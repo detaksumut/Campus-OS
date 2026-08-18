@@ -121,6 +121,46 @@ export const SSOGatewayScreen: React.FC<SSOGatewayScreenProps> = ({ onLoginSucce
               <span className="text-[10px] text-slate-400">PDDIKTI Kemendikbudristek RI</span>
             </div>
           </div>
+
+          {/* 🌟 DAFTAR AKUN UJI COBA RESMI */}
+          <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-2 text-xs">
+            <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
+              <span className="font-bold text-blue-400">🔑 Daftar Akun Uji Coba SSO (Siap Pakai):</span>
+              <span className="text-[10px] text-slate-500 font-mono">1-Klik Pilih Role di Kanan</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-[11px]">
+              <div className="p-2 rounded-xl bg-slate-950/60 border border-emerald-900/40">
+                <span className="font-bold text-emerald-400 block">1. Administrator IT</span>
+                <span className="text-slate-400 block">User: <b className="text-white">admin@kampus.ac.id</b></span>
+                <span className="text-slate-400">Pass: <b className="text-white">Admin#Campus2024</b></span>
+              </div>
+              <div className="p-2 rounded-xl bg-slate-950/60 border border-amber-900/40">
+                <span className="font-bold text-amber-400 block">2. Rektor / Direktur</span>
+                <span className="text-slate-400 block">User: <b className="text-white">rektor@kampus.ac.id</b></span>
+                <span className="text-slate-400">Pass: <b className="text-white">Rektor#2024</b></span>
+              </div>
+              <div className="p-2 rounded-xl bg-slate-950/60 border border-blue-900/40">
+                <span className="font-bold text-blue-400 block">3. Dosen Pengajar</span>
+                <span className="text-slate-400 block">NIDN: <b className="text-white">0012057801</b></span>
+                <span className="text-slate-400">Pass: <b className="text-white">Dsn#0012057801</b></span>
+              </div>
+              <div className="p-2 rounded-xl bg-slate-950/60 border border-purple-900/40">
+                <span className="font-bold text-purple-400 block">4. Mahasiswa Aktif</span>
+                <span className="text-slate-400 block">NIM: <b className="text-white">200101012</b></span>
+                <span className="text-slate-400">Pass: <b className="text-white">Mhs#200101012#2024</b></span>
+              </div>
+              <div className="p-2 rounded-xl bg-slate-950/60 border border-teal-900/40">
+                <span className="font-bold text-teal-400 block">5. Pegawai / Tendik</span>
+                <span className="text-slate-400 block">NIP: <b className="text-white">PEG-001</b></span>
+                <span className="text-slate-400">Pass: <b className="text-white">Peg#19850101</b></span>
+              </div>
+              <div className="p-2 rounded-xl bg-slate-950/60 border border-rose-900/40">
+                <span className="font-bold text-rose-400 block">6. Pengurus Yayasan</span>
+                <span className="text-slate-400 block">ID: <b className="text-white">YYS-001</b></span>
+                <span className="text-slate-400">Pass: <b className="text-white">Yys#YAY-001</b></span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right Column: Login / Register SSO Card */}
