@@ -30,7 +30,7 @@ export const RecentApplicationsWidget: React.FC = () => {
             </div>
             
             <div className="text-right">
-              <span className={\`inline-block px-2 py-1 text-[10px] font-bold rounded-full mb-1 \${app.paymentStatus === 'PAID' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}\`}>
+              <span className={`inline-block px-2 py-1 text-[10px] font-bold rounded-full mb-1 ${app.paymentStatus === 'PAID' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
                 {app.paymentStatus}
               </span>
               <p className="text-xs font-semibold text-slate-500">{new Date(app.registrationDate).toLocaleDateString('id-ID')}</p>

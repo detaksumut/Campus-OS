@@ -2,18 +2,8 @@
   "name": "@campus-os/application-layer-kernel",
   "version": "1.0.0",
   "description": "Campus OS Application Layer Kernel",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
+  "main": "src/index.ts",
   "dependencies": {
     "@campus-os/kernel-events": "*"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0",
-    "jest": "^29.5.0",
-    "@types/jest": "^29.5.0"
   }
 }

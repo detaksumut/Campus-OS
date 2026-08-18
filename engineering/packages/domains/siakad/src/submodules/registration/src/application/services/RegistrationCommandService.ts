@@ -23,7 +23,7 @@ export class RegistrationCommandService {
       const provision: StudentProvision = {
         studentProvisionId: crypto.randomUUID(),
         applicantId,
-        generatedNIM: \`\${generation}-\${studyProgramId.substring(0,3)}-\${Math.floor(Math.random() * 1000)}\`,
+        generatedNIM: `${generation}-${studyProgramId.substring(0,3)}-${Math.floor(Math.random() * 1000)}`,
         studyProgramId,
         admissionGeneration: generation
       };

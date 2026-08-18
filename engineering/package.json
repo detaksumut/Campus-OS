@@ -17,7 +17,7 @@
     "tools/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --filter=portal",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "lint:architecture": "ts-node-dev tools/architecture-governance/run-compliance.ts --mode=development",
