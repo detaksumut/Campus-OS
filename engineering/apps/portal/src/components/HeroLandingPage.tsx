@@ -73,16 +73,16 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
             <span>Smart Enterprise Higher Education Operating System</span>
           </div>
 
+          <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+            Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek. Menghubungkan Kurikulum OBE, Perkuliahan Hybrid WebRTC, Wisuda PIN Dikti SIVIL, Jurnal Ilmiah OJS, dan Keuangan Multi-Bank dalam satu ekosistem digital.
+          </p>
+
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-snug max-w-3xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
             <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {profile.institutionName}
             </span>
           </h1>
-
-          <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-            Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek. Menghubungkan Kurikulum OBE, Perkuliahan Hybrid WebRTC, Wisuda PIN Dikti SIVIL, Jurnal Ilmiah OJS, dan Keuangan Multi-Bank dalam satu ekosistem digital.
-          </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
