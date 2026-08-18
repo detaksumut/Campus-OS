@@ -452,13 +452,15 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
 
               {/* 5 Pasal Kesepakatan Kontrak */}
               <div className="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
-                <h5 className="font-bold text-slate-700 dark:text-slate-300">Pasal Ketentuan Perkuliahan:</h5>
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5 leading-relaxed">
-                  <p><b>1. Toleransi Keterlambatan:</b> Maksimal 15 menit setelah jadwal perkuliahan dimulai.</p>
-                  <p><b>2. Hak Mahasiswa:</b> Berhak mendapatkan RPS, Silabus, bahan tayang modul, dan transparansi nilai.</p>
-                  <p><b>3. Tugas Terstruktur:</b> Pengumpulan tugas melalui portal LMS dengan batas waktu tegas.</p>
-                  <p><b>4. Bebas Plagiarisme:</b> Pelanggaran kecurangan ujian dikenakan sanksi nilai E (Gagal).</p>
-                  <p><b>5. Komposisi Nilai:</b> Kehadiran 10% + Tugas 20% + Praktikum 20% + UTS 25% + UAS 25% = 100%.</p>
+                <h5 className="font-black text-slate-800 dark:text-white flex items-center gap-1.5">
+                  <span>📜 5 Pasal Ketentuan & Tata Tertib Perkuliahan:</span>
+                </h5>
+                <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 space-y-2.5 leading-relaxed font-medium">
+                  <p><b className="text-amber-600 dark:text-amber-400 font-bold">1. Toleransi Keterlambatan:</b> Maksimal 15 menit setelah jadwal perkuliahan dimulai.</p>
+                  <p><b className="text-blue-600 dark:text-blue-400 font-bold">2. Hak Mahasiswa:</b> Berhak mendapatkan RPS, Silabus, bahan tayang modul, dan transparansi nilai.</p>
+                  <p><b className="text-emerald-600 dark:text-emerald-400 font-bold">3. Tugas Terstruktur:</b> Pengumpulan tugas melalui portal LMS dengan batas waktu tegas.</p>
+                  <p><b className="text-rose-600 dark:text-rose-400 font-bold">4. Bebas Plagiarisme:</b> Pelanggaran kecurangan ujian dikenakan sanksi nilai E (Gagal).</p>
+                  <p><b className="text-indigo-600 dark:text-indigo-400 font-bold">5. Komposisi Nilai:</b> Kehadiran 10% + Tugas 20% + Praktikum 20% + UTS 25% + UAS 25% = 100%.</p>
                 </div>
               </div>
             </div>
