@@ -73,7 +73,7 @@ function PortalMainLayout() {
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden font-sans ${mode === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
-      {/* 1. Top Header with RBAC Switcher */}
+      {/* 1. Top Header with 6-Role Switcher (Rektor & Administrator Terpisah) */}
       <Header 
         userRole={userRole} 
         onChangeRole={setUserRole} 
@@ -112,7 +112,15 @@ function PortalMainLayout() {
           {/* 🌟 DASHBOARD DINAMIS SESUAI PERAN PENGGUNA SSO */}
           {activeTab === 'dashboard' && (
             <>
-              {/* JIKA ROLE DOSEN -> RENDER DASHBOARD DOSEN (KONTRAK SKS BKD, 16 SESI BAP, APPROVAL KRS) */}
+              {/* 1. JIKA ROLE REKTOR / DIREKTUR -> RENDER DASHBOARD EKSEKUTIF REKTOR & WAREK 1-4 */}
+              {userRole === 'REKTOR' && (
+                <RectorDashboardView 
+                  onNavigate={handleSelectMenu}
+                  onOpenCustomizer={() => setShowCustomizer(true)}
+                />
+              )}
+
+              {/* 2. JIKA ROLE DOSEN -> RENDER DASHBOARD DOSEN (KONTRAK SKS BKD, 16 SESI BAP, APPROVAL KRS) */}
               {userRole === 'DOSEN' && (
                 <LecturerDashboardView 
                   onNavigate={handleSelectMenu}
@@ -120,7 +128,7 @@ function PortalMainLayout() {
                 />
               )}
 
-              {/* JIKA ROLE MAHASISWA -> RENDER DASHBOARD MAHASISWA (STATUS SKS, KRS, JADWAL KULIAH, UKT, TUGAS) */}
+              {/* 3. JIKA ROLE MAHASISWA -> RENDER DASHBOARD MAHASISWA (STATUS SKS, KRS, JADWAL KULIAH, UKT, TUGAS) */}
               {userRole === 'MAHASISWA' && (
                 <StudentDashboardView 
                   onNavigate={handleSelectMenu}
@@ -128,13 +136,29 @@ function PortalMainLayout() {
                 />
               )}
 
-              {/* JIKA ROLE ADMIN / DIREKTUR -> RENDER DASHBOARD EKSEKUTIF REKTOR & SISTEM */}
+              {/* 4. JIKA ROLE PEGAWAI / TENDIK -> RENDER DASHBOARD PEGAWAI (PRESENSI, LOKET BAAK, SIMAK-BMN) */}
+              {userRole === 'PEGAWAI' && (
+                <StaffDashboardView 
+                  onNavigate={handleSelectMenu}
+                  onOpenCustomizer={() => setShowCustomizer(true)}
+                />
+              )}
+
+              {/* 5. JIKA ROLE PENGURUS YAYASAN -> RENDER DASHBOARD YAYASAN (VALUASI ASET, KAS, TREN PMB) */}
+              {userRole === 'YAYASAN' && (
+                <FoundationDashboardView 
+                  onNavigate={handleSelectMenu}
+                  onOpenCustomizer={() => setShowCustomizer(true)}
+                />
+              )}
+
+              {/* 6. JIKA ROLE ADMINISTRATOR (SUPER ADMIN) -> RENDER KONSOL ADMIN PUSAT */}
               {userRole === 'ADMIN' && (
                 <div className="space-y-6">
                   {/* Hero Banner */}
                   <HeroBanner 
                     onOpenDashboard={() => handleSelectMenu('dashboard', 'Beranda')}
-                    onOpenGuide={() => handleSelectMenu('akademik', 'Sistem Akademik')}
+                    onOpenGuide={() => handleSelectMenu('migrasi', 'Dropship & Migrasi Data')}
                   />
 
                   {/* Quick Access Grid (8 Items) */}
@@ -196,8 +220,30 @@ function PortalMainLayout() {
           {/* 12. JURNAL OJS / PKP 3.x */}
           {activeTab === 'ojs' && <OJSWorkspaceView />}
 
-          {/* 13. DROPSHIP & PENYESUAIAN DATA MASTER */}
-          {activeTab === 'migrasi' && <DataMigrationWorkspaceView />}
+          {/* 13. DROPSHIP & PENYESUAIAN DATA MASTER (HANYA UNTUK ADMINISTRATOR BACKEND) */}
+          {activeTab === 'migrasi' && (
+            userRole === 'ADMIN' ? (
+              <DataMigrationWorkspaceView />
+            ) : (
+              <div className="p-12 text-center rounded-3xl bg-slate-900 border border-slate-800 text-white space-y-4 max-w-lg mx-auto mt-12 shadow-2xl">
+                <div className="w-16 h-16 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 mx-auto flex items-center justify-center text-2xl font-black">
+                  🔒
+                </div>
+                <div>
+                  <h3 className="text-lg font-black">Akses Terbatas: Konsol Administrator (Backend)</h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Kanal Ingestion Dropship & Migrasi Data hanya dapat dikelola oleh Administrator BAAK / IT Pusat setelah login SSO dengan peran Admin.
+                  </p>
+                </div>
+                <button 
+                  onClick={() => handleSelectMenu('dashboard', 'Beranda')} 
+                  className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-blue-600/30"
+                >
+                  Kembali ke Dashboard Utama
+                </button>
+              </div>
+            )
+          )}
 
           {/* 14. PDDIKTI NEO FEEDER */}
           {activeTab === 'pddikti' && <PDDIKTIWorkspaceView />}

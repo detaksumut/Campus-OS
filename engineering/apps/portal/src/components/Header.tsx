@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { 
   Search, Bell, Mail, ChevronDown, CheckCircle, ShieldCheck, 
   GraduationCap, BookOpen, LogIn, UserPlus, Lock, Key, LogOut, CheckCircle2,
-  Eye, EyeOff, ShieldAlert
+  ShieldAlert, Landmark, Briefcase, Building2
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
-export type UserRole = 'ADMIN' | 'DOSEN' | 'MAHASISWA';
+export type UserRole = 'ADMIN' | 'REKTOR' | 'DOSEN' | 'MAHASISWA' | 'PEGAWAI' | 'YAYASAN';
 
 interface HeaderProps {
   userRole: UserRole;
@@ -51,11 +51,17 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
   const getRoleBadge = () => {
     switch (userRole) {
       case 'ADMIN':
-        return { label: 'Administrator (Pak Direktur)', subtitle: 'Direktur / BAAK IT', icon: ShieldCheck, color: 'bg-emerald-500', defaultPass: 'Admin#Campus2024' };
+        return { label: 'Administrator Sistem (BAAK / IT)', subtitle: 'Super Admin Backend Console', icon: ShieldCheck, color: 'bg-emerald-500', defaultPass: 'Admin#Campus2024' };
+      case 'REKTOR':
+        return { label: `Prof. Dr. Ir. H. M. Yusuf, M.T.`, subtitle: `${profile.executiveTitle} / Pimpinan Eksekutif`, icon: Landmark, color: 'bg-amber-500', defaultPass: 'Rektor#2024' };
       case 'DOSEN':
         return { label: 'Dr. Hendra Wijaya, M.T.', subtitle: 'Dosen Tetap (NIDN: 0012057801)', icon: BookOpen, color: 'bg-blue-500', defaultPass: 'Dsn#0012057801' };
       case 'MAHASISWA':
         return { label: 'Rian Hidayat (Mahasiswa)', subtitle: 'NIM: 200101012 • D4 Pariwisata', icon: GraduationCap, color: 'bg-purple-500', defaultPass: 'Mhs#200101012#2024' };
+      case 'PEGAWAI':
+        return { label: 'Budi Santoso, S.Kom.', subtitle: 'Staf Tendik / Layanan BAAK', icon: Briefcase, color: 'bg-teal-500', defaultPass: 'Peg#19850101' };
+      case 'YAYASAN':
+        return { label: 'Drs. H. M. Syafei, M.Si.', subtitle: 'Ketua Pengurus Yayasan', icon: Building2, color: 'bg-rose-500', defaultPass: 'Yys#YAY-001' };
     }
   };
 
@@ -220,60 +226,121 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
               <ChevronDown size={14} className="text-slate-400" />
             </div>
 
-            {/* User Dropdown Menu */}
+            {/* User Dropdown Menu - TERPISAH REKTOR & ADMINISTRATOR */}
             {showRoleMenu && (
-              <div className="absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-800 rounded-2xl p-2.5 shadow-2xl z-50 text-white space-y-1.5 animate-in zoom-in-95">
+              <div className="absolute right-0 mt-2 w-80 bg-slate-900 border border-slate-800 rounded-2xl p-2.5 shadow-2xl z-50 text-white space-y-1.5 animate-in zoom-in-95">
                 <div className="p-2 border-b border-slate-800 flex items-center justify-between">
-                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Akun SSO Terverifikasi</p>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Pilih Peran SSO Aktif</p>
                   <span className="px-1.5 py-0.5 text-[9px] font-black bg-emerald-500/20 text-emerald-400 rounded">
-                    Aktif
+                    Terverifikasi
                   </span>
                 </div>
 
-                <div className="p-1">
-                  <p className="text-[10px] text-slate-400 mb-1 px-1 font-semibold">Ganti Peran SSO:</p>
+                <div className="p-1 space-y-1">
+                  {/* 1. ADMINISTRATOR SISTEM (BACKEND) */}
                   <button
                     onClick={() => {
                       onChangeRole('ADMIN');
                       setShowRoleMenu(false);
                     }}
                     className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
-                      userRole === 'ADMIN' ? 'bg-blue-600/20 text-white font-bold' : 'hover:bg-slate-800 text-slate-300 text-xs'
+                      userRole === 'ADMIN' ? 'bg-emerald-600/20 text-emerald-300 font-bold border border-emerald-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
                     }`}
                   >
-                    <ShieldCheck size={14} className="text-emerald-400" />
-                    <span className="text-xs">1. Administrator / Direktur</span>
+                    <ShieldCheck size={15} className="text-emerald-400 shrink-0" />
+                    <div>
+                      <span className="text-xs block font-bold">1. Administrator (BAAK / IT)</span>
+                      <span className="text-[10px] text-slate-400">Pengelola Data Dropship & Backend</span>
+                    </div>
                   </button>
 
+                  {/* 2. REKTOR / DIREKTUR (PIMPINAN EKSEKUTIF) */}
+                  <button
+                    onClick={() => {
+                      onChangeRole('REKTOR');
+                      setShowRoleMenu(false);
+                    }}
+                    className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
+                      userRole === 'REKTOR' ? 'bg-amber-600/20 text-amber-300 font-bold border border-amber-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
+                    }`}
+                  >
+                    <Landmark size={15} className="text-amber-400 shrink-0" />
+                    <div>
+                      <span className="text-xs block font-bold">2. {profile.executiveTitle} / Rektor</span>
+                      <span className="text-[10px] text-slate-400">Dashboard Eksekutif IKU & Kampus</span>
+                    </div>
+                  </button>
+
+                  {/* 3. DOSEN PENGAJAR */}
                   <button
                     onClick={() => {
                       onChangeRole('DOSEN');
                       setShowRoleMenu(false);
                     }}
                     className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
-                      userRole === 'DOSEN' ? 'bg-blue-600/20 text-white font-bold' : 'hover:bg-slate-800 text-slate-300 text-xs'
+                      userRole === 'DOSEN' ? 'bg-blue-600/20 text-blue-300 font-bold border border-blue-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
                     }`}
                   >
-                    <BookOpen size={14} className="text-blue-400" />
-                    <span className="text-xs">2. Dosen Pengajar</span>
+                    <BookOpen size={15} className="text-blue-400 shrink-0" />
+                    <div>
+                      <span className="text-xs block font-bold">3. Dosen Pengajar</span>
+                      <span className="text-[10px] text-slate-400">BKD 12-16 SKS & Validasi KRS</span>
+                    </div>
                   </button>
 
+                  {/* 4. MAHASISWA AKTIF */}
                   <button
                     onClick={() => {
                       onChangeRole('MAHASISWA');
                       setShowRoleMenu(false);
                     }}
                     className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
-                      userRole === 'MAHASISWA' ? 'bg-blue-600/20 text-white font-bold' : 'hover:bg-slate-800 text-slate-300 text-xs'
+                      userRole === 'MAHASISWA' ? 'bg-purple-600/20 text-purple-300 font-bold border border-purple-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
                     }`}
                   >
-                    <GraduationCap size={14} className="text-purple-400" />
-                    <span className="text-xs">3. Mahasiswa Aktif</span>
+                    <GraduationCap size={15} className="text-purple-400 shrink-0" />
+                    <div>
+                      <span className="text-xs block font-bold">4. Mahasiswa Aktif</span>
+                      <span className="text-[10px] text-slate-400">Portal KRS, Jadwal & UKT</span>
+                    </div>
+                  </button>
+
+                  {/* 5. PEGAWAI / TENDIK */}
+                  <button
+                    onClick={() => {
+                      onChangeRole('PEGAWAI');
+                      setShowRoleMenu(false);
+                    }}
+                    className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
+                      userRole === 'PEGAWAI' ? 'bg-teal-600/20 text-teal-300 font-bold border border-teal-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
+                    }`}
+                  >
+                    <Briefcase size={15} className="text-teal-400 shrink-0" />
+                    <div>
+                      <span className="text-xs block font-bold">5. Pegawai / Tendik</span>
+                      <span className="text-[10px] text-slate-400">Layanan Dokumen BAAK & Presensi</span>
+                    </div>
+                  </button>
+
+                  {/* 6. PENGURUS YAYASAN */}
+                  <button
+                    onClick={() => {
+                      onChangeRole('YAYASAN');
+                      setShowRoleMenu(false);
+                    }}
+                    className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
+                      userRole === 'YAYASAN' ? 'bg-rose-600/20 text-rose-300 font-bold border border-rose-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
+                    }`}
+                  >
+                    <Building2 size={15} className="text-rose-400 shrink-0" />
+                    <div>
+                      <span className="text-xs block font-bold">6. Pengurus Yayasan</span>
+                      <span className="text-[10px] text-slate-400">Valuasi Aset & Kesehatan Kas</span>
+                    </div>
                   </button>
                 </div>
 
                 <div className="pt-2 border-t border-slate-800 space-y-1">
-                  {/* 🔑 TOMBOL GANTI PASSWORD */}
                   <button
                     onClick={() => {
                       setShowRoleMenu(false);
@@ -456,10 +523,22 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
                         setLoginIdentifier('admin@kampus.ac.id');
                       }}
                       className={`p-2 rounded-xl border text-center transition-all ${
-                        loginSelectedRole === 'ADMIN' ? 'bg-blue-600/30 border-blue-500 font-bold text-white' : 'border-slate-700 text-slate-400'
+                        loginSelectedRole === 'ADMIN' ? 'bg-emerald-600/30 border-emerald-500 font-bold text-white' : 'border-slate-700 text-slate-400'
                       }`}
                     >
-                      👑 Admin
+                      🛡️ Admin IT
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLoginSelectedRole('REKTOR');
+                        setLoginIdentifier('rektor@kampus.ac.id');
+                      }}
+                      className={`p-2 rounded-xl border text-center transition-all ${
+                        loginSelectedRole === 'REKTOR' ? 'bg-amber-600/30 border-amber-500 font-bold text-white' : 'border-slate-700 text-slate-400'
+                      }`}
+                    >
+                      🏛️ Rektor
                     </button>
                     <button
                       type="button"
@@ -480,10 +559,34 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
                         setLoginIdentifier('200101012');
                       }}
                       className={`p-2 rounded-xl border text-center transition-all ${
-                        loginSelectedRole === 'MAHASISWA' ? 'bg-blue-600/30 border-blue-500 font-bold text-white' : 'border-slate-700 text-slate-400'
+                        loginSelectedRole === 'MAHASISWA' ? 'bg-purple-600/30 border-purple-500 font-bold text-white' : 'border-slate-700 text-slate-400'
                       }`}
                     >
                       👨‍🎓 Mahasiswa
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLoginSelectedRole('PEGAWAI');
+                        setLoginIdentifier('PEG-001');
+                      }}
+                      className={`p-2 rounded-xl border text-center transition-all ${
+                        loginSelectedRole === 'PEGAWAI' ? 'bg-teal-600/30 border-teal-500 font-bold text-white' : 'border-slate-700 text-slate-400'
+                      }`}
+                    >
+                      💼 Pegawai
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLoginSelectedRole('YAYASAN');
+                        setLoginIdentifier('YYS-001');
+                      }}
+                      className={`p-2 rounded-xl border text-center transition-all ${
+                        loginSelectedRole === 'YAYASAN' ? 'bg-rose-600/30 border-rose-500 font-bold text-white' : 'border-slate-700 text-slate-400'
+                      }`}
+                    >
+                      🏛️ Yayasan
                     </button>
                   </div>
                 </div>
@@ -520,18 +623,6 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
                     <LogIn size={15} />
                     <span>Masuk ke Campus OS Gateway</span>
                   </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsLoggedIn(true);
-                      onChangeRole('ADMIN');
-                      setShowSSOModal(false);
-                    }}
-                    className="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs flex items-center justify-center gap-2 border border-slate-700"
-                  >
-                    <span>Masuk dengan Google Workspace (@kampus.ac.id)</span>
-                  </button>
                 </div>
               </form>
             )}
@@ -555,7 +646,7 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
                   >
                     <option value="MAHASISWA">Calon / Mahasiswa Baru (Camaba / Aktif)</option>
                     <option value="DOSEN">Dosen Pengajar / Peneliti</option>
-                    <option value="ADMIN">Staf Administrasi / Pegawai Tendik</option>
+                    <option value="PEGAWAI">Staf Administrasi / Pegawai Tendik</option>
                   </select>
                 </div>
 
