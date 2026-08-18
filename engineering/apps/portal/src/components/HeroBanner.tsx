@@ -38,30 +38,31 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenDashboard, onOpenG
   const current = slides[activeSlide % slides.length];
 
   return (
-    <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-700/50 bg-slate-950 text-white min-h-[280px] flex flex-col justify-between p-8 group">
-      {/* Background Campus Photo with Rich Vibrant Overlay */}
+    <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-blue-500/20 text-white min-h-[300px] flex flex-col justify-between p-8 group">
+      {/* 100% Full Brightness & Crystal Clear Campus Photo (No Black Bias) */}
       <img 
         src={current.bgImg} 
         alt="Campus Hero" 
-        className="absolute inset-0 w-full h-full object-cover object-center opacity-75 group-hover:scale-105 transition-transform duration-1000 z-0"
+        className="absolute inset-0 w-full h-full object-cover object-center opacity-100 group-hover:scale-105 transition-transform duration-1000 z-0"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/65 to-slate-950/20 z-10" />
+      {/* Subtle, crystal clear glass gradient just enough for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-slate-900/25 to-transparent z-10" />
 
-      {/* Hero Content */}
-      <div className="relative z-20 max-w-2xl">
-        <p className="text-xs font-bold text-blue-400 tracking-wider uppercase mb-1">
+      {/* Hero Content with Crisp Drop Shadows */}
+      <div className="relative z-20 max-w-2xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+        <p className="text-xs font-black text-blue-300 tracking-wider uppercase mb-1 drop-shadow-md">
           Welcome to
         </p>
-        <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-1">
+        <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-1 drop-shadow-lg">
           {current.title}
         </h2>
-        <h3 className="text-base md:text-lg font-extrabold text-blue-300 mb-3 tracking-wide">
+        <h3 className="text-base md:text-lg font-extrabold text-blue-200 mb-3 tracking-wide drop-shadow-md">
           {current.institution}
         </h3>
-        <p className="text-xs font-semibold text-slate-300 mb-1">
+        <p className="text-xs font-bold text-white mb-1 drop-shadow-md">
           {current.slogan}
         </p>
-        <p className="text-[11px] text-slate-400 font-medium mb-6">
+        <p className="text-[11px] text-slate-100 font-semibold mb-6 drop-shadow-md">
           {current.desc}
         </p>
 

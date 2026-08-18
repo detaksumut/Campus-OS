@@ -7,6 +7,7 @@ interface ThemeState {
   setMode: (mode: 'light' | 'dark') => void;
   setPrimaryColor: (color: string) => void;
   setRadius: (radius: string) => void;
+  toggleTheme: () => void;
 }
 
 export const useThemeRuntime = create<ThemeState>((set) => ({
@@ -16,4 +17,5 @@ export const useThemeRuntime = create<ThemeState>((set) => ({
   setMode: (mode) => set({ mode }),
   setPrimaryColor: (color) => set({ primaryColor: color }),
   setRadius: (radius) => set({ radius }),
+  toggleTheme: () => set((state) => ({ mode: state.mode === 'dark' ? 'light' : 'dark' })),
 }));
