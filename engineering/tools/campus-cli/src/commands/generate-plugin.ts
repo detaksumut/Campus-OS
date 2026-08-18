@@ -1,5 +1,5 @@
-import * from 'fs';
-import * from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export function generatePlugin(pluginName: string) {
   const baseDir = path.resolve(process.cwd(), `packages/domains/${pluginName}/src/ui`);
