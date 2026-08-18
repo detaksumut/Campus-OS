@@ -45,7 +45,7 @@ import { SettingsView } from './modules/SettingsView';
 function PortalMainLayout() {
   const { mode } = useThemeRuntime();
   const { profile } = useTenant();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userRole, setUserRole] = useState<UserRole>('ADMIN');
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [activeTabTitle, setActiveTabTitle] = useState<string>('Beranda');
