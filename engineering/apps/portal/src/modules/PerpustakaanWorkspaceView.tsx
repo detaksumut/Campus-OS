@@ -435,9 +435,24 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
             </div>
           )}
 
-          {/* DIREKTORI ALUMNI TERDATA */}
-          {alumniViewMode === 'DIREKTORI' && (
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-100 dark:border-slate-700/60">
+                <div className="flex items-center gap-2">
+                  <UserCheck size={18} className="text-emerald-500" />
+                  <h4 className="font-black text-sm text-slate-900 dark:text-white">Direktori Database Alumni Terdata</h4>
+                  <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 rounded-full">
+                    {filteredAlumni.length} Lulusan
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => setAlumniViewMode('FORM_DAFTAR')}
+                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-600/20 flex items-center gap-2 transition-all hover:scale-105"
+                >
+                  <UserPlus size={14} />
+                  <span>+ Daftarkan Alumni Baru (Tracer Form)</span>
+                </button>
+              </div>
+
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="relative flex-1 max-w-md">
                   <input
