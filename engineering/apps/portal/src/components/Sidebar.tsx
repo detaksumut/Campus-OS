@@ -3,7 +3,8 @@ import {
   LayoutDashboard, UserPlus, GraduationCap, FileText, CalendarCheck, 
   CheckSquare, Award, ScrollText, BookOpen, Video, FolderOpen, MessageSquare, 
   DollarSign, Users, Package, Library, UserCheck, Microscope, HeartHandshake, 
-  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database, Lock
+  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database, Lock,
+  Building2, Landmark, Wallet, Scale, FileCheck
 } from 'lucide-react';
 import { useThemeRuntime } from '@campus-os/shared';
 import { UserRole } from './Header';
@@ -17,10 +18,22 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectMenu }) => {
   const { mode, toggleTheme } = useThemeRuntime();
 
-  // Full Access Group: Administrator, Rektor / Direktur, dan Pengurus Yayasan
-  const isFullExecutiveOrAdmin = ['ADMIN', 'REKTOR', 'YAYASAN'].includes(userRole);
-
   const allSections = [
+    // 🌟 KHUSUS PENGURUS YAYASAN: MENU OTORITAS & 6 HAK YAYASAN
+    ...(userRole === 'YAYASAN' ? [
+      {
+        category: '🏛️ 6 HAK & OTORITAS YAYASAN',
+        roles: ['YAYASAN'],
+        items: [
+          { id: 'aset', label: '1. Valuasi & Aset (Rp 148.5 M)', icon: Building2, roles: ['YAYASAN'] },
+          { id: 'keuangan', label: '2. Kas Abadi & RAPBY (Rp 24.2 M)', icon: Wallet, roles: ['YAYASAN'] },
+          { id: 'pengaturan', label: '3. SK Statuta & Renstra Kampus', icon: Scale, roles: ['YAYASAN'] },
+          { id: 'akreditasi', label: '4. Audit KAP Independen (WTP)', icon: FileCheck, roles: ['YAYASAN'] },
+          { id: 'pmb', label: '5. Kebijakan PMB & Prodi Baru', icon: UserPlus, roles: ['YAYASAN'] },
+          { id: 'sdm', label: '6. Manajemen Rektorat & Pejabat', icon: Landmark, roles: ['YAYASAN'] },
+        ]
+      }
+    ] : []),
     {
       category: 'AKADEMIK',
       roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'],
