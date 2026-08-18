@@ -1,5 +1,5 @@
 {
-  "name": "@campus-os/kernel-configuration",
+  "name": "@campus-os/platform-kernel-configuration",
   "version": "1.0.0",
   "description": "Layer 1 Configuration Runtime for Campus OS",
   "main": "dist/index.js",

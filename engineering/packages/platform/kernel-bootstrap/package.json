@@ -1,5 +1,5 @@
 {
-  "name": "@campus-os/kernel-bootstrap",
+  "name": "@campus-os/platform-kernel-bootstrap",
   "version": "1.0.0",
   "description": "Layer 0 Boot Orchestrator for Campus OS",
   "main": "dist/index.js",
