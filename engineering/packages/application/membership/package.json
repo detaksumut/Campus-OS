@@ -2,12 +2,7 @@
   "name": "@campus-os/application-membership",
   "version": "1.0.0",
   "description": "Membership Application Services",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
+  "main": "src/index.ts",
   "dependencies": {
     "@campus-os/application-kernel": "*",
     "@campus-os/membership": "*"

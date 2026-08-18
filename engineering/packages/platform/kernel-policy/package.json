@@ -2,11 +2,7 @@
   "name": "@campus-os/kernel-policy",
   "version": "1.0.0",
   "description": "Layer 1 Policy Runtime for Campus OS",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
+  "main": "src/index.ts",
   "dependencies": {},
   "devDependencies": {
     "typescript": "^5.0.0"

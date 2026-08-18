@@ -2,10 +2,7 @@
   "name": "@campus-os/kernel-credential",
   "version": "1.0.0",
   "description": "Layer 2 Credential Runtime for Campus OS",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc"
-  },
+  "main": "src/index.ts",
   "dependencies": {
     "@campus-os/kernel-identity": "*"
   }

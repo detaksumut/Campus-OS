@@ -5,9 +5,6 @@
   "bin": {
     "campus": "./bin/campus.js"
   },
-  "scripts": {
-    "build": "tsc"
-  },
   "dependencies": {
     "commander": "^11.0.0",
     "fs-extra": "^11.1.1",

@@ -2,10 +2,7 @@
   "name": "@campus-os/kernel-academic-identity",
   "version": "1.0.0",
   "description": "Layer 2 Academic Identity Runtime for Campus OS",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc"
-  },
+  "main": "src/index.ts",
   "dependencies": {
     "@campus-os/kernel-identity": "*"
   }

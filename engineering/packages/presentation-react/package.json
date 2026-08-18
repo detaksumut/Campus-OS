@@ -2,11 +2,7 @@
   "name": "@campus-os/presentation-react",
   "version": "1.0.0",
   "description": "Campus OS Presentation React Adapter",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc"
-  },
+  "main": "src/index.ts",
   "dependencies": {
     "@campus-os/presentation-core": "*",
     "react": "^18.0.0",

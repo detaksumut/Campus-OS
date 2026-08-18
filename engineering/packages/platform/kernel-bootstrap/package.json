@@ -2,11 +2,7 @@
   "name": "@campus-os/platform-kernel-bootstrap",
   "version": "1.0.0",
   "description": "Layer 0 Boot Orchestrator for Campus OS",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
-  },
+  "main": "src/index.ts",
   "dependencies": {},
   "devDependencies": {
     "typescript": "^5.0.0"
