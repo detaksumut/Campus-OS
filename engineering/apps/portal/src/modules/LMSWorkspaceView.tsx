@@ -3,7 +3,7 @@ import {
   BookOpen, Video, FolderOpen, MessageSquare, CheckCircle2, Clock, 
   Upload, Download, Search, Mic, MicOff, Camera, CameraOff, 
   Hand, MessageCircle, Send, Play, Users, FileText, Sparkles, X, 
-  Share2, VideoOff, CheckSquare
+  Share2, VideoOff, CheckSquare, LogOut
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
