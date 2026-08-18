@@ -69,21 +69,25 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
 
         {/* 🌟 BAGIAN ATAS: Tepat di bagian langit di ATAS tulisan besar CAMPUS OS */}
         <div className="max-w-4xl mx-auto px-6 text-center space-y-2 relative z-10 pt-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/70 border border-white/20 text-white text-[11px] font-bold shadow-lg backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-950/80 border border-amber-400/30 text-amber-300 text-[11px] font-bold shadow-lg backdrop-blur-md">
             <Sparkles size={13} className="text-amber-400" />
             <span>Smart Enterprise Higher Education Operating System</span>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-100 max-w-2xl mx-auto leading-relaxed font-semibold drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-            Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek (Kurikulum OBE, LMS WebRTC, PIN Dikti SIVIL, Jurnal OJS 3.x, Keuangan Multi-Bank)
-          </p>
+          <div>
+            <p className="inline-block px-4 py-1.5 rounded-2xl bg-slate-950/75 border border-slate-700 text-xs sm:text-sm text-amber-200 max-w-2xl mx-auto leading-relaxed font-semibold drop-shadow-md backdrop-blur-md">
+              Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek (Kurikulum OBE, LMS WebRTC, PIN Dikti SIVIL, Jurnal OJS 3.x, Keuangan Multi-Bank)
+            </p>
+          </div>
         </div>
 
         {/* 🏆 BAGIAN BAWAH: Tepat di BAWAH grafis teks CAMPUS OS */}
         <div className="max-w-6xl w-full mx-auto px-6 text-center space-y-6 relative z-10 pt-24 pb-4">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white leading-snug max-w-3xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
-            Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight leading-snug max-w-3xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
+            </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 font-black drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] block sm:inline">
               {profile.institutionName}
             </span>
           </h1>
