@@ -154,8 +154,8 @@ export const StudentDashboardView: React.FC<StudentDashboardViewProps> = ({ onNa
                     {cls.time}
                   </span>
                   <button
-                    onClick={() => alert(`Membuka Ruang Kelas Online LMS untuk ${cls.name}`)}
-                    className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-1"
+                    onClick={() => onNavigate && onNavigate('lms', 'LMS (E-Learning)')}
+                    className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl shadow-sm flex items-center gap-1 hover:scale-105 transition-all"
                   >
                     <Video size={13} />
                     <span>Masuk Kelas</span>

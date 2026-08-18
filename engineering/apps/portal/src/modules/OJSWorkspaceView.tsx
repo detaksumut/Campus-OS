@@ -57,14 +57,18 @@ export const OJSWorkspaceView: React.FC = () => {
     { key: 'PUBLISHED', label: '5. Published' },
   ];
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const handleAdvance = (targetStage: OJSEditorialStage) => {
     if (!selectedArticle) return;
+    setErrorMessage(null);
     try {
       const updated = OJSWorkflowEngine.advanceStage(selectedArticle, targetStage);
       setArticles(prev => prev.map(a => a.id === updated.id ? updated : a));
       setSelectedArticle(updated);
     } catch (err: any) {
-      alert(err.message);
+      setErrorMessage(err.message);
+      setTimeout(() => setErrorMessage(null), 3000);
     }
   };
 

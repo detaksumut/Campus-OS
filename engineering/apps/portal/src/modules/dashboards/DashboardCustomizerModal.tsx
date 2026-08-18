@@ -67,8 +67,7 @@ export const DashboardCustomizerModal: React.FC<DashboardCustomizerModalProps> =
     setTimeout(() => {
       setSavedSuccess(false);
       onClose();
-      alert('Tata letak widget dashboard berhasil disimpan dan disesuaikan!');
-    }, 1000);
+    }, 800);
   };
 
   return (

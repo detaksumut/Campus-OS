@@ -109,13 +109,18 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
     uas: 20
   });
 
+  const [krsSubmittedSuccess, setKrsSubmittedSuccess] = useState(false);
+  const [gradeWeightSavedSuccess, setGradeWeightSavedSuccess] = useState(false);
+  const [courseError, setCourseError] = useState('');
+
   const handleSaveCourse = (e: React.FormEvent) => {
     e.preventDefault();
+    setCourseError('');
     if (!newCourse.code || !newCourse.name) return;
 
     const exists = courses.some(c => c.code.toLowerCase() === newCourse.code.toLowerCase());
     if (exists) {
-      alert(`⚠️ Peringatan Anti-Duplikasi: Kode Mata Kuliah [${newCourse.code}] sudah terdaftar di sistem!`);
+      setCourseError(`Peringatan Anti-Duplikasi: Kode Mata Kuliah [${newCourse.code}] sudah terdaftar di sistem!`);
       return;
     }
 
@@ -698,11 +703,28 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
               })}
             </div>
 
+            {krsSubmittedSuccess && (
+              <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-500/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in zoom-in-95">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
+                  <span>KRS Berhasil Disimpan & Terkirim ke Dosen Pembimbing Akademik (PA)!</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-black shadow-md shrink-0 flex items-center gap-1.5"
+                >
+                  <FileCheck size={13} />
+                  <span>🖨️ Cetak Lembar KRS (PDF)</span>
+                </button>
+              </div>
+            )}
+
             <div className="pt-3 border-t border-slate-200 dark:border-slate-700 flex justify-end">
               <button
                 disabled={!krsValidation.isValid}
-                onClick={() => alert('KRS Berhasil Disimpan & Diajukan ke Dosen Wali / Pembimbing Akademik!')}
-                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold text-xs shadow-lg shadow-emerald-500/30 transition-all flex items-center gap-2"
+                onClick={() => setKrsSubmittedSuccess(true)}
+                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-bold text-xs shadow-lg shadow-emerald-500/30 transition-all flex items-center gap-2 hover:scale-105"
               >
                 <FileCheck size={16} />
                 <span>Simpan & Ajukan KRS ke Dosen PA</span>
@@ -813,9 +835,16 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
                 </span>
               </div>
 
+              {gradeWeightSavedSuccess && (
+                <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-500/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+                  <span>Komposisi Bobot Nilai Statuta Akademik Berhasil Diperbarui & Disimpan!</span>
+                </div>
+              )}
+
               <button
-                onClick={() => alert('Komposisi Bobot Nilai Statuta Akademik Berhasil Diperbarui!')}
-                className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md flex items-center justify-center gap-2"
+                onClick={() => setGradeWeightSavedSuccess(true)}
+                className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md flex items-center justify-center gap-2 transition-all hover:scale-105"
               >
                 <Save size={14} />
                 <span>Simpan Aturan Bobot Akademik</span>

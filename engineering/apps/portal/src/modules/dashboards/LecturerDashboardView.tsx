@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   BookOpen, CheckCircle, Clock, Award, FileText, Calendar, Users, 
   CheckSquare, AlertCircle, Send, Sparkles, ChevronRight, SlidersHorizontal, 
-  ExternalLink, Layers, Plus, Save
+  ExternalLink, Layers, Plus, Save, CheckCircle2, X, FileCheck, PenTool
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
@@ -77,21 +77,49 @@ export const LecturerDashboardView: React.FC<LecturerDashboardViewProps> = ({ on
     { id: 'krs-3', nim: '200101020', name: 'Budi Santoso', prodi: 'D4 Usaha Perjalanan Wisata', semester: 3, ipsPrev: 2.70, requestedSKS: 20, maxAllowedSKS: 20, status: 'MENUNGGU_APPROVAL' },
   ]);
 
+  const [notificationToast, setNotificationToast] = useState<string | null>(null);
+  const [activeBAPClass, setActiveBAPClass] = useState<any | null>(null);
+  const [bapForm, setBapForm] = useState({
+    topic: 'Implementasi Strategi Pariwisata Berkelanjutan Berbasis Komunitas (CBT)',
+    attendanceCount: 38,
+    notes: 'Seluruh mahasiswa hadir tepat waktu dan aktif dalam sesi studi kasus.'
+  });
+
+  const showToast = (msg: string) => {
+    setNotificationToast(msg);
+    setTimeout(() => setNotificationToast(null), 3000);
+  };
+
   const handleApproveKRS = (id: string, name: string) => {
     setAdviseeKRS(prev => prev.map(k => k.id === id ? { ...k, status: 'DISETUJUI' } : k));
-    alert(`Kontrak KRS mahasiswa [${name}] berhasil disetujui & divalidasi oleh Dosen PA!`);
+    showToast(`✓ Kontrak KRS mahasiswa [${name}] berhasil disetujui & divalidasi oleh Dosen PA!`);
   };
 
   const handleRejectKRS = (id: string, name: string) => {
-    const reason = prompt('Masukkan catatan revisi KRS untuk mahasiswa:', 'SKS mata kuliah pilihan bentrok');
-    if (reason) {
-      setAdviseeKRS(prev => prev.map(k => k.id === id ? { ...k, status: 'DITOLAK_REVISI' } : k));
-      alert(`Kontrak KRS mahasiswa [${name}] dikembalikan untuk revisi.`);
-    }
+    setAdviseeKRS(prev => prev.map(k => k.id === id ? { ...k, status: 'DITOLAK_REVISI' } : k));
+    showToast(`Kontrak KRS mahasiswa [${name}] dikembalikan untuk revisi.`);
+  };
+
+  const handleSaveBAP = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!activeBAPClass) return;
+    setTeachingClasses(prev => prev.map(c => 
+      c.id === activeBAPClass.id ? { ...c, completedSessions: Math.min(16, c.completedSessions + 1) } : c
+    ));
+    showToast(`✓ Berita Acara Perkuliahan (BAP) Sesi ke-${activeBAPClass.completedSessions + 1} berhasil disimpan & disinkronkan!`);
+    setActiveBAPClass(null);
   };
 
   return (
     <div className="space-y-6">
+      {/* Toast Notification */}
+      {notificationToast && (
+        <div className="fixed top-20 right-6 z-50 p-4 rounded-2xl bg-slate-900 border border-emerald-500/60 shadow-2xl text-emerald-300 text-xs font-bold flex items-center gap-2.5 animate-in slide-in-from-top-4">
+          <CheckCircle2 size={18} className="text-emerald-400 shrink-0" />
+          <span>{notificationToast}</span>
+        </div>
+      )}
+
       {/* 1. Header Banner Dosen Pengajar */}
       <div className="p-6 rounded-3xl bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 text-white border border-blue-500/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -111,7 +139,7 @@ export const LecturerDashboardView: React.FC<LecturerDashboardViewProps> = ({ on
           {onOpenCustomizer && (
             <button
               onClick={onOpenCustomizer}
-              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 flex items-center gap-1.5 transition-all hover:scale-105"
             >
               <SlidersHorizontal size={14} />
               <span>Sesuaikan Widget</span>
@@ -211,7 +239,7 @@ export const LecturerDashboardView: React.FC<LecturerDashboardViewProps> = ({ on
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between text-[11px]">
                   <span className="text-slate-500">Progres 16 Sesi:</span>
-                  <span className="font-bold text-slate-800 dark:text-slate-200">{cls.completedSessions} / {cls.totalSessions} Sesi (50%)</span>
+                  <span className="font-bold text-slate-800 dark:text-slate-200">{cls.completedSessions} / {cls.totalSessions} Sesi ({( (cls.completedSessions / cls.totalSessions) * 100 ).toFixed(0)}%)</span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
                   <div className="h-full bg-blue-600 rounded-full" style={{ width: `${(cls.completedSessions / cls.totalSessions) * 100}%` }} />
@@ -224,10 +252,11 @@ export const LecturerDashboardView: React.FC<LecturerDashboardViewProps> = ({ on
                   <span>Sesi Berikutnya: {cls.nextSession.split(' ')[0]}</span>
                 </span>
                 <button
-                  onClick={() => alert(`Membuka Lembar BAP Digital & Kontrak Kuliah Sesi ke-${cls.completedSessions + 1} untuk kelas ${cls.name}`)}
-                  className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] rounded-lg shadow-sm"
+                  onClick={() => setActiveBAPClass(cls)}
+                  className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] rounded-lg shadow-sm hover:scale-105 transition-all flex items-center gap-1"
                 >
-                  Isi BAP Sesi {cls.completedSessions + 1}
+                  <PenTool size={11} />
+                  <span>Isi BAP Sesi {cls.completedSessions + 1}</span>
                 </button>
               </div>
             </div>
@@ -297,7 +326,7 @@ export const LecturerDashboardView: React.FC<LecturerDashboardViewProps> = ({ on
                       <div className="flex items-center justify-center gap-1.5">
                         <button
                           onClick={() => handleApproveKRS(adv.id, adv.name)}
-                          className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg shadow-sm transition-all"
+                          className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg shadow-sm transition-all hover:scale-105"
                         >
                           ✓ Setujui
                         </button>
@@ -318,6 +347,94 @@ export const LecturerDashboardView: React.FC<LecturerDashboardViewProps> = ({ on
           </table>
         </div>
       </div>
+
+      {/* 📝 MODAL PENGISIAN LEMBAR BAP DIGITAL 16 SESI */}
+      {activeBAPClass && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl animate-in zoom-in-95 text-slate-900 dark:text-white">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <FileCheck className="text-blue-500" size={20} />
+                <div>
+                  <h3 className="font-black text-sm">Lembar BAP & Presensi Digital (Sesi {activeBAPClass.completedSessions + 1})</h3>
+                  <p className="text-xs text-slate-500">{activeBAPClass.code} • {activeBAPClass.name}</p>
+                </div>
+              </div>
+              <button onClick={() => setActiveBAPClass(null)} className="text-slate-400 hover:text-slate-600">
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveBAP} className="space-y-3.5 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Materi / Topik Bahasan Perkuliahan: *</label>
+                <textarea
+                  required
+                  rows={2}
+                  value={bapForm.topic}
+                  onChange={(e) => setBapForm({ ...bapForm, topic: e.target.value })}
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-medium focus:outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Jumlah Hadir Mahasiswa: *</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={activeBAPClass.studentsCount}
+                    value={bapForm.attendanceCount}
+                    onChange={(e) => setBapForm({ ...bapForm, attendanceCount: parseInt(e.target.value) || 0 })}
+                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Total Mahasiswa Kelas:</label>
+                  <input
+                    type="text"
+                    disabled
+                    value={`${activeBAPClass.studentsCount} Mahasiswa`}
+                    className="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Catatan Pelaksanaan Kuliah:</label>
+                <input
+                  type="text"
+                  value={bapForm.notes}
+                  onChange={(e) => setBapForm({ ...bapForm, notes: e.target.value })}
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 focus:outline-none"
+                />
+              </div>
+
+              <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 text-[11px] text-blue-800 dark:text-blue-300 flex items-center gap-2 font-medium">
+                <PenTool size={14} className="text-blue-500 shrink-0" />
+                <span>BAP akan ditandatangani digital secara otomatis dengan akun NIDN Anda.</span>
+              </div>
+
+              <div className="pt-2 flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setActiveBAPClass(null)}
+                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-md shadow-blue-600/30 flex items-center gap-1.5"
+                >
+                  <Save size={14} />
+                  <span>Simpan & Tanda Tangan BAP</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

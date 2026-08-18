@@ -490,11 +490,21 @@ export const DataMigrationWorkspaceView: React.FC = () => {
 
           {/* Download Custom-Tailored Template Button */}
           <button
-            onClick={() => alert(`Mengunduh Template Excel Kustom untuk Data ${activeTab} (${profile.institutionName}) dengan ${visibleColumns.length} kolom aktif yang telah disesuaikan!`)}
-            className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-bold text-xs flex items-center gap-2 shadow-sm transition-all"
+            onClick={() => {
+              const headers = visibleColumns.map(c => c.label).join(',');
+              const sampleRow = visibleColumns.map(c => `Contoh_${c.id}`).join(',');
+              const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(`${headers}\n${sampleRow}`);
+              const link = document.createElement("a");
+              link.setAttribute("href", csvContent);
+              link.setAttribute("download", `Template_${activeTab}_${profile.institutionName.replace(/\s+/g, '_')}.csv`);
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+            className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-bold text-xs flex items-center gap-2 shadow-sm transition-all hover:scale-105"
           >
             <Download size={14} className="text-blue-600" />
-            <span>Download Template Excel Kustom ({visibleColumns.length} Kolom)</span>
+            <span>Download Template CSV Kustom ({visibleColumns.length} Kolom)</span>
           </button>
         </div>
 

@@ -231,11 +231,23 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
             </div>
 
             <button
-              onClick={() => alert('Mengekspor data tracer study alumni ke format pelaporan PDDIKTI / Belmawa Kemendikbudristek!')}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5"
+              onClick={() => {
+                const headers = "NIM,Nama,ProgramStudi,TahunLulus,StatusKerja,Perusahaan,Jabatan,WaktuTungguBulan,Kontak";
+                const rows = filteredAlumni.map(a => 
+                  `"${a.nim}","${a.name}","${a.prodi}",${a.gradYear},"${a.employmentStatus}","${a.company}","${a.jobTitle}",${a.waitTimeMonths},"${a.phone}"`
+                ).join("\n");
+                const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(`${headers}\n${rows}`);
+                const link = document.createElement("a");
+                link.setAttribute("href", csvContent);
+                link.setAttribute("download", `Tracer_Study_PDDIKTI_${profile.institutionName.replace(/\s+/g, '_')}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all hover:scale-105"
             >
-              <Download size={13} />
-              <span>Export Data Tracer (Dikti)</span>
+              <Download size={13} className="text-emerald-500" />
+              <span>Export CSV Tracer (Dikti)</span>
             </button>
           </div>
 

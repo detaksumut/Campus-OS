@@ -106,7 +106,6 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
-      alert('Kata sandi akun SSO Anda berhasil diperbarui dengan aman!');
     }, 1500);
   };
 

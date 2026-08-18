@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Briefcase, CheckCircle, Clock, Calendar, Users, FileText, 
-  Package, ChevronRight, SlidersHorizontal, CheckSquare, Wrench
+  Package, ChevronRight, SlidersHorizontal, CheckSquare, Wrench, CheckCircle2, Printer, X
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
@@ -12,6 +12,7 @@ export interface StaffDashboardViewProps {
 
 export const StaffDashboardView: React.FC<StaffDashboardViewProps> = ({ onNavigate, onOpenCustomizer }) => {
   const { profile } = useTenant();
+  const [selectedIssuedDoc, setSelectedIssuedDoc] = useState<any | null>(null);
 
   // Presensi Pegawai
   const staffProfile = {
@@ -26,14 +27,14 @@ export const StaffDashboardView: React.FC<StaffDashboardViewProps> = ({ onNaviga
 
   // Antrian Layanan Dokumen BAAK
   const [ticketQueue, setTicketQueue] = useState([
-    { id: 'req-1', type: 'Surat Keterangan Mahasiswa Aktif', student: 'Rian Hidayat (200101012)', date: 'Hari ini, 09:15 WIB', status: 'DIPROSES' },
-    { id: 'req-2', type: 'Legalisir Transkrip Nilai Sementara', student: 'Siti Maryam (190102004)', date: 'Hari ini, 10:30 WIB', status: 'MENUNGGU' },
-    { id: 'req-3', type: 'Permohonan Cuti Akademik', student: 'Ahmad Fauzi (210103009)', date: 'Kemarin', status: 'MENUNGGU_VERIFIKASI' },
+    { id: 'req-1', type: 'Surat Keterangan Mahasiswa Aktif', student: 'Rian Hidayat (200101012)', prodi: 'D4 Usaha Perjalanan Wisata', date: 'Hari ini, 09:15 WIB', status: 'DIPROSES' },
+    { id: 'req-2', type: 'Legalisir Transkrip Nilai Sementara', student: 'Siti Maryam (190102004)', prodi: 'D4 Perhotelan', date: 'Hari ini, 10:30 WIB', status: 'MENUNGGU' },
+    { id: 'req-3', type: 'Permohonan Cuti Akademik', student: 'Ahmad Fauzi (210103009)', prodi: 'D3 Kuliner', date: 'Kemarin', status: 'MENUNGGU_VERIFIKASI' },
   ]);
 
-  const handleProcessTicket = (id: string, type: string) => {
-    setTicketQueue(prev => prev.map(t => t.id === id ? { ...t, status: 'SELESAI_DITERBITKAN' } : t));
-    alert(`Permohonan [${type}] berhasil diselesaikan & dokumen PDF siap diunduh mahasiswa!`);
+  const handleProcessTicket = (ticket: any) => {
+    setTicketQueue(prev => prev.map(t => t.id === ticket.id ? { ...t, status: 'SELESAI_DITERBITKAN' } : t));
+    setSelectedIssuedDoc(ticket);
   };
 
   return (
@@ -57,7 +58,7 @@ export const StaffDashboardView: React.FC<StaffDashboardViewProps> = ({ onNaviga
           {onOpenCustomizer && (
             <button
               onClick={onOpenCustomizer}
-              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 flex items-center gap-1.5 transition-all hover:scale-105"
             >
               <SlidersHorizontal size={14} />
               <span>Sesuaikan Widget</span>
@@ -138,13 +139,19 @@ export const StaffDashboardView: React.FC<StaffDashboardViewProps> = ({ onNaviga
                   <td className="p-3 text-center">
                     {t.status !== 'SELESAI_DITERBITKAN' ? (
                       <button
-                        onClick={() => handleProcessTicket(t.id, t.type)}
-                        className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg shadow-sm"
+                        onClick={() => handleProcessTicket(t)}
+                        className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg shadow-sm transition-all hover:scale-105"
                       >
                         ✓ Terbitkan Surat
                       </button>
                     ) : (
-                      <span className="text-[10px] text-slate-400">Terkirim ke Mhs</span>
+                      <button
+                        onClick={() => setSelectedIssuedDoc(t)}
+                        className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[10px] rounded-lg inline-flex items-center gap-1"
+                      >
+                        <Printer size={12} className="text-emerald-500" />
+                        <span>Lihat / Cetak</span>
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -153,6 +160,70 @@ export const StaffDashboardView: React.FC<StaffDashboardViewProps> = ({ onNaviga
           </table>
         </div>
       </div>
+
+      {/* 📄 MODAL CETAK SURAT RESMI BAAK */}
+      {selectedIssuedDoc && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl animate-in zoom-in-95 text-slate-900 dark:text-white">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <FileText className="text-emerald-500" size={20} />
+                <h3 className="font-black text-sm">Dokumen Surat Keterangan Resmi Terbit</h3>
+              </div>
+              <button onClick={() => setSelectedIssuedDoc(null)} className="text-slate-400 hover:text-slate-600">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3 text-xs leading-relaxed">
+              <div className="text-center pb-2 border-b border-slate-200 dark:border-slate-700">
+                <h4 className="font-black uppercase text-sm">{profile.institutionName}</h4>
+                <p className="text-[10px] text-slate-400">BIRO ADMINISTRASI AKADEMIK & KEMAHASISWAAN (BAAK)</p>
+              </div>
+
+              <div className="text-center font-bold underline">
+                {selectedIssuedDoc.type.toUpperCase()}
+              </div>
+
+              <p className="text-slate-600 dark:text-slate-300">
+                Menerangkan dengan sebenarnya bahwa mahasiswa di bawah ini:
+              </p>
+
+              <div className="space-y-1 pl-4">
+                <p><b>Nama:</b> {selectedIssuedDoc.student.split('(')[0]}</p>
+                <p><b>NIM:</b> {selectedIssuedDoc.student.includes('(') ? selectedIssuedDoc.student.split('(')[1].replace(')', '') : '-'}</p>
+                <p><b>Program Studi:</b> {selectedIssuedDoc.prodi || 'D4 Pariwisata'}</p>
+                <p><b>Status:</b> Terdaftar Aktif Kuliah Semester Genap 2024</p>
+              </div>
+
+              <p className="text-slate-600 dark:text-slate-300 pt-1">
+                Demikian surat keterangan ini dibuat untuk dipergunakan sebagaimana mestinya.
+              </p>
+
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center text-[10px] text-slate-400">
+                <span>Verifikasi Digital BSrE</span>
+                <span className="font-bold text-emerald-600">✓ Ditandatangani Elektronik BAAK</span>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setSelectedIssuedDoc(null)}
+                className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold"
+              >
+                Tutup
+              </button>
+              <button
+                onClick={() => window.print()}
+                className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md flex items-center gap-1.5"
+              >
+                <Printer size={13} />
+                <span>🖨️ Cetak Surat (PDF)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
