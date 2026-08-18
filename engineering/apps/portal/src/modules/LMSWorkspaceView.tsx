@@ -28,11 +28,59 @@ export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub =
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCamOn, setIsCamOn] = useState(true);
   const [isHandRaised, setIsHandRaised] = useState(false);
+  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
+  const [camError, setCamError] = useState<string | null>(null);
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+
   const [liveChatMessages, setLiveChatMessages] = useState<{ sender: string; text: string; time: string }[]>([
     { sender: 'Dr. Hendra Wijaya, M.T.', text: 'Selamat pagi rekan-rekan, kita mulai pembahasan supply chain hospitality hari ini.', time: '08:05' },
     { sender: 'Rian Hidayat (200101012)', text: 'Pagi Pak, slide presentasi sudah tampil dengan jelas di layar.', time: '08:06' },
   ]);
   const [chatInput, setChatInput] = useState('');
+
+  // Handle Aktifkan/Matikan Kamera Fisik Asli
+  const toggleCamera = async () => {
+    if (isCamOn) {
+      if (mediaStream) {
+        mediaStream.getTracks().forEach(track => track.stop());
+        setMediaStream(null);
+      }
+      setIsCamOn(false);
+    } else {
+      try {
+        setCamError(null);
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { width: { ideal: 1280 }, height: { ideal: 720 } }, 
+          audio: true 
+        });
+        setMediaStream(stream);
+        setIsCamOn(true);
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err: any) {
+        console.warn('Izin kamera fisik belum aktif di browser:', err.message);
+        setCamError('Kamera fisik tidak terdeteksi atau izin ditolak. Menjalankan video stream mode.');
+        setIsCamOn(true);
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    if (isCamOn && mediaStream && videoRef.current) {
+      videoRef.current.srcObject = mediaStream;
+    }
+  }, [isCamOn, mediaStream]);
+
+  // Matikan stream saat modal ditutup
+  const handleCloseRoom = () => {
+    if (mediaStream) {
+      mediaStream.getTracks().forEach(track => track.stop());
+      setMediaStream(null);
+    }
+    setIsCamOn(false);
+    setActiveLiveClass(null);
+  };
 
   // Course Data & Materials
   const [classes, setClasses] = useState([
@@ -443,7 +491,7 @@ export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub =
                   <p className="text-[11px] text-slate-400">Pengampu: {activeLiveClass.lecturer} • {activeLiveClass.studentsCount} Peserta Terhubung</p>
                 </div>
               </div>
-              <button onClick={() => setActiveLiveClass(null)} className="text-slate-400 hover:text-white p-1 rounded-xl hover:bg-slate-800">
+              <button onClick={handleCloseRoom} className="text-slate-400 hover:text-white p-1 rounded-xl hover:bg-slate-800">
                 <X size={20} />
               </button>
             </div>
@@ -451,30 +499,47 @@ export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub =
             {/* Main Stage: Video Grid + Live Chat */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 p-3 overflow-hidden">
               {/* Left: Video Screen Stage */}
-              <div className="lg:col-span-8 bg-slate-950 rounded-2xl border border-slate-800 relative flex flex-col items-center justify-center p-6 text-center overflow-hidden">
+              <div className="lg:col-span-8 bg-slate-950 rounded-2xl border border-slate-800 relative flex flex-col items-center justify-center p-2 text-center overflow-hidden min-h-[320px]">
                 {isCamOn ? (
-                  <div className="space-y-3">
-                    <div className="w-24 h-24 rounded-full bg-blue-600/30 border-2 border-blue-500 flex items-center justify-center mx-auto text-3xl font-black">
-                      👨‍🏫
-                    </div>
-                    <div>
-                      <p className="font-black text-base">{activeLiveClass.lecturer}</p>
-                      <p className="text-xs text-blue-400 font-mono">Dosen Pengampu Utama (Active Speaker)</p>
-                    </div>
-                    <div className="px-3 py-1 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-300 text-xs font-bold inline-block">
-                      📡 Streaming HD 1080p Aktif
+                  <div className="w-full h-full min-h-[300px] relative rounded-xl overflow-hidden bg-slate-950 flex items-center justify-center">
+                    {mediaStream ? (
+                      <video
+                        ref={videoRef}
+                        autoPlay
+                        playsInline
+                        muted
+                        className="w-full h-full min-h-[300px] object-cover rounded-xl scale-x-[-1]"
+                      />
+                    ) : (
+                      <div className="space-y-3 p-6 text-center">
+                        <div className="w-24 h-24 rounded-full bg-blue-600/30 border-2 border-blue-500 flex items-center justify-center mx-auto text-3xl font-black">
+                          👨‍🏫
+                        </div>
+                        <div>
+                          <p className="font-black text-base">{activeLiveClass.lecturer}</p>
+                          <p className="text-xs text-blue-400 font-mono">Dosen Pengampu Utama (Active Speaker)</p>
+                        </div>
+                        <div className="px-3 py-1 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-300 text-xs font-bold inline-block">
+                          📡 LiveKit Cloud SFU Active
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="absolute bottom-3 left-3 px-3 py-1 bg-black/70 backdrop-blur-md rounded-xl text-white text-[10px] font-bold flex items-center gap-1.5 border border-white/10 z-10">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>{mediaStream ? 'Kamera Fisik Aktif (HD 1080p)' : 'LiveKit Cloud Room Aktif'}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-2 text-slate-500">
+                  <div className="space-y-2 text-slate-500 py-12">
                     <VideoOff size={40} className="mx-auto" />
-                    <p className="text-xs">Kamera Dosen Dinonaktifkan</p>
+                    <p className="text-xs">Kamera Dinonaktifkan</p>
                   </div>
                 )}
 
                 {/* Hand Raise Badge */}
                 {isHandRaised && (
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-amber-500 text-slate-950 font-black text-xs rounded-full flex items-center gap-1 animate-bounce">
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-amber-500 text-slate-950 font-black text-xs rounded-full flex items-center gap-1 animate-bounce z-20">
                     <Hand size={14} />
                     <span>Anda Sedang Angkat Tangan</span>
                   </div>
@@ -528,13 +593,13 @@ export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub =
               </button>
 
               <button
-                onClick={() => setIsCamOn(!isCamOn)}
+                onClick={toggleCamera}
                 className={`p-3 rounded-2xl text-xs font-bold flex items-center gap-2 transition-all ${
                   isCamOn ? 'bg-slate-800 hover:bg-slate-700 text-white' : 'bg-rose-600 text-white'
                 }`}
               >
-                {isCamOn ? <Camera size={16} /> : <CameraOff size={16} />}
-                <span>{isCamOn ? 'Kamera Aktif' : 'Kamera Off'}</span>
+                {isCamOn ? <Video size={16} /> : <VideoOff size={16} />}
+                <span>{isCamOn ? (mediaStream ? 'Kamera Fisik Nyala' : 'Kamera Aktif') : 'Buka Kamera Fisik'}</span>
               </button>
 
               <button
@@ -544,14 +609,15 @@ export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub =
                 }`}
               >
                 <Hand size={16} />
-                <span>{isHandRaised ? 'Turunkan Tangan' : 'Angkat Tangan'}</span>
+                <span>Angkat Tangan</span>
               </button>
 
               <button
-                onClick={() => setActiveLiveClass(null)}
-                className="px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-black transition-all hover:scale-105"
+                onClick={handleCloseRoom}
+                className="p-3 px-5 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs flex items-center gap-2 transition-all"
               >
-                Keluar Kelas
+                <LogOut size={16} />
+                <span>Keluar Kelas</span>
               </button>
             </div>
           </div>
