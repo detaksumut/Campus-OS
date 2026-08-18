@@ -55,56 +55,58 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
       </nav>
 
       {/* 2. HERO SECTION */}
-      <section className="relative pt-4 sm:pt-6 pb-16 sm:pb-20 overflow-hidden min-h-[85vh] sm:min-h-[88vh] flex flex-col justify-between items-center">
-        {/* Pure Original Campus Hero Background Image without any blue tint */}
-        <div className="absolute inset-0 z-0">
+      <section className="relative pt-4 sm:pt-6 pb-12 sm:pb-20 overflow-hidden min-h-[85vh] sm:min-h-[88vh] flex flex-col justify-between items-center">
+        {/* Responsive Campus Hero Background Image */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <img 
             src="/hero-campuos.png" 
             alt="Campus Hero Banner" 
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-top sm:object-center"
           />
-          {/* Subtle neutral top & bottom transition into dark section */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-slate-950" />
+          {/* Smart adaptive overlay: darker & subtle on mobile, transparent gradient on desktop */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/80 to-slate-950 sm:from-black/40 sm:via-transparent sm:to-slate-950" />
         </div>
 
         {/* 🌟 BAGIAN ATAS: Tepat di langit biru di atas tulisan CAMPUS OS */}
-        <div className="max-w-4xl mx-auto px-3 sm:px-6 text-center relative z-10 pt-1">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-950/80 border border-amber-400/40 text-amber-200 text-[10px] sm:text-xs font-bold shadow-xl backdrop-blur-md">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 text-center relative z-10 pt-1 sm:pt-2">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-950/90 border border-amber-400/50 text-amber-200 text-[10px] sm:text-xs font-bold shadow-xl backdrop-blur-md">
             <Sparkles size={13} className="text-amber-400 shrink-0" />
             <span>Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek RI</span>
           </div>
         </div>
 
-        {/* 🏆 BAGIAN BAWAH: Tepat di bawah grafis ONE CAMPUS INFINITE POSSIBILITIES */}
-        <div className="max-w-6xl w-full mx-auto px-3 sm:px-6 text-center space-y-3.5 sm:space-y-4 relative z-10 pt-28 sm:pt-36 pb-3">
-          <h1 className="text-sm sm:text-lg lg:text-2xl font-black tracking-tight leading-snug max-w-2xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
-            <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
-              Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
-            </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 font-black drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] block sm:inline">
-              {profile.institutionName}
-            </span>
-          </h1>
+        {/* 🏆 BAGIAN BAWAH: Slogan, Tombol Aksi & Statistik */}
+        <div className="max-w-5xl w-full mx-auto px-3 sm:px-6 text-center space-y-3 sm:space-y-4 relative z-10 pt-6 sm:pt-28 pb-2 sm:pb-3">
+          <div className="p-4 sm:p-6 rounded-3xl bg-slate-950/75 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-slate-800/80 sm:border-transparent shadow-2xl sm:shadow-none space-y-3.5 sm:space-y-4">
+            <h1 className="text-sm sm:text-lg lg:text-2xl font-black tracking-tight leading-snug max-w-2xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              <span className="text-amber-300">
+                Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
+              </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 font-black block sm:inline">
+                {profile.institutionName}
+              </span>
+            </h1>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">
-            <button
-              onClick={onOpenLogin}
-              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 hover:scale-105 transition-all"
-            >
-              <span>🚀 Masuk ke Portal Sivitas Akademika</span>
-              <ArrowRight size={14} />
-            </button>
-            <a
-              href="#keunggulan"
-              className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-2xl bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
-            >
-              <span>Eksplorasi Fitur Kampus</span>
-              <ChevronRight size={14} />
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">
+              <button
+                onClick={onOpenLogin}
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 hover:scale-105 transition-all"
+              >
+                <span>🚀 Masuk ke Portal Sivitas Akademika</span>
+                <ArrowRight size={14} />
+              </button>
+              <a
+                href="#keunggulan"
+                className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-2xl bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
+              >
+                <span>Eksplorasi Fitur Kampus</span>
+                <ChevronRight size={14} />
+              </a>
+            </div>
           </div>
 
           {/* 4 Stats Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 pt-3 sm:pt-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 pt-1 sm:pt-3">
             <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
               <p className="text-lg sm:text-xl font-black text-blue-400 font-mono">98.5%</p>
               <p className="text-xs font-bold text-slate-300">Lulusan Bekerja & Berwirausaha</p>
