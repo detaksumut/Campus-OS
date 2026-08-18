@@ -48,7 +48,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
       category: 'NON-AKADEMIK & LAYANAN',
       roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'],
       items: [
-        { id: 'keuangan', label: userRole === 'MAHASISWA' ? 'Tagihan UKT & VA' : 'Keuangan & Billing UKT', icon: DollarSign, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'MAHASISWA'] },
+        { 
+          id: 'keuangan', 
+          label: userRole === 'MAHASISWA' ? 'Tagihan UKT & Virtual Account' : 
+                 (userRole === 'DOSEN' || userRole === 'PEGAWAI') ? 'Slip Gaji & Penggajian (Payroll)' : 
+                 'Keuangan, Billing UKT & Payroll', 
+          icon: DollarSign, 
+          roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'PEGAWAI', 'MAHASISWA'] 
+        },
         { id: 'sdm', label: userRole === 'PEGAWAI' ? 'Presensi & Kepegawaian' : 'SDM & BKD SISTER', icon: Users, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'PEGAWAI'] },
         { id: 'aset', label: 'Inventaris & Aset BMN', icon: Package, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'PEGAWAI'] },
         { id: 'perpustakaan', label: 'Perpustakaan & OPAC', icon: Library, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'] },
