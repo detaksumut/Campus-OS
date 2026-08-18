@@ -237,9 +237,9 @@ function PortalMainLayout() {
           {/* 12. JURNAL OJS / PKP 3.x */}
           {activeTab === 'ojs' && <OJSWorkspaceView />}
 
-          {/* 13. DROPSHIP & PENYESUAIAN DATA MASTER (HANYA UNTUK ADMINISTRATOR BACKEND) */}
+          {/* 13. DROPSHIP & PENYESUAIAN DATA MASTER (ADMIN, REKTOR & YAYASAN FULL ACCESS) */}
           {activeTab === 'migrasi' && (
-            userRole === 'ADMIN' ? (
+            ['ADMIN', 'REKTOR', 'YAYASAN'].includes(userRole) ? (
               <DataMigrationWorkspaceView />
             ) : (
               <div className="p-12 text-center rounded-3xl bg-slate-900 border border-slate-800 text-white space-y-4 max-w-lg mx-auto mt-12 shadow-2xl">

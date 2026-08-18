@@ -3,7 +3,7 @@ import {
   LayoutDashboard, UserPlus, GraduationCap, FileText, CalendarCheck, 
   CheckSquare, Award, ScrollText, BookOpen, Video, FolderOpen, MessageSquare, 
   DollarSign, Users, Package, Library, UserCheck, Microscope, HeartHandshake, 
-  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database, Lock, Landmark, Building2
+  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database, Lock
 } from 'lucide-react';
 import { useThemeRuntime } from '@campus-os/shared';
 import { UserRole } from './Header';
@@ -17,60 +17,63 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectMenu }) => {
   const { mode, toggleTheme } = useThemeRuntime();
 
+  // Full Access Group: Administrator, Rektor / Direktur, dan Pengurus Yayasan
+  const isFullExecutiveOrAdmin = ['ADMIN', 'REKTOR', 'YAYASAN'].includes(userRole);
+
   const allSections = [
     {
       category: 'AKADEMIK',
-      roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA', 'PEGAWAI'],
+      roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'],
       items: [
-        { id: 'pmb', label: 'PMB (Penerimaan Mhs Baru)', icon: UserPlus, roles: ['ADMIN', 'REKTOR', 'PEGAWAI'] },
-        { id: 'akademik', label: 'Sistem Akademik', icon: GraduationCap, roles: ['ADMIN', 'REKTOR', 'DOSEN'] },
-        { id: 'krs', label: 'KRS', icon: FileText, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
-        { id: 'perkuliahan', label: 'Perkuliahan (16 Sesi)', icon: CalendarCheck, roles: ['ADMIN', 'REKTOR', 'DOSEN'] },
-        { id: 'ujian', label: 'Ujian Online (CBT)', icon: CheckSquare, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
-        { id: 'penilaian', label: 'Penilaian & KHS', icon: Award, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
-        { id: 'wisuda', label: 'Wisuda & SIVIL', icon: ScrollText, roles: ['ADMIN', 'REKTOR', 'MAHASISWA'] },
+        { id: 'pmb', label: 'PMB (Penerimaan Mhs Baru)', icon: UserPlus, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'PEGAWAI'] },
+        { id: 'akademik', label: 'Sistem Akademik & Kurikulum', icon: GraduationCap, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'krs', label: userRole === 'MAHASISWA' ? 'KRS Mandiri' : 'KRS & Perwalian', icon: FileText, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'perkuliahan', label: 'Perkuliahan (16 Sesi BAP)', icon: CalendarCheck, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'ujian', label: 'Ujian Online (CBT)', icon: CheckSquare, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'penilaian', label: userRole === 'MAHASISWA' ? 'KHS & Transkrip Nilai' : 'Penilaian & Bobot Mutu', icon: Award, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'wisuda', label: userRole === 'MAHASISWA' ? 'Pendaftaran Wisuda' : 'Wisuda & SIVIL Dikti', icon: ScrollText, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'MAHASISWA', 'PEGAWAI'] },
       ]
     },
     {
       category: 'PEMBELAJARAN',
-      roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'],
+      roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'],
       items: [
-        { id: 'lms', label: 'LMS (E-Learning)', icon: BookOpen, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
-        { id: 'kelas_online', label: 'Kelas Online', icon: Video, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
-        { id: 'materi', label: 'Materi Digital', icon: FolderOpen, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
-        { id: 'tugas', label: 'Tugas & Diskusi', icon: MessageSquare, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA'] },
+        { id: 'lms', label: 'LMS (E-Learning)', icon: BookOpen, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'kelas_online', label: 'Kelas Online Virtual', icon: Video, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'materi', label: 'Materi Digital & Modul', icon: FolderOpen, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'tugas', label: 'Tugas & Diskusi Forum', icon: MessageSquare, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
       ]
     },
     {
-      category: 'NON-AKADEMIK',
-      roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA', 'PEGAWAI', 'YAYASAN'],
+      category: 'NON-AKADEMIK & LAYANAN',
+      roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'],
       items: [
-        { id: 'keuangan', label: 'Keuangan & UKT', icon: DollarSign, roles: ['ADMIN', 'REKTOR', 'MAHASISWA', 'YAYASAN'] },
-        { id: 'sdm', label: 'SDM & BKD Dosen', icon: Users, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'PEGAWAI'] },
-        { id: 'aset', label: 'Inventaris & Aset', icon: Package, roles: ['ADMIN', 'REKTOR', 'PEGAWAI', 'YAYASAN'] },
-        { id: 'perpustakaan', label: 'Perpustakaan', icon: Library, roles: ['ADMIN', 'REKTOR', 'DOSEN', 'MAHASISWA', 'PEGAWAI'] },
-        { id: 'alumni', label: 'Alumni & Tracer Study', icon: UserCheck, roles: ['ADMIN', 'REKTOR', 'MAHASISWA'] },
+        { id: 'keuangan', label: userRole === 'MAHASISWA' ? 'Tagihan UKT & VA' : 'Keuangan & Billing UKT', icon: DollarSign, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'MAHASISWA'] },
+        { id: 'sdm', label: userRole === 'PEGAWAI' ? 'Presensi & Kepegawaian' : 'SDM & BKD SISTER', icon: Users, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'PEGAWAI'] },
+        { id: 'aset', label: 'Inventaris & Aset BMN', icon: Package, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'PEGAWAI'] },
+        { id: 'perpustakaan', label: 'Perpustakaan & OPAC', icon: Library, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'] },
+        { id: 'alumni', label: 'Alumni & Tracer Study', icon: UserCheck, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'MAHASISWA'] },
       ]
     },
     {
-      category: 'PENELITIAN & PENGABDIAN',
-      roles: ['ADMIN', 'REKTOR', 'DOSEN'],
+      category: 'PENELITIAN & PUBLIKASI',
+      roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'],
       items: [
-        { id: 'penelitian', label: 'Penelitian', icon: Microscope, roles: ['ADMIN', 'REKTOR', 'DOSEN'] },
-        { id: 'pengabdian', label: 'Pengabdian Masyarakat', icon: HeartHandshake, roles: ['ADMIN', 'REKTOR', 'DOSEN'] },
-        { id: 'publikasi', label: 'Publikasi & HKI', icon: BookMarked, roles: ['ADMIN', 'REKTOR', 'DOSEN'] },
-        { id: 'ojs', label: 'Jurnal Sistem (OJS)', icon: Newspaper, badge: 'New', roles: ['ADMIN', 'REKTOR', 'DOSEN'] },
+        { id: 'penelitian', label: 'Penelitian LPPM', icon: Microscope, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'pengabdian', label: 'Pengabdian Masyarakat (PkM)', icon: HeartHandshake, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'publikasi', label: 'Publikasi SINTA & HKI', icon: BookMarked, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'ojs', label: 'Jurnal Sistem (OJS)', icon: Newspaper, badge: 'New', roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
       ]
     },
     {
-      category: 'KONSOL ADMINISTRATOR (BACKEND)',
-      roles: ['ADMIN'], // HANYA MUNCUL KETIKA SUPER ADMINISTRATOR LOGIN!
+      category: 'KONSOL UTAMA & BACKEND',
+      roles: ['ADMIN', 'REKTOR', 'YAYASAN'], // REKTOR, YAYASAN, DAN ADMIN MEMILIKI AKSES LENGKAP!
       items: [
-        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Auto-Map', roles: ['ADMIN'] },
-        { id: 'pddikti', label: 'PDDIKTI Neo Feeder', icon: Cloud, roles: ['ADMIN'] },
-        { id: 'akreditasi', label: 'Akreditasi 9 Kriteria', icon: ShieldCheck, roles: ['ADMIN'] },
-        { id: 'laporan', label: 'Laporan & Dashboard', icon: BarChart3, roles: ['ADMIN'] },
-        { id: 'pengaturan', label: 'Pengaturan Sistem', icon: Settings, roles: ['ADMIN'] },
+        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Auto-Map', roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
+        { id: 'pddikti', label: 'PDDIKTI Neo Feeder', icon: Cloud, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
+        { id: 'akreditasi', label: 'Akreditasi 9 Kriteria', icon: ShieldCheck, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
+        { id: 'laporan', label: 'Laporan & BI Dashboard', icon: BarChart3, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
+        { id: 'pengaturan', label: 'Pengaturan Sistem', icon: Settings, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
       ]
     }
   ];
@@ -83,6 +86,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
       items: sec.items.filter(item => item.roles.includes(userRole))
     }))
     .filter(sec => sec.items.length > 0);
+
+  const getRoleLabelBadge = () => {
+    switch (userRole) {
+      case 'ADMIN': return { label: 'Admin BAAK', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' };
+      case 'REKTOR': return { label: 'Rektor', color: 'bg-amber-500/20 text-amber-400 border-amber-500/30' };
+      case 'YAYASAN': return { label: 'Yayasan', color: 'bg-rose-500/20 text-rose-400 border-rose-500/30' };
+      case 'DOSEN': return { label: 'Dosen', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' };
+      case 'MAHASISWA': return { label: 'Mahasiswa', color: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
+      case 'PEGAWAI': return { label: 'Pegawai', color: 'bg-teal-500/20 text-teal-400 border-teal-500/30' };
+    }
+  };
+
+  const roleBadge = getRoleLabelBadge();
 
   return (
     <aside className="w-64 bg-slate-900 border-r border-slate-800 text-slate-300 flex flex-col h-full select-none shrink-0 z-30">
@@ -98,16 +114,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
           </div>
         </div>
 
-        {userRole === 'ADMIN' && (
-          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded">
-            Admin
-          </span>
-        )}
-        {userRole === 'REKTOR' && (
-          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded">
-            Rektor
-          </span>
-        )}
+        <span className={`px-2 py-0.5 text-[9px] font-bold border rounded-full ${roleBadge.color}`}>
+          {roleBadge.label}
+        </span>
       </div>
 
       {/* Nav Items (Scrollable) */}
@@ -122,7 +131,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
           }`}
         >
           <LayoutDashboard size={16} className={activeTab === 'dashboard' ? 'text-white' : 'text-blue-400'} />
-          <span>Beranda</span>
+          <span>Beranda Utama</span>
         </button>
 
         {/* Categorized Sections */}
@@ -132,7 +141,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
               <p className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
                 {sec.category}
               </p>
-              {sec.category.includes('ADMINISTRATOR') && (
+              {sec.category.includes('KONSOL') && (
                 <Lock size={11} className="text-emerald-500" />
               )}
             </div>
