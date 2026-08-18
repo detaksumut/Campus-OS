@@ -57,12 +57,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
     },
     {
       category: 'PENELITIAN & PUBLIKASI',
-      roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'],
+      roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'],
       items: [
         { id: 'penelitian', label: 'Penelitian LPPM', icon: Microscope, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
         { id: 'pengabdian', label: 'Pengabdian Masyarakat (PkM)', icon: HeartHandshake, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
         { id: 'publikasi', label: 'Publikasi SINTA & HKI', icon: BookMarked, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
-        { id: 'ojs', label: 'Jurnal Sistem (OJS)', icon: Newspaper, badge: 'New', roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'ojs', label: 'Jurnal Ilmiah (OJS)', icon: Newspaper, badge: 'Akses Semua', roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA', 'PEGAWAI'] },
       ]
     },
     {
