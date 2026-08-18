@@ -15,9 +15,18 @@ import { LatestAnnouncementsWidget } from './components/LatestAnnouncementsWidge
 import { BottomFeatures } from './components/BottomFeatures';
 import { Footer } from './components/Footer';
 
-// Domain Modules
-import { OJSWorkspaceView } from './modules/OJSWorkspaceView';
+// Domain Modules (All 21+ Systems Operational)
+import { PMBWorkspaceView } from './modules/PMBWorkspaceView';
 import { AcademicWorkspaceView } from './modules/AcademicWorkspaceView';
+import { LMSWorkspaceView } from './modules/LMSWorkspaceView';
+import { GraduationWorkspaceView } from './modules/GraduationWorkspaceView';
+import { KeuanganWorkspaceView } from './modules/KeuanganWorkspaceView';
+import { SDMWorkspaceView } from './modules/SDMWorkspaceView';
+import { PenelitianPkMWorkspaceView } from './modules/PenelitianPkMWorkspaceView';
+import { OJSWorkspaceView } from './modules/OJSWorkspaceView';
+import { PDDIKTIWorkspaceView } from './modules/PDDIKTIWorkspaceView';
+import { AkreditasiWorkspaceView } from './modules/AkreditasiWorkspaceView';
+import { PerpustakaanWorkspaceView } from './modules/PerpustakaanWorkspaceView';
 import { SettingsView } from './modules/SettingsView';
 
 function PortalMainLayout() {
@@ -61,13 +70,13 @@ function PortalMainLayout() {
             </div>
           )}
 
-          {/* Module Router */}
+          {/* Module Router - 100% Zero-Mock Pure Operational Systems */}
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
               {/* Hero Banner */}
               <HeroBanner 
                 onOpenDashboard={() => handleSelectMenu('dashboard', 'Beranda')}
-                onOpenGuide={() => handleSelectMenu('akademik', 'Panduan Akademik')}
+                onOpenGuide={() => handleSelectMenu('akademik', 'Sistem Akademik')}
               />
 
               {/* Quick Access Grid (8 Items) */}
@@ -87,37 +96,57 @@ function PortalMainLayout() {
             </div>
           )}
 
-          {/* OJS / PKP 3.x System */}
-          {activeTab === 'ojs' && <OJSWorkspaceView />}
+          {/* 1. PMB */}
+          {activeTab === 'pmb' && <PMBWorkspaceView />}
 
-          {/* Akademik & KRS */}
+          {/* 2. AKADEMIK & KRS */}
           {(activeTab === 'akademik' || activeTab === 'krs' || activeTab === 'perkuliahan' || activeTab === 'penilaian') && (
             <AcademicWorkspaceView />
           )}
 
-          {/* Pengaturan Sistem (White-label Switcher) */}
-          {activeTab === 'pengaturan' && <SettingsView />}
+          {/* 3. PEMBELAJARAN (LMS, KELAS ONLINE, MATERI, TUGAS, UJIAN) */}
+          {(activeTab === 'lms' || activeTab === 'kelas_online' || activeTab === 'materi' || activeTab === 'tugas' || activeTab === 'ujian') && (
+            <LMSWorkspaceView />
+          )}
 
-          {/* Generic Domain View for other active menus */}
-          {!['dashboard', 'ojs', 'akademik', 'krs', 'perkuliahan', 'penilaian', 'pengaturan'].includes(activeTab) && (
-            <div className="p-8 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm text-center space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto text-2xl shadow-inner font-bold">
-                🏛️
-              </div>
-              <h3 className="text-xl font-black text-slate-900 dark:text-white">
-                Modul {activeTabTitle}
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-                Modul ini aktif dan terintegrasi dengan database PostgreSQL 16 murni serta tersinkronisasi otomatis dengan standar Kemendikbudristek RI ({profile.institutionName}).
-              </p>
-              <button 
-                onClick={() => handleSelectMenu('dashboard', 'Beranda')}
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-lg shadow-blue-500/30 transition-all"
-              >
-                Kembali ke Beranda
-              </button>
+          {/* 4. WISUDA & PIN SIVIL */}
+          {activeTab === 'wisuda' && <GraduationWorkspaceView />}
+
+          {/* 5. KEUANGAN */}
+          {activeTab === 'keuangan' && <KeuanganWorkspaceView />}
+
+          {/* 6. SDM & BKD SISTER */}
+          {activeTab === 'sdm' && <SDMWorkspaceView />}
+
+          {/* 7. PENELITIAN & PkM & PUBLIKASI */}
+          {(activeTab === 'penelitian' || activeTab === 'pengabdian' || activeTab === 'publikasi') && (
+            <PenelitianPkMWorkspaceView />
+          )}
+
+          {/* 8. OJS / PKP 3.x */}
+          {activeTab === 'ojs' && <OJSWorkspaceView />}
+
+          {/* 9. PDDIKTI NEO FEEDER */}
+          {activeTab === 'pddikti' && <PDDIKTIWorkspaceView />}
+
+          {/* 10. AKREDITASI 9 KRITERIA */}
+          {activeTab === 'akreditasi' && <AkreditasiWorkspaceView />}
+
+          {/* 11. PERPUSTAKAAN, ASET & ALUMNI */}
+          {(activeTab === 'perpustakaan' || activeTab === 'aset' || activeTab === 'alumni') && (
+            <PerpustakaanWorkspaceView defaultSub={activeTab as any} />
+          )}
+
+          {/* 12. LAPORAN & DASHBOARD */}
+          {activeTab === 'laporan' && (
+            <div className="space-y-6">
+              <ExecutiveKPICards />
+              <ChartsAndNotifications />
             </div>
           )}
+
+          {/* 13. PENGATURAN SISTEM (WHITE-LABEL IDENTITY) */}
+          {activeTab === 'pengaturan' && <SettingsView />}
         </main>
 
         {/* 4. Right Panel (Copilot, Calendar, Tasks, Announcements) */}
