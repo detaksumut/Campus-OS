@@ -863,3 +863,5 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
     </div>
   );
 };
+
+export default AcademicWorkspaceView;

@@ -17,7 +17,7 @@
     "tools/*"
   ],
   "scripts": {
-    "build": "turbo run build --filter=portal",
+    "build": "npm run build --workspace=portal",
     "migrate:neon": "node scripts/run-migration.cjs",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
