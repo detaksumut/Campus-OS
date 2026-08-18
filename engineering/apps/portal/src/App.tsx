@@ -39,7 +39,17 @@ function PortalMainLayout() {
   const handleSelectMenu = (menuId: string, title: string) => {
     setActiveTab(menuId);
     setActiveTabTitle(title);
+    if (typeof window !== 'undefined') {
+      window.history.pushState(null, '', `/#/${menuId}`);
+    }
   };
+
+  React.useEffect(() => {
+    const hash = window.location.hash.replace('#/', '').replace('#', '');
+    if (hash && hash !== '') {
+      setActiveTab(hash);
+    }
+  }, []);
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden font-sans ${mode === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
@@ -100,10 +110,17 @@ function PortalMainLayout() {
           {/* 1. PMB */}
           {activeTab === 'pmb' && <PMBWorkspaceView />}
 
-          {/* 2. AKADEMIK & KRS */}
-          {(activeTab === 'akademik' || activeTab === 'krs' || activeTab === 'perkuliahan' || activeTab === 'penilaian') && (
-            <AcademicWorkspaceView />
-          )}
+          {/* 2. SISTEM AKADEMIK (KURIKULUM OBE & MATA KULIAH) */}
+          {activeTab === 'akademik' && <AcademicWorkspaceView defaultSubTab="KURIKULUM_OBE" />}
+
+          {/* 3. KARTU RENCANA STUDI (KRS & BATAS SKS) */}
+          {activeTab === 'krs' && <AcademicWorkspaceView defaultSubTab="KRS_PORTAL" />}
+
+          {/* 4. PERKULIAHAN & 16 SESI BAP DIGITAL */}
+          {activeTab === 'perkuliahan' && <AcademicWorkspaceView defaultSubTab="JADWAL_KELAS" />}
+
+          {/* 5. PENILAIAN & BOBOT MUTU KHS */}
+          {activeTab === 'penilaian' && <AcademicWorkspaceView defaultSubTab="PENILAIAN_KHS" />}
 
           {/* 3. PEMBELAJARAN (LMS, KELAS ONLINE, MATERI, TUGAS, UJIAN) */}
           {(activeTab === 'lms' || activeTab === 'kelas_online' || activeTab === 'materi' || activeTab === 'tugas' || activeTab === 'ujian') && (

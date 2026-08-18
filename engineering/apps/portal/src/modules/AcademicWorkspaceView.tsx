@@ -39,11 +39,21 @@ interface ClassScheduleItem {
   totalMeetings: number; // 16 Pertemuan standar DIKTI
 }
 
-export const AcademicWorkspaceView: React.FC = () => {
+interface AcademicWorkspaceViewProps {
+  defaultSubTab?: AcademicSubTab;
+}
+
+export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ defaultSubTab = 'KURIKULUM_OBE' }) => {
   const { profile } = useTenant();
-  const [activeSubTab, setActiveSubTab] = useState<AcademicSubTab>('KURIKULUM_OBE');
+  const [activeSubTab, setActiveSubTab] = useState<AcademicSubTab>(defaultSubTab);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProdiFilter, setSelectedProdiFilter] = useState('ALL');
+
+  React.useEffect(() => {
+    if (defaultSubTab) {
+      setActiveSubTab(defaultSubTab);
+    }
+  }, [defaultSubTab]);
 
   // 1. Kurikulum OBE & Mata Kuliah Catalog (Full CRUD Standar DIKTI)
   const [courses, setCourses] = useState<CourseItem[]>([
