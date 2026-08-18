@@ -42,6 +42,31 @@ export const OJSWorkspaceView: React.FC = () => {
       similarityScore: 14.0,
       reviewRound: 1,
       reviewersAssigned: []
+    },
+    {
+      id: 'sub-104',
+      journalTitle: 'Jurnal Pengabdian Masyarakat & Vokasi Nusantara (JPMVN)',
+      sintaGrade: 'SINTA 5',
+      title: 'Pemberdayaan Kelompok Sadar Wisata (Pokdarwis) Melalui Pelatihan Digital Marketing & Homestay Management',
+      abstract: 'Program pengabdian masyarakat untuk meningkatkan kompetensi pengelola homestay desa wisata berbasis CHSE.',
+      authors: ['Drs. Anwar Nasution, M.Si.', 'Siti Maryam'],
+      currentStage: 'REVIEW',
+      similarityScore: 9.8,
+      reviewRound: 1,
+      reviewersAssigned: ['Dr. Hendra Wijaya, M.T.'],
+      recommendation: 'ACCEPT'
+    },
+    {
+      id: 'sub-105',
+      journalTitle: 'Jurnal Riset Mahasiswa & Inovasi Terapan (JRMIT)',
+      sintaGrade: 'SINTA 6',
+      title: 'Perancangan Media Informasi Interaktif Berbasis Augmented Reality untuk Pemandu Wisata Museum',
+      abstract: 'Pengembangan aplikasi mobile AR guna memperkaya pengalaman edukasi pengunjung museum sejarah daerah.',
+      authors: ['Rian Hidayat (Mahasiswa)', 'Budi Santoso, S.Kom.'],
+      currentStage: 'COPYEDITING',
+      similarityScore: 7.2,
+      reviewRound: 1,
+      reviewersAssigned: ['Prof. Yusuf, M.T.']
     }
   ]);
 
@@ -354,21 +379,28 @@ export const OJSWorkspaceView: React.FC = () => {
 
             <form onSubmit={handleCreateSubmission} className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Target Jurnal Ilmiah Kampus: *</label>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Target Jurnal Ilmiah Kampus (SINTA 1 s/d SINTA 6): *</label>
                 <select
                   value={newSubmissionForm.journalTitle}
                   onChange={(e) => {
                     const jTitle = e.target.value;
                     let sGrade = 'SINTA 2';
+                    if (jTitle.includes('JIRKT')) sGrade = 'SINTA 1';
+                    if (jTitle.includes('JTIP')) sGrade = 'SINTA 2';
                     if (jTitle.includes('JMPB')) sGrade = 'SINTA 3';
                     if (jTitle.includes('Kuliner')) sGrade = 'SINTA 4';
+                    if (jTitle.includes('JPMVN')) sGrade = 'SINTA 5';
+                    if (jTitle.includes('JRMIT')) sGrade = 'SINTA 6';
                     setNewSubmissionForm({ ...newSubmissionForm, journalTitle: jTitle, sintaGrade: sGrade });
                   }}
                   className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold focus:outline-none"
                 >
+                  <option value="Jurnal Internasional Riset Kepariwisataan & Teknologi (JIRKT)">Jurnal Internasional Riset Kepariwisataan & Teknologi (JIRKT) [Akreditasi SINTA 1 / Scopus]</option>
                   <option value="Jurnal Teknologi Informasi dan Pariwisata (JTIP)">Jurnal Teknologi Informasi dan Pariwisata (JTIP) [Akreditasi SINTA 2]</option>
                   <option value="Jurnal Manajemen Perhotelan dan Bisnis (JMPB)">Jurnal Manajemen Perhotelan dan Bisnis (JMPB) [Akreditasi SINTA 3]</option>
                   <option value="Jurnal Kuliner Nusantara & Gastronomi">Jurnal Kuliner Nusantara & Gastronomi [Akreditasi SINTA 4]</option>
+                  <option value="Jurnal Pengabdian Masyarakat & Vokasi Nusantara (JPMVN)">Jurnal Pengabdian Masyarakat & Vokasi Nusantara (JPMVN) [Akreditasi SINTA 5]</option>
+                  <option value="Jurnal Riset Mahasiswa & Inovasi Terapan (JRMIT)">Jurnal Riset Mahasiswa & Inovasi Terapan (JRMIT) [Akreditasi SINTA 6]</option>
                 </select>
               </div>
 
