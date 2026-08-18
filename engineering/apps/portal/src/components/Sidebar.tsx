@@ -88,13 +88,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
     },
     {
       category: 'KONSOL UTAMA & BACKEND',
-      roles: ['ADMIN', 'REKTOR', 'YAYASAN'], // REKTOR, YAYASAN, DAN ADMIN MEMILIKI AKSES LENGKAP!
+      roles: ['ADMIN'], // HANYA AKSES KHUSUS SUPER ADMINISTRATOR IT / BAAK PUSAT!
       items: [
-        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Auto-Map', roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
-        { id: 'pddikti', label: 'PDDIKTI Neo Feeder', icon: Cloud, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
-        { id: 'akreditasi', label: 'Akreditasi 9 Kriteria', icon: ShieldCheck, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
-        { id: 'laporan', label: 'Laporan & BI Dashboard', icon: BarChart3, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
-        { id: 'pengaturan', label: 'Pengaturan Sistem', icon: Settings, roles: ['ADMIN', 'REKTOR', 'YAYASAN'] },
+        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Admin Only', roles: ['ADMIN'] },
+        { id: 'pddikti', label: 'PDDIKTI Neo Feeder', icon: Cloud, roles: ['ADMIN'] },
+        { id: 'akreditasi', label: 'Akreditasi 9 Kriteria', icon: ShieldCheck, roles: ['ADMIN'] },
+        { id: 'laporan', label: 'Laporan & BI Dashboard', icon: BarChart3, roles: ['ADMIN'] },
+        { id: 'pengaturan', label: 'Pengaturan Sistem', icon: Settings, roles: ['ADMIN'] },
       ]
     }
   ];

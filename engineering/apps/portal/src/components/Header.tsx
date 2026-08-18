@@ -238,22 +238,22 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
                 </div>
 
                 <div className="p-1 space-y-1">
-                  {/* 1. ADMINISTRATOR SISTEM (BACKEND) */}
-                  <button
-                    onClick={() => {
-                      onChangeRole('ADMIN');
-                      setShowRoleMenu(false);
-                    }}
-                    className={`w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors ${
-                      userRole === 'ADMIN' ? 'bg-emerald-600/20 text-emerald-300 font-bold border border-emerald-500/40' : 'hover:bg-slate-800 text-slate-300 text-xs'
-                    }`}
-                  >
-                    <ShieldCheck size={15} className="text-emerald-400 shrink-0" />
-                    <div>
-                      <span className="text-xs block font-bold">1. Administrator (BAAK / IT)</span>
-                      <span className="text-[10px] text-slate-400">Pengelola Data Dropship & Backend</span>
-                    </div>
-                  </button>
+                  {/* 1. ADMINISTRATOR SISTEM (HANYA TERLIHAT JIKA SEDANG SEBAGAI ADMIN) */}
+                  {userRole === 'ADMIN' && (
+                    <button
+                      onClick={() => {
+                        onChangeRole('ADMIN');
+                        setShowRoleMenu(false);
+                      }}
+                      className="w-full p-2 rounded-lg text-left flex items-center gap-2 transition-colors bg-emerald-600/20 text-emerald-300 font-bold border border-emerald-500/40"
+                    >
+                      <ShieldCheck size={15} className="text-emerald-400 shrink-0" />
+                      <div>
+                        <span className="text-xs block font-bold">1. Administrator (BAAK / IT)</span>
+                        <span className="text-[10px] text-slate-400">Pengelola Data Dropship & Backend</span>
+                      </div>
+                    </button>
+                  )}
 
                   {/* 2. REKTOR / DIREKTUR (PIMPINAN EKSEKUTIF) */}
                   <button
