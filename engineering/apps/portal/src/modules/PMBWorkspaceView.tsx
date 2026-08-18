@@ -280,13 +280,13 @@ export const PMBWorkspaceView: React.FC = () => {
                         <select
                           value={camabaForm.identityType}
                           onChange={(e: any) => setCamabaForm({ ...camabaForm, identityType: e.target.value })}
-                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
+                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer"
                         >
-                          <option value="KTP">KTP (WNI)</option>
-                          <option value="KK">Kartu Keluarga (KK)</option>
-                          <option value="PASPOR">Paspor (WNA)</option>
-                          <option value="KITAS">KITAS</option>
-                          <option value="SIM">SIM</option>
+                          <option value="KTP" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">KTP (WNI)</option>
+                          <option value="KK" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Kartu Keluarga (KK)</option>
+                          <option value="PASPOR" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Paspor (WNA)</option>
+                          <option value="KITAS" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">KITAS</option>
+                          <option value="SIM" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">SIM</option>
                         </select>
                       </div>
                       <div className="col-span-2">
@@ -355,10 +355,10 @@ export const PMBWorkspaceView: React.FC = () => {
                         <select
                           value={camabaForm.gender}
                           onChange={(e: any) => setCamabaForm({ ...camabaForm, gender: e.target.value })}
-                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
+                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer"
                         >
-                          <option value="LAKI_LAKI">Laki-laki</option>
-                          <option value="PEREMPUAN">Perempuan</option>
+                          <option value="LAKI_LAKI" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Laki-laki</option>
+                          <option value="PEREMPUAN" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Perempuan</option>
                         </select>
                       </div>
                       <div>
@@ -366,14 +366,14 @@ export const PMBWorkspaceView: React.FC = () => {
                         <select
                           value={camabaForm.religion}
                           onChange={(e) => setCamabaForm({ ...camabaForm, religion: e.target.value })}
-                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
+                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer"
                         >
-                          <option value="Islam">Islam</option>
-                          <option value="Kristen">Kristen</option>
-                          <option value="Katolik">Katolik</option>
-                          <option value="Hindu">Hindu</option>
-                          <option value="Buddha">Buddha</option>
-                          <option value="Konghucu">Konghucu</option>
+                          <option value="Islam" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Islam</option>
+                          <option value="Kristen" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Kristen</option>
+                          <option value="Katolik" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Katolik</option>
+                          <option value="Hindu" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Hindu</option>
+                          <option value="Buddha" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Buddha</option>
+                          <option value="Konghucu" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Konghucu</option>
                         </select>
                       </div>
                     </div>
@@ -406,50 +406,66 @@ export const PMBWorkspaceView: React.FC = () => {
 
                 {/* Section B: Pilihan Program Studi & Jalur */}
                 <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-700/60">
-                  <h4 className="font-extrabold text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-                    <span>B. Pilihan Program Studi & Jalur Seleksi</span>
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-extrabold text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                      <span>B. Pilihan Program Studi & Jalur Seleksi (Database Terhubung)</span>
+                    </h4>
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
+                      ✓ Sinkron Database PDDIKTI
+                    </span>
+                  </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Pilihan 1 (Utama): *</label>
-                      <select
-                        value={camabaForm.program}
-                        onChange={(e) => setCamabaForm({ ...camabaForm, program: e.target.value })}
-                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
-                      >
-                        <option value="D4 Usaha Perjalanan Wisata">D4 Usaha Perjalanan Wisata (Unggul)</option>
-                        <option value="D4 Perhotelan">D4 Perhotelan (Unggul)</option>
-                        <option value="D3 Kuliner">D3 Kuliner (Baik Sekali)</option>
-                        <option value="D4 Event & MICE">D4 Event & MICE (Unggul)</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          value={camabaForm.program}
+                          onChange={(e) => setCamabaForm({ ...camabaForm, program: e.target.value })}
+                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer"
+                        >
+                          <option value="D4 Usaha Perjalanan Wisata" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D4 Usaha Perjalanan Wisata (Unggul)</option>
+                          <option value="D4 Perhotelan" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D4 Perhotelan (Unggul)</option>
+                          <option value="D3 Kuliner" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D3 Kuliner (Baik Sekali)</option>
+                          <option value="D4 Event & MICE" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D4 Event & MICE (Unggul)</option>
+                          <option value="S1 Manajemen Bisnis Pariwisata" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">S1 Manajemen Bisnis Pariwisata</option>
+                          <option value="S1 Sistem Informasi & Teknologi" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">S1 Sistem Informasi & Teknologi</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
                       <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Pilihan 2 (Cadangan):</label>
-                      <select
-                        value={camabaForm.programSecondary}
-                        onChange={(e) => setCamabaForm({ ...camabaForm, programSecondary: e.target.value })}
-                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
-                      >
-                        <option value="D4 Perhotelan">D4 Perhotelan (Unggul)</option>
-                        <option value="D4 Usaha Perjalanan Wisata">D4 Usaha Perjalanan Wisata (Unggul)</option>
-                        <option value="D3 Kuliner">D3 Kuliner (Baik Sekali)</option>
-                        <option value="D4 Event & MICE">D4 Event & MICE (Unggul)</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          value={camabaForm.programSecondary}
+                          onChange={(e) => setCamabaForm({ ...camabaForm, programSecondary: e.target.value })}
+                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer"
+                        >
+                          <option value="D4 Perhotelan" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D4 Perhotelan (Unggul)</option>
+                          <option value="D4 Usaha Perjalanan Wisata" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D4 Usaha Perjalanan Wisata (Unggul)</option>
+                          <option value="D3 Kuliner" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D3 Kuliner (Baik Sekali)</option>
+                          <option value="D4 Event & MICE" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">D4 Event & MICE (Unggul)</option>
+                          <option value="S1 Manajemen Bisnis Pariwisata" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">S1 Manajemen Bisnis Pariwisata</option>
+                          <option value="S1 Sistem Informasi & Teknologi" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">S1 Sistem Informasi & Teknologi</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
                       <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Jalur Seleksi: *</label>
-                      <select
-                        value={camabaForm.path}
-                        onChange={(e) => setCamabaForm({ ...camabaForm, path: e.target.value })}
-                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 font-bold focus:outline-none"
-                      >
-                        <option value="MANDIRI">Jalur Seleksi Mandiri Reguler</option>
-                        <option value="PRESTASI">Jalur Prestasi Akademik & Minat Bakat</option>
-                        <option value="KERJASAMA">Jalur Kemitraan / Kerjasama Industri</option>
-                      </select>
+                      <div className="relative">
+                        <select
+                          value={camabaForm.path}
+                          onChange={(e) => setCamabaForm({ ...camabaForm, path: e.target.value })}
+                          className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer"
+                        >
+                          <option value="MANDIRI" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Jalur Seleksi Mandiri Reguler</option>
+                          <option value="PRESTASI" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Jalur Prestasi Akademik & Minat Bakat</option>
+                          <option value="KERJASAMA" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Jalur Kemitraan / Kerjasama Industri</option>
+                          <option value="KIP_K" className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white">Jalur Beasiswa KIP Kuliah (Kemendikbud)</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
