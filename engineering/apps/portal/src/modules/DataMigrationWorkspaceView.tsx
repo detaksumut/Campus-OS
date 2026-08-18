@@ -245,6 +245,43 @@ export const DataMigrationWorkspaceView: React.FC = () => {
         </div>
       </div>
 
+      {/* Banner Protokol Password Awal Default Dropship */}
+      <div className="p-4 rounded-2xl bg-slate-900 border border-amber-500/40 text-white shadow-lg space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400 font-black text-xs">🔑 SSO Auto-Credential</span>
+            <h4 className="font-black text-xs text-white">Standar Pembuatan Kata Sandi (Password Awal) Data Dropship</h4>
+          </div>
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            ✓ Enkripsi Argon2id / Bcrypt
+          </span>
+        </div>
+        <p className="text-[11px] text-slate-300">
+          Setiap data master yang di-dropship akan otomatis dibuatkan akun SSO dengan format kata sandi awal sebagai berikut:
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-1 text-[11px]">
+          <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700">
+            <span className="text-slate-400 block font-medium">🎓 Mahasiswa:</span>
+            <span className="font-mono font-bold text-amber-400">Mhs#[NIM]#[TahunMasuk]</span>
+          </div>
+          <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700">
+            <span className="text-slate-400 block font-medium">👨‍🏫 Rektor & Dosen:</span>
+            <span className="font-mono font-bold text-blue-400">Dsn#[NIDN/NUP]</span>
+          </div>
+          <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700">
+            <span className="text-slate-400 block font-medium">💼 Pegawai / Tendik:</span>
+            <span className="font-mono font-bold text-emerald-400">Peg#[NIP/NIK]</span>
+          </div>
+          <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700">
+            <span className="text-slate-400 block font-medium">🏛️ Pengurus Yayasan:</span>
+            <span className="font-mono font-bold text-purple-400">Yys#[ID_Pengurus]</span>
+          </div>
+        </div>
+        <div className="pt-1 flex items-center justify-between text-[10px] text-slate-400 border-t border-slate-800">
+          <span>* Pengguna dapat langsung mengubah kata sandi mereka secara mandiri melalui menu <b>Ganti Kata Sandi</b> di pojok kanan atas profil masing-masing.</span>
+        </div>
+      </div>
+
       {/* 5 Kanal Tab Selector (Termasuk Jurusan/Akademik) */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
         <button

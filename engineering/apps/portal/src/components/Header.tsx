@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Search, Bell, Mail, ChevronDown, CheckCircle, ShieldCheck, 
-  GraduationCap, BookOpen, LogIn, UserPlus, Lock, Key, LogOut, CheckCircle2
+  GraduationCap, BookOpen, LogIn, UserPlus, Lock, Key, LogOut, CheckCircle2,
+  Eye, EyeOff, ShieldAlert
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
@@ -15,10 +16,11 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSettings }) => {
   const { profile } = useTenant();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Default true for demo, toggleable
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showRoleMenu, setShowRoleMenu] = useState(false);
   const [showSSOModal, setShowSSOModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [ssoTab, setSsoTab] = useState<'LOGIN' | 'REGISTER'>('LOGIN');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -38,14 +40,22 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
   });
   const [regSuccess, setRegSuccess] = useState(false);
 
+  // Change Password State
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassText, setShowPassText] = useState(false);
+  const [changePassSuccess, setChangePassSuccess] = useState(false);
+  const [changePassError, setChangePassError] = useState('');
+
   const getRoleBadge = () => {
     switch (userRole) {
       case 'ADMIN':
-        return { label: 'Administrator (Pak Direktur)', subtitle: 'Direktur / BAAK IT', icon: ShieldCheck, color: 'bg-emerald-500' };
+        return { label: 'Administrator (Pak Direktur)', subtitle: 'Direktur / BAAK IT', icon: ShieldCheck, color: 'bg-emerald-500', defaultPass: 'Admin#Campus2024' };
       case 'DOSEN':
-        return { label: 'Dr. Hendra Wijaya, M.T.', subtitle: 'Dosen Tetap (NIDN: 0012057801)', icon: BookOpen, color: 'bg-blue-500' };
+        return { label: 'Dr. Hendra Wijaya, M.T.', subtitle: 'Dosen Tetap (NIDN: 0012057801)', icon: BookOpen, color: 'bg-blue-500', defaultPass: 'Dsn#0012057801' };
       case 'MAHASISWA':
-        return { label: 'Rian Hidayat (Mahasiswa)', subtitle: 'NIM: 200101012 • D4 Pariwisata', icon: GraduationCap, color: 'bg-purple-500' };
+        return { label: 'Rian Hidayat (Mahasiswa)', subtitle: 'NIM: 200101012 • D4 Pariwisata', icon: GraduationCap, color: 'bg-purple-500', defaultPass: 'Mhs#200101012#2024' };
     }
   };
 
@@ -67,6 +77,30 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
       setIsLoggedIn(true);
       setRegSuccess(false);
       setShowSSOModal(false);
+    }, 1500);
+  };
+
+  const handlePerformChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setChangePassError('');
+
+    if (newPassword.length < 8) {
+      setChangePassError('Kata sandi baru minimal harus 8 karakter!');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setChangePassError('Konfirmasi kata sandi baru tidak cocok!');
+      return;
+    }
+
+    setChangePassSuccess(true);
+    setTimeout(() => {
+      setChangePassSuccess(false);
+      setShowChangePasswordModal(false);
+      setOldPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      alert('Kata sandi akun SSO Anda berhasil diperbarui dengan aman!');
     }, 1500);
   };
 
@@ -239,15 +273,16 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
                 </div>
 
                 <div className="pt-2 border-t border-slate-800 space-y-1">
+                  {/* 🔑 TOMBOL GANTI PASSWORD */}
                   <button
                     onClick={() => {
                       setShowRoleMenu(false);
-                      setShowSSOModal(true);
+                      setShowChangePasswordModal(true);
                     }}
-                    className="w-full p-2 rounded-lg text-left text-xs font-bold text-slate-300 hover:bg-slate-800 flex items-center gap-2"
+                    className="w-full p-2 rounded-lg text-left text-xs font-bold text-amber-300 hover:bg-amber-950/40 flex items-center gap-2"
                   >
-                    <Key size={14} className="text-blue-400" />
-                    <span>Kelola Autentikasi SSO</span>
+                    <Key size={14} className="text-amber-400" />
+                    <span>Ganti Kata Sandi (Password)</span>
                   </button>
 
                   <button
@@ -264,11 +299,116 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
         )}
       </div>
 
+      {/* 🔑 MODAL GANTI PASSWORD AKUN SSO */}
+      {showChangePasswordModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl animate-in zoom-in-95 duration-200 text-white">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                  <Key size={20} />
+                </div>
+                <div>
+                  <h3 className="font-black text-sm text-white">Ganti Kata Sandi (Password Akun)</h3>
+                  <p className="text-[10px] text-slate-400">Akun: {currentRoleInfo.label}</p>
+                </div>
+              </div>
+              <button onClick={() => setShowChangePasswordModal(false)} className="text-slate-400 hover:text-white text-sm">✕</button>
+            </div>
+
+            {changePassSuccess ? (
+              <div className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-bold flex items-center gap-2.5">
+                <CheckCircle2 size={20} className="text-emerald-400 shrink-0" />
+                <span>Kata sandi akun SSO Anda telah berhasil diperbarui!</span>
+              </div>
+            ) : (
+              <form onSubmit={handlePerformChangePassword} className="space-y-4 text-xs">
+                {changePassError && (
+                  <div className="p-3 rounded-xl bg-rose-950/80 border border-rose-500/40 text-rose-300 font-bold flex items-center gap-2">
+                    <ShieldAlert size={16} className="text-rose-400 shrink-0" />
+                    <span>{changePassError}</span>
+                  </div>
+                )}
+
+                <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700 text-[11px] space-y-1">
+                  <p className="text-slate-400">Password Awal Default Dropship:</p>
+                  <p className="font-mono font-bold text-amber-400">{currentRoleInfo.defaultPass}</p>
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-300 block mb-1">Kata Sandi Saat Ini / Lama: *</label>
+                  <input
+                    type={showPassText ? 'text' : 'password'}
+                    required
+                    placeholder="Masukkan kata sandi lama/default..."
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    className="w-full p-2.5 rounded-xl border border-slate-700 bg-slate-800 font-mono focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-300 block mb-1">Kata Sandi Baru (Min. 8 Karakter): *</label>
+                  <input
+                    type={showPassText ? 'text' : 'password'}
+                    required
+                    placeholder="Minimal 8 karakter kombinasi..."
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full p-2.5 rounded-xl border border-slate-700 bg-slate-800 font-mono focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-300 block mb-1">Konfirmasi Kata Sandi Baru: *</label>
+                  <input
+                    type={showPassText ? 'text' : 'password'}
+                    required
+                    placeholder="Ulangi kata sandi baru..."
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full p-2.5 rounded-xl border border-slate-700 bg-slate-800 font-mono focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between text-[11px]">
+                  <label className="flex items-center gap-1.5 cursor-pointer text-slate-400">
+                    <input
+                      type="checkbox"
+                      checked={showPassText}
+                      onChange={(e) => setShowPassText(e.target.checked)}
+                      className="rounded text-amber-500"
+                    />
+                    <span>Tampilkan karakter sandi</span>
+                  </label>
+                </div>
+
+                <div className="pt-2 flex justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowChangePasswordModal(false)}
+                    className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold shadow-lg shadow-amber-600/30 flex items-center gap-2"
+                  >
+                    <Key size={14} />
+                    <span>Simpan Kata Sandi Baru</span>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* 🔐 MODAL UNIFIED SSO GATEWAY (LOGIN & REGISTRASI TERPADU) */}
       {showSSOModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl animate-in zoom-in-95 duration-200 text-white">
-            {/* Header Modal */}
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30">
@@ -282,7 +422,6 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
               <button onClick={() => setShowSSOModal(false)} className="text-slate-400 hover:text-white text-sm">✕</button>
             </div>
 
-            {/* Switcher Tab Login / Register */}
             <div className="grid grid-cols-2 gap-2 bg-slate-800/80 p-1 rounded-xl border border-slate-700">
               <button
                 onClick={() => setSsoTab('LOGIN')}
