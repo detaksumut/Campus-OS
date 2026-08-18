@@ -8,9 +8,10 @@ import { UserRole } from './Header';
 
 interface SSOGatewayScreenProps {
   onLoginSuccess: (role: UserRole) => void;
+  onBackToHero?: () => void;
 }
 
-export const SSOGatewayScreen: React.FC<SSOGatewayScreenProps> = ({ onLoginSuccess }) => {
+export const SSOGatewayScreen: React.FC<SSOGatewayScreenProps> = ({ onLoginSuccess, onBackToHero }) => {
   const { profile } = useTenant();
   const [ssoTab, setSsoTab] = useState<'LOGIN' | 'REGISTER'>('LOGIN');
   const [selectedRole, setSelectedRole] = useState<UserRole>('ADMIN');
@@ -88,9 +89,19 @@ export const SSOGatewayScreen: React.FC<SSOGatewayScreenProps> = ({ onLoginSucce
           </div>
         </div>
 
-        <div className="px-3 py-1 bg-slate-800/80 border border-slate-700 rounded-full text-[11px] font-bold text-slate-300 flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Single Sign-On (SSO) Gateway</span>
+        <div className="flex items-center gap-3">
+          {onBackToHero && (
+            <button
+              onClick={onBackToHero}
+              className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-slate-300 hover:text-white transition-all flex items-center gap-1.5"
+            >
+              <span>← Beranda Utama</span>
+            </button>
+          )}
+          <div className="px-3 py-1 bg-slate-800/80 border border-slate-700 rounded-full text-[11px] font-bold text-slate-300 flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Single Sign-On (SSO) Gateway</span>
+          </div>
         </div>
       </div>
 

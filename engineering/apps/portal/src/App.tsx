@@ -15,7 +15,8 @@ import { LatestAnnouncementsWidget } from './components/LatestAnnouncementsWidge
 import { BottomFeatures } from './components/BottomFeatures';
 import { Footer } from './components/Footer';
 
-// SSO Gateway Login/Register Screen
+// Landing Page & SSO Gateway Screen
+import { HeroLandingPage } from './components/HeroLandingPage';
 import { SSOGatewayScreen } from './components/SSOGatewayScreen';
 
 // Role-Specific Workspaces & Dashboards
@@ -49,6 +50,7 @@ function PortalMainLayout() {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [activeTabTitle, setActiveTabTitle] = useState<string>('Beranda');
   const [showCustomizer, setShowCustomizer] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSelectMenu = (menuId: string, title: string) => {
     setActiveTab(menuId);
@@ -73,13 +75,23 @@ function PortalMainLayout() {
     return () => window.removeEventListener('hashchange', handleHashSync);
   }, []);
 
-  // 🔐 JIKA STATUS LOGOUT -> RENDER LAYAR GERBANG SSO LENGKAP
+  // 🌟 JIKA STATUS LOGOUT -> RENDER HERO LANDING PAGE KAMPUS DAHULU (KLIK LOGIN UNTUK SSO)
   if (!isLoggedIn) {
+    if (!showLoginModal) {
+      return (
+        <HeroLandingPage
+          onOpenLogin={() => setShowLoginModal(true)}
+        />
+      );
+    }
+
     return (
       <SSOGatewayScreen
+        onBackToHero={() => setShowLoginModal(false)}
         onLoginSuccess={(role) => {
           setUserRole(role);
           setIsLoggedIn(true);
+          setShowLoginModal(false);
           setActiveTab('dashboard');
           setActiveTabTitle('Beranda');
         }}
