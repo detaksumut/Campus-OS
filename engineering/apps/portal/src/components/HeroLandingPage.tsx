@@ -55,30 +55,40 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
       </nav>
 
       {/* 2. HERO SECTION */}
-      <section className="relative pt-4 sm:pt-6 pb-12 sm:pb-20 overflow-hidden min-h-[85vh] sm:min-h-[88vh] flex flex-col justify-between items-center">
-        {/* Responsive Campus Hero Background Image */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+      <section className="relative pt-3 sm:pt-6 pb-12 sm:pb-20 overflow-hidden md:min-h-[88vh] flex flex-col justify-between items-center">
+        {/* Full Landscape Background on Desktop (md and above) */}
+        <div className="hidden md:block absolute inset-0 z-0">
           <img 
             src="/hero-campuos.png" 
             alt="Campus Hero Banner" 
-            className="w-full h-full object-cover object-top sm:object-center"
+            className="w-full h-full object-cover object-center"
           />
-          {/* Smart adaptive overlay: darker & subtle on mobile, transparent gradient on desktop */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/80 to-slate-950 sm:from-black/40 sm:via-transparent sm:to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-slate-950" />
         </div>
 
-        {/* 🌟 BAGIAN ATAS: Tepat di langit biru di atas tulisan CAMPUS OS */}
+        {/* 🌟 BAGIAN ATAS: Badge Akreditasi & Standar SN-Dikti */}
         <div className="max-w-4xl mx-auto px-3 sm:px-6 text-center relative z-10 pt-1 sm:pt-2">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-950/90 border border-amber-400/50 text-amber-200 text-[10px] sm:text-xs font-bold shadow-xl backdrop-blur-md">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-900/90 border border-amber-400/50 text-amber-200 text-[10px] sm:text-xs font-bold shadow-xl backdrop-blur-md">
             <Sparkles size={13} className="text-amber-400 shrink-0" />
             <span>Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek RI</span>
           </div>
         </div>
 
-        {/* 🏆 BAGIAN BAWAH: Slogan, Tombol Aksi & Statistik */}
-        <div className="max-w-5xl w-full mx-auto px-3 sm:px-6 text-center space-y-3 sm:space-y-4 relative z-10 pt-6 sm:pt-28 pb-2 sm:pb-3">
-          <div className="p-4 sm:p-6 rounded-3xl bg-slate-950/75 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-slate-800/80 sm:border-transparent shadow-2xl sm:shadow-none space-y-3.5 sm:space-y-4">
-            <h1 className="text-sm sm:text-lg lg:text-2xl font-black tracking-tight leading-snug max-w-2xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+        {/* 📱 FOTO HERO UTUH UNTUK HP (Responsive 16:9 Banner Tanpa Terpotong) */}
+        <div className="w-full max-w-lg mx-auto px-3 my-3 md:hidden relative z-10">
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-800/90 bg-slate-900 aspect-[16/9] w-full">
+            <img 
+              src="/hero-campuos.png" 
+              alt="Campus Hero Banner" 
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+        </div>
+
+        {/* 🏆 BAGIAN BAWAH: Slogan, Tombol Aksi & 4 Statistik */}
+        <div className="max-w-5xl w-full mx-auto px-3 sm:px-6 text-center space-y-3 sm:space-y-4 relative z-10 md:pt-32 pb-2 sm:pb-3">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="text-base sm:text-xl lg:text-2xl font-black tracking-tight leading-snug max-w-2xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               <span className="text-amber-300">
                 Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
               </span>
@@ -97,7 +107,7 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
               </button>
               <a
                 href="#keunggulan"
-                className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-2xl bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
+                className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
               >
                 <span>Eksplorasi Fitur Kampus</span>
                 <ChevronRight size={14} />
@@ -106,7 +116,7 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
           </div>
 
           {/* 4 Stats Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 pt-1 sm:pt-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 pt-2 sm:pt-4">
             <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
               <p className="text-lg sm:text-xl font-black text-blue-400 font-mono">98.5%</p>
               <p className="text-xs font-bold text-slate-300">Lulusan Bekerja & Berwirausaha</p>
