@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import { BookOpen, Video, FolderOpen, MessageSquare, CheckSquare, Play, Users, Clock, FileText } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
-export const LMSWorkspaceView: React.FC = () => {
+interface LMSWorkspaceViewProps {
+  defaultSub?: 'lms' | 'kelas_online' | 'materi' | 'tugas' | 'ujian';
+}
+
+export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub = 'lms' }) => {
   const { profile } = useTenant();
-  const [activeTab, setActiveTab] = useState<'lms' | 'kelas_online' | 'materi' | 'tugas' | 'ujian'>('lms');
+  const [activeTab, setActiveTab] = useState<'lms' | 'kelas_online' | 'materi' | 'tugas' | 'ujian'>(defaultSub);
+
+  React.useEffect(() => {
+    if (defaultSub) {
+      setActiveTab(defaultSub);
+    }
+  }, [defaultSub]);
 
   const onlineClasses = [
     { id: 'cls-1', code: 'UPW-201-A', name: 'Manajemen Operasional Pariwisata', lecturer: 'Dr. Hendra Wijaya', enrolled: 38, progress: 75, activeSession: 'Minggu ke-10: Pemasaran Destinasi' },

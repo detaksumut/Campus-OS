@@ -40,15 +40,23 @@ function PortalMainLayout() {
     setActiveTab(menuId);
     setActiveTabTitle(title);
     if (typeof window !== 'undefined') {
-      window.history.pushState(null, '', `/#/${menuId}`);
+      window.location.hash = `#/${menuId}`;
     }
   };
 
   React.useEffect(() => {
-    const hash = window.location.hash.replace('#/', '').replace('#', '');
-    if (hash && hash !== '') {
-      setActiveTab(hash);
-    }
+    const handleHashSync = () => {
+      const hash = window.location.hash.replace('#/', '').replace('#', '');
+      if (hash && hash !== '') {
+        setActiveTab(hash);
+      } else {
+        setActiveTab('dashboard');
+      }
+    };
+
+    handleHashSync();
+    window.addEventListener('hashchange', handleHashSync);
+    return () => window.removeEventListener('hashchange', handleHashSync);
   }, []);
 
   return (
@@ -107,7 +115,7 @@ function PortalMainLayout() {
             </div>
           )}
 
-          {/* 1. PMB */}
+          {/* 1. PMB (PENERIMAAN MAHASISWA BARU) */}
           {activeTab === 'pmb' && <PMBWorkspaceView />}
 
           {/* 2. SISTEM AKADEMIK (KURIKULUM OBE & MATA KULIAH) */}
@@ -119,43 +127,49 @@ function PortalMainLayout() {
           {/* 4. PERKULIAHAN & 16 SESI BAP DIGITAL */}
           {activeTab === 'perkuliahan' && <AcademicWorkspaceView defaultSubTab="JADWAL_KELAS" />}
 
-          {/* 5. PENILAIAN & BOBOT MUTU KHS */}
+          {/* 5. UJIAN ONLINE (CBT) */}
+          {activeTab === 'ujian' && <LMSWorkspaceView defaultSub="ujian" />}
+
+          {/* 6. PENILAIAN & BOBOT MUTU KHS */}
           {activeTab === 'penilaian' && <AcademicWorkspaceView defaultSubTab="PENILAIAN_KHS" />}
 
-          {/* 3. PEMBELAJARAN (LMS, KELAS ONLINE, MATERI, TUGAS, UJIAN) */}
-          {(activeTab === 'lms' || activeTab === 'kelas_online' || activeTab === 'materi' || activeTab === 'tugas' || activeTab === 'ujian') && (
-            <LMSWorkspaceView />
+          {/* 7. PEMBELAJARAN LMS (E-LEARNING, KELAS ONLINE, MATERI, TUGAS) */}
+          {(activeTab === 'lms' || activeTab === 'kelas_online' || activeTab === 'materi' || activeTab === 'tugas') && (
+            <LMSWorkspaceView defaultSub={activeTab as any} />
           )}
 
-          {/* 4. WISUDA & PIN SIVIL */}
+          {/* 8. WISUDA & PIN SIVIL */}
           {activeTab === 'wisuda' && <GraduationWorkspaceView />}
 
-          {/* 5. KEUANGAN */}
+          {/* 9. KEUANGAN (UKT & VIRTUAL ACCOUNT) */}
           {activeTab === 'keuangan' && <KeuanganWorkspaceView />}
 
-          {/* 6. SDM & BKD SISTER */}
+          {/* 10. SDM & BKD SISTER */}
           {activeTab === 'sdm' && <SDMWorkspaceView />}
 
-          {/* 7. PENELITIAN & PkM & PUBLIKASI */}
+          {/* 11. PENELITIAN, PkM & PUBLIKASI */}
           {(activeTab === 'penelitian' || activeTab === 'pengabdian' || activeTab === 'publikasi') && (
             <PenelitianPkMWorkspaceView />
           )}
 
-          {/* 8. OJS / PKP 3.x */}
+          {/* 12. JURNAL OJS / PKP 3.x */}
           {activeTab === 'ojs' && <OJSWorkspaceView />}
 
-          {/* 9. PDDIKTI NEO FEEDER */}
+          {/* 13. DROPSHIP & PENYESUAIAN DATA MASTER */}
+          {activeTab === 'migrasi' && <DataMigrationWorkspaceView />}
+
+          {/* 14. PDDIKTI NEO FEEDER */}
           {activeTab === 'pddikti' && <PDDIKTIWorkspaceView />}
 
-          {/* 10. AKREDITASI 9 KRITERIA */}
+          {/* 15. AKREDITASI 9 KRITERIA */}
           {activeTab === 'akreditasi' && <AkreditasiWorkspaceView />}
 
-          {/* 11. PERPUSTAKAAN, ASET & ALUMNI */}
+          {/* 16. PERPUSTAKAAN, ASET & ALUMNI */}
           {(activeTab === 'perpustakaan' || activeTab === 'aset' || activeTab === 'alumni') && (
             <PerpustakaanWorkspaceView defaultSub={activeTab as any} />
           )}
 
-          {/* 12. LAPORAN & DASHBOARD */}
+          {/* 17. LAPORAN & DASHBOARD */}
           {activeTab === 'laporan' && (
             <div className="space-y-6">
               <ExecutiveKPICards />
