@@ -39,13 +39,13 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ onOpenDashboard, onOpenG
 
   return (
     <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-700/50 bg-slate-950 text-white min-h-[280px] flex flex-col justify-between p-8 group">
-      {/* Background Image with Dark Gradient Overlay */}
+      {/* Background Campus Photo with Rich Vibrant Overlay */}
       <img 
         src={current.bgImg} 
         alt="Campus Hero" 
-        className="absolute inset-0 w-full h-full object-cover object-center opacity-40 group-hover:scale-105 transition-transform duration-1000 z-0"
+        className="absolute inset-0 w-full h-full object-cover object-center opacity-75 group-hover:scale-105 transition-transform duration-1000 z-0"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/65 to-slate-950/20 z-10" />
 
       {/* Hero Content */}
       <div className="relative z-20 max-w-2xl">
