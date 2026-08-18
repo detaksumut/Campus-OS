@@ -15,6 +15,14 @@ import { LatestAnnouncementsWidget } from './components/LatestAnnouncementsWidge
 import { BottomFeatures } from './components/BottomFeatures';
 import { Footer } from './components/Footer';
 
+// Role-Specific Workspaces & Dashboards
+import { LecturerDashboardView } from './modules/dashboards/LecturerDashboardView';
+import { StudentDashboardView } from './modules/dashboards/StudentDashboardView';
+import { StaffDashboardView } from './modules/dashboards/StaffDashboardView';
+import { RectorDashboardView } from './modules/dashboards/RectorDashboardView';
+import { FoundationDashboardView } from './modules/dashboards/FoundationDashboardView';
+import { DashboardCustomizerModal } from './modules/dashboards/DashboardCustomizerModal';
+
 // Domain Modules (All 21+ Systems Operational)
 import { PMBWorkspaceView } from './modules/PMBWorkspaceView';
 import { AcademicWorkspaceView } from './modules/AcademicWorkspaceView';
@@ -38,6 +46,7 @@ function PortalMainLayout() {
   const [userRole, setUserRole] = useState<UserRole>('ADMIN');
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [activeTabTitle, setActiveTabTitle] = useState<string>('Beranda');
+  const [showCustomizer, setShowCustomizer] = useState(false);
 
   const handleSelectMenu = (menuId: string, title: string) => {
     setActiveTab(menuId);
@@ -100,30 +109,51 @@ function PortalMainLayout() {
             </div>
           )}
 
-          {/* Module Router - 100% Zero-Mock Pure Operational Systems */}
+          {/* 🌟 DASHBOARD DINAMIS SESUAI PERAN PENGGUNA SSO */}
           {activeTab === 'dashboard' && (
-            <div className="space-y-6">
-              {/* Hero Banner */}
-              <HeroBanner 
-                onOpenDashboard={() => handleSelectMenu('dashboard', 'Beranda')}
-                onOpenGuide={() => handleSelectMenu('akademik', 'Sistem Akademik')}
-              />
+            <>
+              {/* JIKA ROLE DOSEN -> RENDER DASHBOARD DOSEN (KONTRAK SKS BKD, 16 SESI BAP, APPROVAL KRS) */}
+              {userRole === 'DOSEN' && (
+                <LecturerDashboardView 
+                  onNavigate={handleSelectMenu}
+                  onOpenCustomizer={() => setShowCustomizer(true)}
+                />
+              )}
 
-              {/* Quick Access Grid (8 Items) */}
-              <QuickAccessGrid onSelectAction={handleSelectMenu} />
+              {/* JIKA ROLE MAHASISWA -> RENDER DASHBOARD MAHASISWA (STATUS SKS, KRS, JADWAL KULIAH, UKT, TUGAS) */}
+              {userRole === 'MAHASISWA' && (
+                <StudentDashboardView 
+                  onNavigate={handleSelectMenu}
+                  onOpenCustomizer={() => setShowCustomizer(true)}
+                />
+              )}
 
-              {/* Executive KPI Cards (5 Cards) */}
-              <ExecutiveKPICards />
+              {/* JIKA ROLE ADMIN / DIREKTUR -> RENDER DASHBOARD EKSEKUTIF REKTOR & SISTEM */}
+              {userRole === 'ADMIN' && (
+                <div className="space-y-6">
+                  {/* Hero Banner */}
+                  <HeroBanner 
+                    onOpenDashboard={() => handleSelectMenu('dashboard', 'Beranda')}
+                    onOpenGuide={() => handleSelectMenu('akademik', 'Sistem Akademik')}
+                  />
 
-              {/* Multi-Line Chart, Donut Chart & Important Notifications */}
-              <ChartsAndNotifications />
+                  {/* Quick Access Grid (8 Items) */}
+                  <QuickAccessGrid onSelectAction={handleSelectMenu} />
 
-              {/* Bottom Feature Banners (5 Pillars) */}
-              <BottomFeatures />
+                  {/* Executive KPI Cards (5 Cards) */}
+                  <ExecutiveKPICards />
 
-              {/* Multi-Tenant Footer */}
-              <Footer />
-            </div>
+                  {/* Multi-Line Chart, Donut Chart & Important Notifications */}
+                  <ChartsAndNotifications />
+
+                  {/* Bottom Feature Banners (5 Pillars) */}
+                  <BottomFeatures />
+
+                  {/* Multi-Tenant Footer */}
+                  <Footer />
+                </div>
+              )}
+            </>
           )}
 
           {/* 1. PMB (PENERIMAAN MAHASISWA BARU) */}
@@ -207,6 +237,13 @@ function PortalMainLayout() {
           <LatestAnnouncementsWidget />
         </aside>
       </div>
+
+      {/* 5. MODAL ADMINISTRATOR DASHBOARD CUSTOMIZER */}
+      <DashboardCustomizerModal
+        currentRole={userRole}
+        isOpen={showCustomizer}
+        onClose={() => setShowCustomizer(false)}
+      />
     </div>
   );
 }
