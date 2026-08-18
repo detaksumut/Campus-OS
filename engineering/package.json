@@ -4,12 +4,14 @@
   "workspaces": [
     "apps/*",
     "packages/*",
+    "packages/application/*",
     "packages/foundation/*",
     "packages/platform/*",
     "packages/platforms/*",
     "packages/domains/*",
     "packages/kernel/*",
     "packages/bindings/*",
+    "packages/services/*",
     "packages/shared",
     "services/*",
     "tools/*"

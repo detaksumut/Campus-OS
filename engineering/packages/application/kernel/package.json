@@ -1,5 +1,5 @@
 {
-  "name": "@campus-os/application-kernel",
+  "name": "@campus-os/application-layer-kernel",
   "version": "1.0.0",
   "description": "Campus OS Application Layer Kernel",
   "main": "dist/index.js",
