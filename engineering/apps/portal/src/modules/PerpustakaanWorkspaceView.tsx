@@ -435,6 +435,9 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
             </div>
           )}
 
+          {/* TABEL DIREKTORI ALUMNI TERDATA */}
+          {alumniViewMode === 'DIREKTORI' && (
+            <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-100 dark:border-slate-700/60">
                 <div className="flex items-center gap-2">
                   <UserCheck size={18} className="text-emerald-500" />
