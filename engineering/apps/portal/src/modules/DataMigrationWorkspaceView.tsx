@@ -515,15 +515,46 @@ export const DataMigrationWorkspaceView: React.FC = () => {
             </h4>
           </div>
 
-          <div className="relative max-w-xs w-full">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari data..."
-              className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-semibold focus:outline-none"
-            />
-            <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                const sampleNewRow: Record<string, any> = {};
+                visibleColumns.forEach(c => {
+                  if (c.key.includes('id') || c.key.includes('nim') || c.key.includes('nip') || c.key.includes('nidn') || c.key.includes('code')) {
+                    sampleNewRow[c.key] = `BARU-${Math.floor(Math.random() * 900 + 100)}`;
+                  } else if (c.key === 'name') {
+                    sampleNewRow[c.key] = `Data Baru ${activeTab.toLowerCase()}`;
+                  } else if (c.type === 'NUMBER') {
+                    sampleNewRow[c.key] = 1;
+                  } else if (c.key === 'status') {
+                    sampleNewRow[c.key] = 'AKTIF';
+                  } else {
+                    sampleNewRow[c.key] = `Entri ${c.label}`;
+                  }
+                });
+
+                if (activeTab === 'MAHASISWA') setStudentData(prev => [sampleNewRow, ...prev]);
+                else if (activeTab === 'DOSEN') setLecturerData(prev => [sampleNewRow, ...prev]);
+                else if (activeTab === 'PEGAWAI') setStaffData(prev => [sampleNewRow, ...prev]);
+                else if (activeTab === 'YAYASAN') setFoundationData(prev => [sampleNewRow, ...prev]);
+                else if (activeTab === 'JURUSAN') setProgramData(prev => [sampleNewRow, ...prev]);
+              }}
+              className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all"
+            >
+              <Plus size={13} />
+              <span>+ Input Data Riil</span>
+            </button>
+
+            <div className="relative max-w-xs w-full">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari data..."
+                className="w-full pl-8 pr-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-semibold focus:outline-none"
+              />
+              <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            </div>
           </div>
         </div>
 
@@ -538,6 +569,7 @@ export const DataMigrationWorkspaceView: React.FC = () => {
                     <span className="font-mono text-[9px] font-normal text-blue-500">[{col.key}]</span>
                   </th>
                 ))}
+                <th className="p-3 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-700/60">
@@ -551,6 +583,21 @@ export const DataMigrationWorkspaceView: React.FC = () => {
                       {row[col.key] !== undefined ? String(row[col.key]) : '-'}
                     </td>
                   ))}
+                  <td className="p-3 text-center">
+                    <button
+                      onClick={() => {
+                        if (activeTab === 'MAHASISWA') setStudentData(prev => prev.filter((_, i) => i !== idx));
+                        else if (activeTab === 'DOSEN') setLecturerData(prev => prev.filter((_, i) => i !== idx));
+                        else if (activeTab === 'PEGAWAI') setStaffData(prev => prev.filter((_, i) => i !== idx));
+                        else if (activeTab === 'YAYASAN') setFoundationData(prev => prev.filter((_, i) => i !== idx));
+                        else if (activeTab === 'JURUSAN') setProgramData(prev => prev.filter((_, i) => i !== idx));
+                      }}
+                      title="Hapus Baris Data"
+                      className="p-1.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-colors"
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
