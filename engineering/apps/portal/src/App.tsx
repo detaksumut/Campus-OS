@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { LayoutDashboard, Users, BookOpen, Settings, Bell, Search, Bot, X, Package, Code2, Boxes } from 'lucide-react';
 import { useCopilotRuntime, useThemeRuntime, useWorkspaceRuntime, MenuRegistry } from '@campus-os/shared';
 import { bootstrap } from './bootstrap';
-import heroImg from '../../portal-ui/public/hero-campuos.png';
 import { ZoneRenderer } from './core/ZoneRenderer';
 import { KernelDevTools } from './core/KernelDevTools';
 
 // In a real app, this would be injected via PluginLoader
-import { RegistrationPluginABI } from '../../packages/domains/siakad/src/submodules/registration/src/presentation/plugin';
-import { PresentationCompiler } from '../../packages/presentation-kernel/src/compiler/PresentationCompiler';
-import { GlobalRegistry } from '../../packages/presentation-kernel/src/registry/PresentationRegistry';
-import { RegistryBuilder } from '../../packages/presentation-kernel/src/registry/RegistryBuilder';
+import { RegistrationPluginABI } from '../../../packages/domains/siakad/src/submodules/registration/src/presentation/plugin';
+import { PresentationCompiler, GlobalRegistry, RegistryBuilder } from '@campus-os/presentation-kernel';
 
 // Compile and Register the ABI once on load
 const compiler = new PresentationCompiler();
@@ -135,7 +132,7 @@ export function App() {
                 <div className="rounded-2xl text-white mb-8 shadow-lg relative overflow-hidden flex-1 group min-h-[300px]">
                   {/* Hero Background */}
                   <img 
-                    src={heroImg} 
+                    src="/hero-campuos.png" 
                     alt="Campus OS Hero" 
                     className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105"
                   />

@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { KernelEventBus, KernelEvent } from '../../../../packages/presentation-kernel/src/runtime/KernelEventBus';
-import { GlobalRegistry } from '../../../../packages/presentation-kernel/src/registry/PresentationRegistry';
-import { RuntimeController } from '../../../../packages/presentation-kernel/src/runtime/RuntimeController';
-import { WidgetRuntime } from '../../../../packages/presentation-kernel/src/runtime/WidgetRuntime';
+import { KernelEventBus, KernelEvent, GlobalRegistry, RuntimeController, WidgetRuntime } from '@campus-os/presentation-kernel';
 import { Activity, Clock, Box, ShieldAlert, Cpu, HardDrive } from 'lucide-react';
 
 const bus = KernelEventBus.getInstance();

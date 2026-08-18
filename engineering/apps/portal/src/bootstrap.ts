@@ -1,7 +1,7 @@
 import { MenuRegistry, WidgetRegistry, RouteRegistry } from '@campus-os/shared';
 import { CapabilityRegistry } from '@campus-os/identity-sdk';
 import { ServiceContainer, EventBus, EnvironmentConfigurationProvider } from '@campus-os/kernel';
-import { AuthenticationRuntime } from '@campus-os/identity-runtime/src/AuthenticationRuntime';
+import { AuthenticationRuntime } from '@campus-os/identity-runtime';
 import { ObservabilityRuntimeModule, HealthRuntime, LoggerRuntime, MetricsRuntime, TelemetryRuntime, TracingRuntime, AuditRuntime } from '@campus-os/observability-runtime';
 import { WorkspaceRuntimeModule, WorkspaceState, WindowManager, LayoutManager, NavigationManager, SelectionManager, ClipboardManager } from '@campus-os/workspace-runtime';
 
