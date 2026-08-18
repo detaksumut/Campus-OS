@@ -50,6 +50,21 @@ export interface AlumniItem {
   phone: string;
 }
 
+export interface AssetItem {
+  id: string;
+  code: string;
+  name: string;
+  category: string;
+  location: string;
+  quantity: number;
+  unit: string;
+  condition: 'BAIK' | 'PERLU_SERVIS' | 'RUSAK_RINGAN' | 'RUSAK_BERAT';
+  procurementYear: number;
+  assetValue: number;
+  pic: string;
+  lastMaintenanceDate?: string;
+}
+
 export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' | 'aset' | 'alumni' }> = ({ defaultSub = 'perpustakaan' }) => {
   const { profile } = useTenant();
   const [subTab, setSubTab] = useState<'perpustakaan' | 'aset' | 'alumni'>(defaultSub);
@@ -203,6 +218,100 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
   const [alumniList, setAlumniList] = useState<AlumniItem[]>([
     { id: 'alm-01', nim: '200101012', name: 'Rian Hidayat, S.Tr.Par.', prodi: 'D4 Usaha Perjalanan Wisata', gradYear: 2024, employmentStatus: 'BEKERJA', company: 'Garuda Indonesia Holiday Tour', jobTitle: 'Senior Tour Product Manager', waitTimeMonths: 1.5, salaryRange: 'Rp 8.000.000 - Rp 12.000.000', email: 'rian.hidayat@gmail.com', phone: '081234567801' },
     { id: 'alm-02', nim: '200102025', name: 'Putri Ayu Wandira, S.Tr.Par.', prodi: 'D4 Perhotelan', gradYear: 2024, employmentStatus: 'BEKERJA', company: 'Marriott International (Bali Resort)', jobTitle: 'Assistant Front Office Manager', waitTimeMonths: 1.0, salaryRange: 'Rp 10.000.000 - Rp 15.000.000', email: 'putri.ayu@gmail.com', phone: '081234567802' },
+  ]);
+
+  // Asset & Inventory State
+  const [assetSearch, setAssetSearch] = useState('');
+  const [assetCategoryFilter, setAssetCategoryFilter] = useState('ALL');
+  const [assetConditionFilter, setAssetConditionFilter] = useState('ALL');
+  const [showAddAssetModal, setShowAddAssetModal] = useState(false);
+  const [editingAsset, setEditingAsset] = useState<AssetItem | null>(null);
+
+  const [assetList, setAssetList] = useState<AssetItem[]>([
+    {
+      id: 'ast-01',
+      code: 'BMN-2024-LAB-01',
+      name: 'Rational iCombi Pro 6-Grid Combi Oven Industri',
+      category: 'Peralatan Lab Kuliner',
+      location: 'Lab Kitchen & Culinary Arts (Lt. 1)',
+      quantity: 4,
+      unit: 'Unit',
+      condition: 'BAIK',
+      procurementYear: 2023,
+      assetValue: 380000000,
+      pic: 'Chef Anton, S.Pd.',
+      lastMaintenanceDate: '10 Mei 2024'
+    },
+    {
+      id: 'ast-02',
+      code: 'BMN-2024-LAB-02',
+      name: 'La Marzocco Linea Mini 2-Group Commercial Espresso Machine',
+      category: 'Peralatan Lab Kuliner',
+      location: 'Barista & Beverage Training Center',
+      quantity: 6,
+      unit: 'Unit',
+      condition: 'BAIK',
+      procurementYear: 2024,
+      assetValue: 450000000,
+      pic: 'Budi Santoso, S.Kom.',
+      lastMaintenanceDate: '02 Juni 2024'
+    },
+    {
+      id: 'ast-03',
+      code: 'BMN-2024-TI-03',
+      name: 'Apple iMac 24" M3 Retina 16GB Studio Production',
+      category: 'Teknologi Informasi & Komputer',
+      location: 'Lab Multimedia & Digital Tourism (Lt. 3)',
+      quantity: 30,
+      unit: 'Unit',
+      condition: 'BAIK',
+      procurementYear: 2024,
+      assetValue: 750000000,
+      pic: 'Ir. Rahmat Hidayat, M.Kom.',
+      lastMaintenanceDate: '15 Mei 2024'
+    },
+    {
+      id: 'ast-04',
+      code: 'BMN-2024-FAS-04',
+      name: 'Set Kamar Hotel Suite Bintang 5 (King Koil & Interior)',
+      category: 'Furnitur & Perhotelan',
+      location: 'Hotel Mockup Training Center Room 201-208',
+      quantity: 8,
+      unit: 'Set',
+      condition: 'BAIK',
+      procurementYear: 2023,
+      assetValue: 320000000,
+      pic: 'Siti Fatimah, S.Tr.Par.',
+      lastMaintenanceDate: '20 April 2024'
+    },
+    {
+      id: 'ast-05',
+      code: 'BMN-2024-LAB-05',
+      name: 'Olympus CX23 Binocular LED Microscope Laboratorium',
+      category: 'Peralatan Lab Kuliner',
+      location: 'Lab Sanitasi Pangan & Mikrobiologi',
+      quantity: 15,
+      unit: 'Unit',
+      condition: 'PERLU_SERVIS',
+      procurementYear: 2022,
+      assetValue: 225000000,
+      pic: 'Dr. Hendra Wijaya, M.T.',
+      lastMaintenanceDate: '12 Januari 2024'
+    },
+    {
+      id: 'ast-06',
+      code: 'BMN-2024-TI-06',
+      name: 'Sony Alpha A7 IV Mirrorless 4K Cinema Camera Kit',
+      category: 'Teknologi Informasi & Komputer',
+      location: 'Lab Tour & Broadcast Studio',
+      quantity: 5,
+      unit: 'Unit',
+      condition: 'BAIK',
+      procurementYear: 2024,
+      assetValue: 185000000,
+      pic: 'Rian Hidayat, S.Tr.Par.',
+      lastMaintenanceDate: '18 Mei 2024'
+    }
   ]);
 
   React.useEffect(() => {
@@ -606,28 +715,504 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
       {/* 2. SUB-VIEW: ASET & INVENTARIS */}
       {/* ========================================================================= */}
       {subTab === 'aset' && (
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
-          <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <Package size={16} className="text-amber-500" />
-            <span>Manajemen Sarana Prasarana & Laboratorium Praktikum (SIMAK-BMN)</span>
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700">
-              <p className="font-bold text-xs text-slate-900 dark:text-white">Laboratorium Praktikum Aktif</p>
-              <p className="text-2xl font-black text-amber-600 mt-1">24 Lab</p>
-              <p className="text-[10px] text-slate-400">Lab Kitchen, Hotel Mockup, Tour, Lab Komputer</p>
+        <div className="space-y-6">
+          {/* KPI Ringkasan Inventaris Terkini */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Total Item Inventaris</p>
+              <p className="text-2xl font-black text-amber-500 font-mono">
+                {assetList.reduce((acc, a) => acc + a.quantity, 0)} Unit
+              </p>
+              <span className="text-[10px] font-bold text-slate-400">{assetList.length} Kategori Alat & Aset</span>
             </div>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700">
-              <p className="font-bold text-xs text-slate-900 dark:text-white">Nilai Aset Terdaftar (SIMAK-BMN)</p>
-              <p className="text-2xl font-black text-emerald-600 mt-1">Rp 48,5 M</p>
-              <p className="text-[10px] text-emerald-600">100% Barcode Terinventarisir</p>
+
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Total Nilai Buku (SIMAK-BMN)</p>
+              <p className="text-2xl font-black text-emerald-600 font-mono">
+                Rp {(assetList.reduce((acc, a) => acc + a.assetValue, 0) / 1000000000).toFixed(2)} M
+              </p>
+              <span className="text-[10px] font-bold text-emerald-600">100% Barcode Terdata</span>
             </div>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-700">
-              <p className="font-bold text-xs text-slate-900 dark:text-white">Jadwal Pemeliharaan (Maintenance)</p>
-              <p className="text-2xl font-black text-blue-600 mt-1">98.5% Prima</p>
-              <p className="text-[10px] text-blue-600">Kalibrasi Alat Berkala</p>
+
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Kondisi Prima (Siap Pakai)</p>
+              <p className="text-2xl font-black text-blue-600 font-mono">
+                {Math.round((assetList.filter(a => a.condition === 'BAIK').length / assetList.length) * 100)}%
+              </p>
+              <span className="text-[10px] font-bold text-blue-600">Operasional Praktikum</span>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Perlu Pemeliharaan</p>
+              <p className="text-2xl font-black text-rose-500 font-mono">
+                {assetList.filter(a => a.condition !== 'BAIK').length} Item
+              </p>
+              <span className="text-[10px] font-bold text-rose-500">Jadwal Kalibrasi / Servis</span>
             </div>
           </div>
+
+          {/* Tabel Direktori Inventaris & Tombol Aksi */}
+          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div>
+                <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
+                  <Package size={18} className="text-amber-500" />
+                  <span>Daftar Inventaris Sarana Prasarana & Laboratorium (Dapat di-Adjust)</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Kelola kuantitas unit, mutasi lokasi ruangan, pembaruan kondisi fisik, dan nilai buku aset kampus.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setShowAddAssetModal(true)}
+                className="px-4 py-2.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-600/30 flex items-center gap-1.5 hover:scale-105 transition-all shrink-0"
+              >
+                <Plus size={14} />
+                <span>+ Tambah Aset Inventaris Baru</span>
+              </button>
+            </div>
+
+            {/* Filter & Search Bar */}
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="relative flex-1">
+                <input
+                  type="text"
+                  placeholder="Cari kode BMN, nama peralatan, atau ruangan..."
+                  value={assetSearch}
+                  onChange={(e) => setAssetSearch(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white font-semibold focus:outline-none focus:border-amber-500"
+                />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              </div>
+
+              <select
+                value={assetConditionFilter}
+                onChange={(e) => setAssetConditionFilter(e.target.value)}
+                className="px-3.5 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold focus:outline-none cursor-pointer"
+              >
+                <option value="ALL" className="bg-white dark:bg-slate-800">Semua Kondisi Fisik</option>
+                <option value="BAIK" className="bg-white dark:bg-slate-800">Baik / Siap Pakai</option>
+                <option value="PERLU_SERVIS" className="bg-white dark:bg-slate-800">Perlu Servis / Kalibrasi</option>
+                <option value="RUSAK_RINGAN" className="bg-white dark:bg-slate-800">Rusak Ringan</option>
+                <option value="RUSAK_BERAT" className="bg-white dark:bg-slate-800">Rusak Berat</option>
+              </select>
+            </div>
+
+            {/* Tabel Records */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 border-b border-slate-200 dark:border-slate-800 font-bold">
+                  <tr>
+                    <th className="p-3">Kode BMN & Barcode</th>
+                    <th className="p-3">Nama Alat & Kategori</th>
+                    <th className="p-3">Lokasi Ruangan & PIC</th>
+                    <th className="p-3 text-center">Jumlah (Adjust Qty)</th>
+                    <th className="p-3 text-center">Kondisi Aset</th>
+                    <th className="p-3 text-right">Nilai Perolehan</th>
+                    <th className="p-3 text-center">Aksi Penyesuaian</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
+                  {assetList
+                    .filter(a => {
+                      const matchSearch = a.name.toLowerCase().includes(assetSearch.toLowerCase()) || 
+                                          a.code.toLowerCase().includes(assetSearch.toLowerCase()) ||
+                                          a.location.toLowerCase().includes(assetSearch.toLowerCase());
+                      const matchCond = assetConditionFilter === 'ALL' || a.condition === assetConditionFilter;
+                      return matchSearch && matchCond;
+                    })
+                    .map(asset => (
+                      <tr key={asset.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                        <td className="p-3">
+                          <span className="font-mono font-black text-amber-500 block">{asset.code}</span>
+                          <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
+                            <QrCode size={11} className="text-slate-400" /> Barcode Terdaftar
+                          </span>
+                        </td>
+                        <td className="p-3">
+                          <span className="font-bold text-slate-900 dark:text-white block max-w-xs">{asset.name}</span>
+                          <span className="text-[10px] text-slate-400 font-semibold">{asset.category} • Pengadaan {asset.procurementYear}</span>
+                        </td>
+                        <td className="p-3">
+                          <span className="font-semibold text-slate-800 dark:text-slate-200 block">{asset.location}</span>
+                          <span className="text-[10px] text-slate-400">PIC: {asset.pic}</span>
+                        </td>
+                        <td className="p-3 text-center">
+                          <div className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <button
+                              onClick={() => {
+                                setAssetList(prev => prev.map(a => a.id === asset.id ? { ...a, quantity: Math.max(0, a.quantity - 1) } : a));
+                              }}
+                              className="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-black hover:bg-rose-500 hover:text-white transition-colors flex items-center justify-center text-xs shadow-sm"
+                              title="Kurangi 1 unit"
+                            >
+                              -
+                            </button>
+                            <span className="font-mono font-black text-sm px-1.5 text-slate-900 dark:text-white">
+                              {asset.quantity} {asset.unit}
+                            </span>
+                            <button
+                              onClick={() => {
+                                setAssetList(prev => prev.map(a => a.id === asset.id ? { ...a, quantity: a.quantity + 1 } : a));
+                              }}
+                              className="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-black hover:bg-emerald-500 hover:text-white transition-colors flex items-center justify-center text-xs shadow-sm"
+                              title="Tambah 1 unit"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="p-3 text-center">
+                          <span className={`px-2.5 py-1 text-[10px] font-black rounded-full ${
+                            asset.condition === 'BAIK' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' :
+                            asset.condition === 'PERLU_SERVIS' ? 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 animate-pulse' :
+                            'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300'
+                          }`}>
+                            {asset.condition === 'BAIK' ? '✓ BAIK / PRIMA' :
+                             asset.condition === 'PERLU_SERVIS' ? '⚠️ PERLU SERVIS' :
+                             asset.condition === 'RUSAK_RINGAN' ? 'RUSAK RINGAN' : 'RUSAK BERAT'}
+                          </span>
+                        </td>
+                        <td className="p-3 text-right font-mono font-bold text-slate-900 dark:text-white">
+                          Rp {asset.assetValue.toLocaleString('id-ID')}
+                        </td>
+                        <td className="p-3 text-center">
+                          <button
+                            onClick={() => setEditingAsset(asset)}
+                            className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-300 font-bold text-[11px] border border-slate-200 dark:border-slate-700 transition-all hover:scale-105 shadow-sm"
+                          >
+                            ⚙️ Adjust & Edit
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* ⚙️ MODAL ADJUST / EDIT DETAIL ASET */}
+          {editingAsset && (
+            <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl animate-in zoom-in-95 text-slate-900 dark:text-white max-h-[90vh] overflow-y-auto custom-scrollbar">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Package className="text-amber-500" size={20} />
+                    <div>
+                      <h3 className="font-black text-sm">Penyesuaian & Adjust Data Aset BMN</h3>
+                      <p className="text-[10px] text-slate-400 font-mono">{editingAsset.code}</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setEditingAsset(null)} className="text-slate-400 hover:text-slate-600">
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setAssetList(prev => prev.map(a => a.id === editingAsset.id ? editingAsset : a));
+                    setEditingAsset(null);
+                  }}
+                  className="space-y-3.5 text-xs"
+                >
+                  <div>
+                    <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nama Peralatan / Spesifikasi Aset: *</label>
+                    <input
+                      type="text"
+                      required
+                      value={editingAsset.name}
+                      onChange={(e) => setEditingAsset({ ...editingAsset, name: e.target.value })}
+                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-bold text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Kategori Aset:</label>
+                      <select
+                        value={editingAsset.category}
+                        onChange={(e) => setEditingAsset({ ...editingAsset, category: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:outline-none cursor-pointer"
+                      >
+                        <option value="Peralatan Lab Kuliner">Peralatan Lab Kuliner</option>
+                        <option value="Teknologi Informasi & Komputer">Teknologi Informasi & Komputer</option>
+                        <option value="Furnitur & Perhotelan">Furnitur & Perhotelan</option>
+                        <option value="Sarana & Prasarana Gedung">Sarana & Prasarana Gedung</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Status Kondisi Fisik: *</label>
+                      <select
+                        value={editingAsset.condition}
+                        onChange={(e: any) => setEditingAsset({ ...editingAsset, condition: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:outline-none cursor-pointer"
+                      >
+                        <option value="BAIK">✓ Baik / Siap Pakai</option>
+                        <option value="PERLU_SERVIS">⚠️ Perlu Servis / Kalibrasi</option>
+                        <option value="RUSAK_RINGAN">Rusak Ringan</option>
+                        <option value="RUSAK_BERAT">Rusak Berat</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Jumlah Kuantitas Unit: *</label>
+                      <input
+                        type="number"
+                        min={0}
+                        required
+                        value={editingAsset.quantity}
+                        onChange={(e) => setEditingAsset({ ...editingAsset, quantity: Number(e.target.value) })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono font-bold text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Satuan:</label>
+                      <input
+                        type="text"
+                        value={editingAsset.unit}
+                        onChange={(e) => setEditingAsset({ ...editingAsset, unit: e.target.value })}
+                        placeholder="Unit / Set / Pcs"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Lokasi Ruangan / Gedung: *</label>
+                      <input
+                        type="text"
+                        required
+                        value={editingAsset.location}
+                        onChange={(e) => setEditingAsset({ ...editingAsset, location: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Penanggung Jawab (PIC): *</label>
+                      <input
+                        type="text"
+                        required
+                        value={editingAsset.pic}
+                        onChange={(e) => setEditingAsset({ ...editingAsset, pic: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nilai Perolehan Aset (Rp): *</label>
+                    <input
+                      type="number"
+                      required
+                      value={editingAsset.assetValue}
+                      onChange={(e) => setEditingAsset({ ...editingAsset, assetValue: Number(e.target.value) })}
+                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono font-black text-slate-900 dark:text-white focus:outline-none focus:border-amber-500"
+                    />
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setEditingAsset(null)}
+                      className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold"
+                    >
+                      Batal
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold shadow-lg shadow-amber-600/30 flex items-center gap-1.5 hover:scale-105 transition-all"
+                    >
+                      <CheckCircle2 size={14} />
+                      <span>Simpan Perubahan Aset</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* ➕ MODAL TAMBAH ASET INVENTARIS BARU */}
+          {showAddAssetModal && (
+            <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl animate-in zoom-in-95 text-slate-900 dark:text-white max-h-[90vh] overflow-y-auto custom-scrollbar">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Package className="text-amber-500" size={20} />
+                    <h3 className="font-black text-sm">Tambah Aset & Sarana Prasarana Baru</h3>
+                  </div>
+                  <button onClick={() => setShowAddAssetModal(false)} className="text-slate-400 hover:text-slate-600">
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const formTarget = e.currentTarget;
+                    const formData = new FormData(formTarget);
+                    const newAsset: AssetItem = {
+                      id: `ast-${Date.now()}`,
+                      code: (formData.get('code') as string) || `BMN-2024-LAB-${assetList.length + 1}`,
+                      name: formData.get('name') as string,
+                      category: formData.get('category') as string,
+                      location: formData.get('location') as string,
+                      quantity: Number(formData.get('quantity') || 1),
+                      unit: (formData.get('unit') as string) || 'Unit',
+                      condition: (formData.get('condition') as any) || 'BAIK',
+                      procurementYear: Number(formData.get('procurementYear') || 2024),
+                      assetValue: Number(formData.get('assetValue') || 10000000),
+                      pic: formData.get('pic') as string,
+                      lastMaintenanceDate: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+                    };
+                    setAssetList(prev => [newAsset, ...prev]);
+                    setShowAddAssetModal(false);
+                  }}
+                  className="space-y-3.5 text-xs"
+                >
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Kode BMN / Barcode: *</label>
+                      <input
+                        name="code"
+                        type="text"
+                        required
+                        defaultValue={`BMN-2024-LAB-0${assetList.length + 1}`}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono font-bold text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Tahun Pengadaan:</label>
+                      <input
+                        name="procurementYear"
+                        type="number"
+                        defaultValue={2024}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nama Peralatan / Spesifikasi Aset: *</label>
+                    <input
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Contoh: Digital Signage Display 65 Inch"
+                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-bold text-slate-900 dark:text-white focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Kategori Aset:</label>
+                      <select
+                        name="category"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:outline-none cursor-pointer"
+                      >
+                        <option value="Peralatan Lab Kuliner">Peralatan Lab Kuliner</option>
+                        <option value="Teknologi Informasi & Komputer">Teknologi Informasi & Komputer</option>
+                        <option value="Furnitur & Perhotelan">Furnitur & Perhotelan</option>
+                        <option value="Sarana & Prasarana Gedung">Sarana & Prasarana Gedung</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Kondisi Awal: *</label>
+                      <select
+                        name="condition"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold focus:outline-none cursor-pointer"
+                      >
+                        <option value="BAIK">✓ Baik / Siap Pakai</option>
+                        <option value="PERLU_SERVIS">⚠️ Perlu Servis / Kalibrasi</option>
+                        <option value="RUSAK_RINGAN">Rusak Ringan</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Jumlah Kuantitas: *</label>
+                      <input
+                        name="quantity"
+                        type="number"
+                        min={1}
+                        defaultValue={1}
+                        required
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono font-bold text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Satuan Unit:</label>
+                      <input
+                        name="unit"
+                        type="text"
+                        defaultValue="Unit"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Lokasi Ruangan: *</label>
+                      <input
+                        name="location"
+                        type="text"
+                        required
+                        placeholder="Contoh: Lab Komputer 2"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Penanggung Jawab (PIC): *</label>
+                      <input
+                        name="pic"
+                        type="text"
+                        required
+                        placeholder="Nama staf pengelola..."
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nilai Perolehan Aset (Rp): *</label>
+                    <input
+                      name="assetValue"
+                      type="number"
+                      required
+                      placeholder="Contoh: 25000000"
+                      defaultValue={15000000}
+                      className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono font-bold text-slate-900 dark:text-white focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowAddAssetModal(false)}
+                      className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold"
+                    >
+                      Batal
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold shadow-lg shadow-amber-600/30 flex items-center gap-1.5 hover:scale-105 transition-all"
+                    >
+                      <Plus size={14} />
+                      <span>Simpan & Daftarkan Aset BMN</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
