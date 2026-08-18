@@ -244,9 +244,19 @@ function PortalMainLayout() {
           {/* 10. SDM & BKD SISTER */}
           {activeTab === 'sdm' && <SDMWorkspaceView />}
 
-          {/* 11. PENELITIAN, PkM & PUBLIKASI */}
-          {(activeTab === 'penelitian' || activeTab === 'pengabdian' || activeTab === 'publikasi') && (
-            <PenelitianPkMWorkspaceView />
+          {/* 11a. PENELITIAN LPPM */}
+          {activeTab === 'penelitian' && (
+            <PenelitianPkMWorkspaceView defaultSubTab="PENELITIAN" />
+          )}
+
+          {/* 11b. PENGABDIAN MASYARAKAT (PkM) */}
+          {activeTab === 'pengabdian' && (
+            <PenelitianPkMWorkspaceView defaultSubTab="PENGABDIAN" />
+          )}
+
+          {/* 11c. PUBLIKASI SINTA & HKI */}
+          {activeTab === 'publikasi' && (
+            <PenelitianPkMWorkspaceView defaultSubTab="PUBLIKASI" />
           )}
 
           {/* 12. JURNAL OJS / PKP 3.x */}
