@@ -765,7 +765,9 @@ export const PerpustakaanWorkspaceView: React.FC<{
                 <p className="text-xs text-slate-500 mt-0.5">
                   Kelola kuantitas unit, mutasi lokasi ruangan, pembaruan kondisi fisik, dan nilai buku aset kampus.
                 </p>
-               {userRole === 'ADMIN' && (
+              </div>
+
+              {userRole === 'ADMIN' && (
                 <button
                   onClick={() => setShowAddAssetModal(true)}
                   className="px-4 py-2.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-600/30 flex items-center gap-1.5 hover:scale-105 transition-all shrink-0"
