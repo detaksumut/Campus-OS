@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   TenantProvider, useThemeRuntime, useTenant 
 } from '@campus-os/shared';
-import { Header } from './components/Header';
+import { Header, UserRole } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { HeroBanner } from './components/HeroBanner';
 import { QuickAccessGrid } from './components/QuickAccessGrid';
@@ -14,6 +14,9 @@ import { TaskInboxWidget } from './components/TaskInboxWidget';
 import { LatestAnnouncementsWidget } from './components/LatestAnnouncementsWidget';
 import { BottomFeatures } from './components/BottomFeatures';
 import { Footer } from './components/Footer';
+
+// SSO Gateway Login/Register Screen
+import { SSOGatewayScreen } from './components/SSOGatewayScreen';
 
 // Role-Specific Workspaces & Dashboards
 import { LecturerDashboardView } from './modules/dashboards/LecturerDashboardView';
@@ -38,11 +41,10 @@ import { PerpustakaanWorkspaceView } from './modules/PerpustakaanWorkspaceView';
 import { DataMigrationWorkspaceView } from './modules/DataMigrationWorkspaceView';
 import { SettingsView } from './modules/SettingsView';
 
-import { UserRole } from './components/Header';
-
 function PortalMainLayout() {
   const { mode } = useThemeRuntime();
   const { profile } = useTenant();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [userRole, setUserRole] = useState<UserRole>('ADMIN');
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [activeTabTitle, setActiveTabTitle] = useState<string>('Beranda');
@@ -71,13 +73,28 @@ function PortalMainLayout() {
     return () => window.removeEventListener('hashchange', handleHashSync);
   }, []);
 
+  // 🔐 JIKA STATUS LOGOUT -> RENDER LAYAR GERBANG SSO LENGKAP
+  if (!isLoggedIn) {
+    return (
+      <SSOGatewayScreen
+        onLoginSuccess={(role) => {
+          setUserRole(role);
+          setIsLoggedIn(true);
+          setActiveTab('dashboard');
+          setActiveTabTitle('Beranda');
+        }}
+      />
+    );
+  }
+
   return (
     <div className={`flex flex-col h-screen overflow-hidden font-sans ${mode === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
-      {/* 1. Top Header with 6-Role Switcher (Rektor & Administrator Terpisah) */}
+      {/* 1. Top Header with 6-Role Switcher & Logout */}
       <Header 
         userRole={userRole} 
         onChangeRole={setUserRole} 
         onOpenSettings={() => handleSelectMenu('pengaturan', 'Pengaturan Sistem')} 
+        onLogout={() => setIsLoggedIn(false)}
       />
 
       <div className="flex flex-1 overflow-hidden">

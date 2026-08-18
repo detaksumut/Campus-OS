@@ -12,9 +12,10 @@ interface HeaderProps {
   userRole: UserRole;
   onChangeRole: (role: UserRole) => void;
   onOpenSettings?: () => void;
+  onLogout?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSettings }) => {
+export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSettings, onLogout }) => {
   const { profile } = useTenant();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -112,6 +113,7 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
   const handleLogout = () => {
     setIsLoggedIn(false);
     setShowRoleMenu(false);
+    if (onLogout) onLogout();
   };
 
   return (
