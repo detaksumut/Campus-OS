@@ -7,6 +7,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@campus-os/kernel-identity": "^1.0.0"
+    "@campus-os/kernel-identity": "*"
   }
 }

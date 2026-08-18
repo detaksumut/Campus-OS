@@ -9,8 +9,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@campus-os/application-kernel": "^1.0.0",
-    "@campus-os/membership": "^1.0.0"
+    "@campus-os/application-kernel": "*",
+    "@campus-os/membership": "*"
   },
   "devDependencies": {
     "typescript": "^5.0.0",

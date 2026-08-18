@@ -8,6 +8,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@campus-os/kernel-configuration": "^1.0.0"
+    "@campus-os/kernel-configuration": "*"
   }
 }
