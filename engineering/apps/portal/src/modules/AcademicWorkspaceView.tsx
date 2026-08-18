@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   GraduationCap, BookOpen, CheckCircle, AlertTriangle, Calculator, 
-  FileCheck, Layers, Calendar, Award, Plus, Trash2, Edit3, Search, 
-  SlidersHorizontal, ShieldCheck, Users, CheckSquare, Sparkles, Filter, Download, Save
+  FileCheck, Calendar, Award, Plus, Trash2, Search, 
+  SlidersHorizontal, Save
 } from 'lucide-react';
 import { KRSSKSLimitEngine, useTenant } from '@campus-os/shared';
 
@@ -19,7 +19,7 @@ interface CourseItem {
   semester: number;
   prodi: string;
   courseType: 'WAJIB_PRODI' | 'WAJIB_NASIONAL' | 'PILIHAN' | 'MBKM';
-  cplCode: string; // Capaian Pembelajaran Lulusan OBE
+  cplCode: string;
   lecturer: string;
 }
 
@@ -36,7 +36,7 @@ interface ClassScheduleItem {
   room: string;
   quota: number;
   enrolled: number;
-  totalMeetings: number; // 16 Pertemuan standar DIKTI
+  totalMeetings: number;
 }
 
 interface AcademicWorkspaceViewProps {
@@ -55,7 +55,7 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
     }
   }, [defaultSubTab]);
 
-  // 1. Kurikulum OBE & Mata Kuliah Catalog (Full CRUD Standar DIKTI)
+  // 1. Kurikulum OBE & Mata Kuliah Catalog
   const [courses, setCourses] = useState<CourseItem[]>([
     { id: 'mk-01', code: 'UPW-201', name: 'Manajemen Operasional Pariwisata', nameEn: 'Tourism Operations Management', creditsTheory: 2, creditsPractical: 2, totalCredits: 4, semester: 3, prodi: 'D4 Usaha Perjalanan Wisata', courseType: 'WAJIB_PRODI', cplCode: 'CPL-03: Manajerial Destinasi', lecturer: 'Dr. Ir. H. M. Yusuf, M.T.' },
     { id: 'mk-02', code: 'UPW-202', name: 'Perencanaan Destinasi Berkelanjutan', nameEn: 'Sustainable Destination Planning', creditsTheory: 2, creditsPractical: 1, totalCredits: 3, semester: 3, prodi: 'D4 Usaha Perjalanan Wisata', courseType: 'WAJIB_PRODI', cplCode: 'CPL-02: Kebijakan Pariwisata', lecturer: 'Siti Rahmawati, M.Par.' },
@@ -82,7 +82,7 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
   });
 
   // 2. Jadwal Perkuliahan 16 Sesi BAP Digital
-  const [schedules, setSchedules] = useState<ClassScheduleItem[]>([
+  const [schedules] = useState<ClassScheduleItem[]>([
     { id: 'sch-01', classCode: 'KLS-UPW-3A', courseCode: 'UPW-201', courseName: 'Manajemen Operasional Pariwisata', className: 'Kelas 3-A', prodi: 'D4 Usaha Perjalanan Wisata', lecturer: 'Dr. Ir. H. M. Yusuf, M.T.', day: 'Senin', time: '08:00 - 11:30 WIB', room: 'Lab Pariwisata 201', quota: 40, enrolled: 38, totalMeetings: 16 },
     { id: 'sch-02', classCode: 'KLS-HTL-3B', courseCode: 'HTL-201', courseName: 'Manajemen Tata Hidang & Bar', className: 'Kelas 3-B', prodi: 'D4 Perhotelan', lecturer: 'Siti Maryam, S.Pd., M.Par.', day: 'Selasa', time: '09:00 - 12:30 WIB', room: 'Resto Training Hall', quota: 35, enrolled: 35, totalMeetings: 16 },
     { id: 'sch-03', classCode: 'KLS-KLN-1A', courseCode: 'KLN-101', courseName: 'Teknik Dasar Kuliner Nusantara', className: 'Kelas 1-A', prodi: 'D3 Kuliner', lecturer: 'Chef Denny Kurniawan, M.Sc.', day: 'Rabu', time: '08:00 - 13:00 WIB', room: 'Dapur Kitchen Lab 1', quota: 30, enrolled: 28, totalMeetings: 16 },
@@ -100,7 +100,7 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
 
   const krsValidation = KRSSKSLimitEngine.validateKRSSelection(previousIPS, totalCreditsTaken);
 
-  // 4. Pengaturan Bobot Penilaian DIKTI (Adjustable by Admin)
+  // 4. Pengaturan Bobot Penilaian DIKTI
   const [gradeWeights, setGradeWeights] = useState({
     kehadiran: 10,
     tugasMandiri: 20,
@@ -113,7 +113,6 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
     e.preventDefault();
     if (!newCourse.code || !newCourse.name) return;
 
-    // Check anti-duplication
     const exists = courses.some(c => c.code.toLowerCase() === newCourse.code.toLowerCase());
     if (exists) {
       alert(`⚠️ Peringatan Anti-Duplikasi: Kode Mata Kuliah [${newCourse.code}] sudah terdaftar di sistem!`);
@@ -591,7 +590,6 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
       {/* 3. SUB 3: KRS & VALIDASI BATAS SKS SN-DIKTI */}
       {activeSubTab === 'KRS_PORTAL' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Card Validasi SKS */}
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
             <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
               <Calculator size={16} className="text-emerald-500" />
@@ -642,7 +640,6 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
             </div>
           </div>
 
-          {/* List Pemilihan Mata Kuliah */}
           <div className="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
@@ -718,7 +715,6 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
       {/* 4. SUB 4: BOBOT PENILAIAN & SKALA NILAI KHS STANDAR DIKTI */}
       {activeSubTab === 'PENILAIAN_KHS' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Panel Penyesuaian Bobot Nilai Kampus */}
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-5">
             <div>
               <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
@@ -827,7 +823,6 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
             </div>
           </div>
 
-          {/* Konversi Huruf Mutu Standar DIKTI */}
           <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
             <div>
               <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
