@@ -27,6 +27,7 @@ import { OJSWorkspaceView } from './modules/OJSWorkspaceView';
 import { PDDIKTIWorkspaceView } from './modules/PDDIKTIWorkspaceView';
 import { AkreditasiWorkspaceView } from './modules/AkreditasiWorkspaceView';
 import { PerpustakaanWorkspaceView } from './modules/PerpustakaanWorkspaceView';
+import { DataMigrationWorkspaceView } from './modules/DataMigrationWorkspaceView';
 import { SettingsView } from './modules/SettingsView';
 
 function PortalMainLayout() {
@@ -145,7 +146,10 @@ function PortalMainLayout() {
             </div>
           )}
 
-          {/* 13. PENGATURAN SISTEM (WHITE-LABEL IDENTITY) */}
+          {/* 13. KANAL DROPSHIP & MIGRASI DATA MASTER */}
+          {activeTab === 'migrasi' && <DataMigrationWorkspaceView />}
+
+          {/* 14. PENGATURAN SISTEM (WHITE-LABEL IDENTITY) */}
           {activeTab === 'pengaturan' && <SettingsView />}
         </main>
 

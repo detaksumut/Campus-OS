@@ -3,7 +3,7 @@ import {
   LayoutDashboard, UserPlus, GraduationCap, FileText, CalendarCheck, 
   CheckSquare, Award, ScrollText, BookOpen, Video, FolderOpen, MessageSquare, 
   DollarSign, Users, Package, Library, UserCheck, Microscope, HeartHandshake, 
-  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun
+  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database
 } from 'lucide-react';
 import { useThemeRuntime } from '@campus-os/shared';
 
@@ -59,6 +59,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onSelectMenu }) => 
     {
       category: 'SISTEM PENDUKUNG',
       items: [
+        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Auto-Map' },
         { id: 'pddikti', label: 'PDDIKTI', icon: Cloud },
         { id: 'akreditasi', label: 'Akreditasi', icon: ShieldCheck },
         { id: 'laporan', label: 'Laporan & Dashboard', icon: BarChart3 },
