@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-cache",
+  "version": "1.0.0",
+  "description": "Campus OS Cache Platform (Redis)",
+  "main": "src/index.ts"
+}

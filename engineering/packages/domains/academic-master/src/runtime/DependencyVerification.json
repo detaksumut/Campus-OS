@@ -1,0 +1,12 @@
+{
+  "domain": "academic-master",
+  "verificationDate": "2026-07-21T06:00:00+07:00",
+  "status": "PASS",
+  "checks": {
+    "noInfrastructureLeaks": true,
+    "noDatabaseDriverLeaks": true,
+    "noHttpLeaks": true,
+    "noPresentationLeaks": true
+  },
+  "forbiddenImportsFound": []
+}

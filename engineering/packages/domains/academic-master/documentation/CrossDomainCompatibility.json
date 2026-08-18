@@ -1,0 +1,23 @@
+{
+  "domain": "academic-master",
+  "version": "1.0.0",
+  "dependencies": {
+    "registration": {
+      "contractVersion": "1.0.0",
+      "eventVersion": "1.0.0",
+      "capabilityVersion": "1.0.0",
+      "breakingChange": false,
+      "compatibleSince": "2026-07-21T00:00:00Z",
+      "compatibleUntil": "null"
+    },
+    "course-offering": {
+      "contractVersion": "1.0.0",
+      "eventVersion": "1.0.0",
+      "capabilityVersion": "1.0.0",
+      "breakingChange": false,
+      "compatibleSince": "2026-07-21T00:00:00Z",
+      "compatibleUntil": "null"
+    }
+  },
+  "overallCompatibility": "PASS"
+}

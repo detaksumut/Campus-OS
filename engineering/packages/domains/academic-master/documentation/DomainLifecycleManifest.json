@@ -1,0 +1,23 @@
+{
+  "domain": "academic-master",
+  "version": "1.0.0",
+  "currentGate": "Gate C",
+  "currentPhase": "Phase I",
+  "readinessIndex": {
+    "DomainReadiness": 100,
+    "RuntimeReadiness": 100,
+    "QualityReadiness": 5,
+    "ReleaseReadiness": 0,
+    "GovernanceReadiness": 0
+  },
+  "certificateStatus": {
+    "GateA": "CERTIFIED",
+    "GateB": "CERTIFIED",
+    "GateC": "IN_PROGRESS",
+    "GateD": "PLANNED",
+    "GateE": "PLANNED"
+  },
+  "architectureScore": 59,
+  "dependencyStatus": "CLEAN",
+  "releaseStatus": "DRAFT"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@campus-os/kernel-configuration",
+  "version": "1.0.0",
+  "description": "Layer 1 Configuration Runtime for Campus OS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

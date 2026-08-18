@@ -1,0 +1,10 @@
+{
+  "platform": "Campus OS",
+  "auditDate": "2026-07-21T07:30:00+07:00",
+  "kpis": {
+    "enterpriseArchitectureScore": 92,
+    "activeExceptions": 1,
+    "averageArbReviewTimeDays": 2,
+    "domainsCertified": 2
+  }
+}

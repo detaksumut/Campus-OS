@@ -1,0 +1,13 @@
+{
+  "name": "@campus-os/kernel-authorization",
+  "version": "1.0.0",
+  "description": "Layer 2 Authorization Runtime for Campus OS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@campus-os/kernel-identity": "^1.0.0",
+    "@campus-os/kernel-policy": "^1.0.0"
+  }
+}

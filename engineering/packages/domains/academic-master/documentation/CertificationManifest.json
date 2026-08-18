@@ -1,0 +1,58 @@
+{
+  "domain": "academic-master",
+  "manifestVersion": "1.0.0",
+  "auditDate": "2026-07-21T06:19:00+07:00",
+  "overallStatus": "IN_PROGRESS",
+  "certificates": [
+    {
+      "certificate": "DomainFoundationCertificate",
+      "version": "1.0.0",
+      "status": "CERTIFIED",
+      "timestamp": "2026-07-20T21:00:00+07:00",
+      "checksum": "sha256-dfc...",
+      "evidence": [
+        "BusinessScope.md",
+        "EntityCatalog.md",
+        "ValueObjectCatalog.md",
+        "DomainDependencyGraph.json"
+      ]
+    },
+    {
+      "certificate": "RuntimeReadyCertificate",
+      "version": "1.0.0",
+      "status": "CERTIFIED",
+      "timestamp": "2026-07-21T06:10:00+07:00",
+      "checksum": "sha256-rrc...",
+      "evidence": [
+        "RuntimeManifest.json",
+        "EventVersionMatrix.json",
+        "RepositoryCompatibility.json",
+        "ApplicationValidation.json"
+      ]
+    },
+    {
+      "certificate": "QualityReadyCertificate",
+      "version": "0.0.0",
+      "status": "PENDING",
+      "timestamp": null,
+      "checksum": null,
+      "evidence": []
+    },
+    {
+      "certificate": "ReleaseReadyCertificate",
+      "version": "0.0.0",
+      "status": "PENDING",
+      "timestamp": null,
+      "checksum": null,
+      "evidence": []
+    },
+    {
+      "certificate": "EnterpriseGovernanceCertificate",
+      "version": "0.0.0",
+      "status": "PENDING",
+      "timestamp": null,
+      "checksum": null,
+      "evidence": []
+    }
+  ]
+}

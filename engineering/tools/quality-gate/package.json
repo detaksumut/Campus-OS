@@ -1,0 +1,13 @@
+{
+  "name": "@campus-os/quality-gate",
+  "version": "1.0.0-beta",
+  "private": true,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/kernel": "*",
+    "@campus-os/identity-runtime": "*",
+    "@campus-os/workspace-runtime": "*",
+    "@campus-os/observability-runtime": "*",
+    "@campus-os/architecture-guardian": "*"
+  }
+}

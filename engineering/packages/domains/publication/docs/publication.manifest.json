@@ -1,0 +1,13 @@
+{
+  "domainName": "Publication",
+  "version": "1.0.0-draft",
+  "boundedContext": "PublicationBoundedContext",
+  "lifecycleStatus": "Sprint 4.1",
+  "dependencies": [
+    "@campus-os/kernel",
+    "@campus-os/membership"
+  ],
+  "exposedSdk": [],
+  "events": [],
+  "projections": []
+}

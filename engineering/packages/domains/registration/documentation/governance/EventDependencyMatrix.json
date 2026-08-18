@@ -1,0 +1,25 @@
+{
+  "domain": "registration",
+  "outgoingDependencies": [
+    {
+      "event": "ApplicantSubmitted",
+      "downstreamContexts": ["Workflow"]
+    },
+    {
+      "event": "ApplicantAccepted",
+      "downstreamContexts": ["Academic", "Notification"]
+    },
+    {
+      "event": "EnrollmentApproved",
+      "downstreamContexts": ["Student", "Academic"]
+    },
+    {
+      "event": "DocumentUploaded",
+      "downstreamContexts": ["Document"]
+    },
+    {
+      "event": "ApplicantVerified",
+      "downstreamContexts": ["Workflow", "Notification"]
+    }
+  ]
+}

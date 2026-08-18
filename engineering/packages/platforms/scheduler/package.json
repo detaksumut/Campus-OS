@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-scheduler",
+  "version": "1.0.0",
+  "description": "Campus OS Scheduler Platform (Cron, Background Jobs)",
+  "main": "src/index.ts"
+}

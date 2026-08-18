@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workflow Start Request",
+  "type": "object",
+  "properties": {
+    "workflowType": {
+      "type": "string",
+      "description": "Identifier for the workflow definition"
+    },
+    "businessKey": {
+      "type": "string",
+      "description": "Unique identifier for the business entity tied to this workflow"
+    },
+    "variables": {
+      "type": "object",
+      "description": "Initial variables required for the workflow"
+    }
+  },
+  "required": ["workflowType", "businessKey"],
+  "additionalProperties": false
+}

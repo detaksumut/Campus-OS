@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------
+  # 1. Primary Database
+  # ----------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: campus-os-postgres
+    environment:
+      POSTGRES_USER: campus_admin
+      POSTGRES_PASSWORD: campus_password
+      POSTGRES_DB: campus_os
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campus_admin -d campus_os"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: campus-os-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@campus-os.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  # ----------------------------------------
+  # 2. Caching & Session State
+  # ----------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: campus-os-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # ----------------------------------------
+  # 3. Object Storage (S3 Compatible)
+  # ----------------------------------------
+  minio:
+    image: minio/minio:latest
+    container_name: campus-os-minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+
+  # ----------------------------------------
+  # 4. Event Bus
+  # ----------------------------------------
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: campus-os-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672" # UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    restart: unless-stopped
+
+  # ----------------------------------------
+  # 5. Email Testing
+  # ----------------------------------------
+  mailpit:
+    image: axllent/mailpit
+    container_name: campus-os-mailpit
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
+    restart: unless-stopped
+
+  # ----------------------------------------
+  # 6. Observability
+  # ----------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: campus-os-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+    # command: --config.file=/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: campus-os-grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  redis_data:
+  minio_data:
+  rabbitmq_data:
+  prometheus_data:
+  grafana_data:

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Search Query Request",
+  "type": "object",
+  "properties": {
+    "indices": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Target indices or aliases"
+    },
+    "queryString": {
+      "type": "string",
+      "description": "Search text"
+    },
+    "filters": {
+      "type": "object",
+      "description": "Structured filters"
+    },
+    "page": {
+      "type": "integer",
+      "default": 1
+    },
+    "size": {
+      "type": "integer",
+      "default": 20
+    }
+  },
+  "required": ["indices"],
+  "additionalProperties": false
+}

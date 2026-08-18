@@ -1,0 +1,10 @@
+{
+  "name": "@campus-os/identity-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/kernel": "*",
+    "@campus-os/identity-sdk": "*"
+  }
+}

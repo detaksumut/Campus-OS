@@ -1,0 +1,8 @@
+{
+  "name": "@campus-os/siakad",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/presentation-core": "^1.0.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "domain": "registration",
+  "certificateType": "BackendFreeze",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:37:00+07:00",
+  "status": "PASSED",
+  "checklist": {
+    "publicApiFrozen": true,
+    "runtimeFrozen": true,
+    "eventFrozen": true,
+    "capabilityFrozen": true,
+    "documentationFrozen": true,
+    "compatibilityVerified": true,
+    "architectureApproved": true,
+    "noOpenCriticalBugs": true
+  },
+  "signature": "BF-REG-0001"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-notification",
+  "version": "1.0.0",
+  "description": "Campus OS Notification Platform (Email, Push, SMS)",
+  "main": "src/index.ts"
+}

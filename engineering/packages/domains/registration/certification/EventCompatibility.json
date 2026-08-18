@@ -1,0 +1,27 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "events": [
+    {
+      "event": "ApplicantSubmitted",
+      "currentVersion": "1.0.0",
+      "backwardCompatible": true,
+      "forwardCompatible": false,
+      "breakingChanges": []
+    },
+    {
+      "event": "ApplicantAccepted",
+      "currentVersion": "1.0.0",
+      "backwardCompatible": true,
+      "forwardCompatible": false,
+      "breakingChanges": []
+    },
+    {
+      "event": "EnrollmentApproved",
+      "currentVersion": "1.0.0",
+      "backwardCompatible": true,
+      "forwardCompatible": false,
+      "breakingChanges": []
+    }
+  ]
+}

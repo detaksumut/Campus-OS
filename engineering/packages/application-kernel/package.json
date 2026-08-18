@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/application-kernel",
+  "version": "1.0.0",
+  "description": "Campus OS Core Application Kernel (Command Bus, Query Bus, Pipeline)",
+  "main": "src/index.ts"
+}

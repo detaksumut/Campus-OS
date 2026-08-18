@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/presentation-kernel",
+  "version": "1.0.0",
+  "description": "Campus OS Presentation Kernel (Registry, ABI Compiler, Runtimes)",
+  "main": "src/index.ts"
+}

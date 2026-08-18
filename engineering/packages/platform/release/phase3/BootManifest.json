@@ -1,0 +1,20 @@
+{
+  "bootSequence": [
+    "kernel.configuration",
+    "kernel.observability",
+    "kernel.policy",
+    "kernel.identity",
+    "kernel.workflow",
+    "kernel.storage",
+    "kernel.notification",
+    "kernel.integration",
+    "kernel.academic-identity",
+    "kernel.credential",
+    "kernel.authorization",
+    "kernel.scheduler",
+    "kernel.document",
+    "kernel.search",
+    "kernel.knowledge",
+    "kernel.ai"
+  ]
+}

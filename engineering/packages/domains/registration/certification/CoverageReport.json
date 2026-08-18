@@ -1,0 +1,24 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "coverage": {
+    "domain": {
+      "statements": 100,
+      "branches": 100,
+      "functions": 100,
+      "lines": 100
+    },
+    "application": {
+      "statements": 95,
+      "branches": 90,
+      "functions": 100,
+      "lines": 95
+    },
+    "contracts": {
+      "statements": 100,
+      "branches": 100,
+      "functions": 100,
+      "lines": 100
+    }
+  }
+}

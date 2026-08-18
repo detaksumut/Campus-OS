@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Chat Request",
+  "type": "object",
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "description": "Optional UUID for continuing an existing conversation"
+    },
+    "message": {
+      "type": "string",
+      "description": "User input text"
+    },
+    "context": {
+      "type": "object",
+      "description": "Optional context data (e.g. current page, active record)"
+    }
+  },
+  "required": ["message"],
+  "additionalProperties": false
+}

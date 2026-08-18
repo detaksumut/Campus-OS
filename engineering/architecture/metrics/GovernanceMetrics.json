@@ -1,0 +1,9 @@
+{
+  "platform": "Campus OS",
+  "auditDate": "2026-07-21T07:30:00+07:00",
+  "metrics": {
+    "adrComplianceRate": "100%",
+    "layerRuleViolationsBlocked": 14,
+    "crossDomainDependencyViolationsBlocked": 3
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "runtimeId": "kernel.policy",
+  "capabilities": [
+    "EvaluatePolicy",
+    "RegisterPolicyRule"
+  ],
+  "publishedEvents": [
+    "PolicyUpdatedEvent"
+  ]
+}

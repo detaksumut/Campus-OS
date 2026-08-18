@@ -1,0 +1,49 @@
+openapi: 3.1.0
+info:
+  title: Configuration Runtime API
+  version: 1.0.0
+  description: API specification for the Campus OS Configuration Runtime.
+servers:
+  - url: https://api.campus-os.local/configuration
+paths:
+  /resolve:
+    get:
+      summary: Resolve configuration for a given context
+      operationId: resolveConfig
+      responses:
+        '200':
+          description: Configuration object returned
+  /keys:
+    post:
+      summary: Create or update a configuration key
+      operationId: upsertKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/configuration-key-request.json'
+      responses:
+        '200':
+          description: Key updated
+  /flags/{flag}/toggle:
+    post:
+      summary: Toggle a feature flag
+      operationId: toggleFlag
+      parameters:
+        - name: flag
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flag toggled
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

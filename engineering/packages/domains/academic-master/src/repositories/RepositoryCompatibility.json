@@ -1,0 +1,14 @@
+{
+  "domain": "academic-master",
+  "auditDate": "2026-07-21T06:00:00+07:00",
+  "status": "PASS",
+  "validations": {
+    "NoORMReferences": true,
+    "NoSQLReferences": true,
+    "NoInfrastructureImports": true,
+    "NoFrameworkTypes": true,
+    "DependencyRulePASS": true,
+    "ContractCompatibilityPASS": true
+  },
+  "violatingFiles": []
+}

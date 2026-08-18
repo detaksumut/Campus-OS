@@ -1,0 +1,8 @@
+{
+  "domain": "academic-master",
+  "runtimeVersion": "1.0.0",
+  "status": "INITIALIZED",
+  "capabilitiesRegistered": 2,
+  "kernelRouting": "ISOLATED",
+  "entrypoint": "AcademicMasterRuntime.ts"
+}

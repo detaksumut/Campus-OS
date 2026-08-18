@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Identity Login Response",
+  "type": "object",
+  "properties": {
+    "accessToken": {
+      "type": "string",
+      "description": "JWT access token"
+    },
+    "refreshToken": {
+      "type": "string",
+      "description": "Refresh token"
+    },
+    "expiresIn": {
+      "type": "integer",
+      "description": "Token expiration in seconds"
+    }
+  },
+  "required": ["accessToken", "refreshToken", "expiresIn"],
+  "additionalProperties": false
+}

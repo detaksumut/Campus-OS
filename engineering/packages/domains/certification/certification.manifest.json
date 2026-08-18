@@ -1,0 +1,27 @@
+{
+  "name": "certification",
+  "version": "0.1.0",
+  "status": "In Development",
+  "domain": "Certification",
+  "description": "Competency Assessment Platform — manages the full lifecycle from application to certificate issuance, verification, and renewal.",
+  "sprints": {
+    "5.1": {
+      "status": "In Progress",
+      "components": ["SchemeRuntime", "ApplicantRuntime", "ApplicationRuntime", "PrerequisiteEngine", "EligibilityPolicy", "MembershipRuleProvider", "PublicationRuleProvider"]
+    },
+    "5.2": { "status": "Planned", "components": ["ExamRuntime", "InterviewRuntime", "ExamPolicy"] },
+    "5.3": { "status": "Planned", "components": ["AssessmentRuntime", "CertificationDecisionRuntime"] },
+    "5.4": { "status": "Planned", "components": ["CertificateRuntime", "VerificationRuntime", "RenewalRuntime"] }
+  },
+  "consumes": {
+    "membership": ["IMembershipLookup", "IMembershipTierLookup"],
+    "publication": ["IPublicationLookup"]
+  },
+  "emits": [
+    "certification.scheme.activated",
+    "certification.application.submitted",
+    "certification.application.eligible",
+    "certification.application.conditionally-eligible",
+    "certification.application.ineligible"
+  ]
+}

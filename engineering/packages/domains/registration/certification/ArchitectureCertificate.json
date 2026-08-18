@@ -1,0 +1,16 @@
+{
+  "domain": "registration",
+  "certificateType": "EnterpriseArchitecture",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:37:00+07:00",
+  "status": "PASSED",
+  "matrix": {
+    "Architecture": "PASSED",
+    "Compatibility": "PASSED",
+    "Security": "PASSED",
+    "Performance": "PASSED",
+    "Observability": "PASSED",
+    "Testing": "PASSED"
+  },
+  "signature": "EA-REG-9999"
+}

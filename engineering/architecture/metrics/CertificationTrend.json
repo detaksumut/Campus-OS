@@ -1,0 +1,9 @@
+{
+  "platform": "Campus OS",
+  "auditDate": "2026-07-21T07:30:00+07:00",
+  "trend": [
+    { "date": "2026-01", "certifiedDomains": 0 },
+    { "date": "2026-06", "certifiedDomains": 1 },
+    { "date": "2026-07", "certifiedDomains": 2 }
+  ]
+}

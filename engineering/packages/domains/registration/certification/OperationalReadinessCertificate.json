@@ -1,0 +1,15 @@
+{
+  "domain": "registration",
+  "certificateType": "OperationalReadiness",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:37:00+07:00",
+  "status": "PASSED",
+  "checks": {
+    "monitoringDashboards": "PASSED",
+    "alertsConfigured": "PASSED",
+    "backupRestoreTested": "PASSED",
+    "featureFlagsReady": "PASSED",
+    "chaosTesting": "PASSED"
+  },
+  "signature": "OPS-REG-1010"
+}

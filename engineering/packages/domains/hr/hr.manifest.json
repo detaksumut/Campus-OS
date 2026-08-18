@@ -1,0 +1,29 @@
+{
+  "name": "hr",
+  "version": "1.0.0",
+  "description": "Human Resources Domain",
+  "publishedEvents": [
+    "EmployeeClockedIn_v1",
+    "EmployeeClockedOut_v1",
+    "LeaveRequested_v1",
+    "LeaveApproved_v1"
+  ],
+  "requiredCapabilities": [
+    "Identity.Authenticate",
+    "Identity.ResolvePermission"
+  ],
+  "exportedCapabilities": [
+    "IEmployeeAttendanceCapability"
+  ],
+  "permissions": [
+    {
+      "name": "hr.attendance.clockin",
+      "description": "Clock into shift"
+    },
+    {
+      "name": "hr.attendance.manage",
+      "description": "Manage employee attendance"
+    }
+  ],
+  "compatibilityVersion": "^1.0.0"
+}

@@ -1,0 +1,21 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "score": {
+    "Architecture": 20,
+    "Security": 15,
+    "Performance": 15,
+    "Testing": 15,
+    "Compatibility": 10,
+    "Documentation": 10,
+    "Observability": 5,
+    "Governance": 10,
+    "TotalScore": 100
+  },
+  "status": "CERTIFIED",
+  "entities": ["Applicant", "RegistrationPeriod", "Document"],
+  "valueObjects": ["PersonalData", "ContactInfo", "AcademicRecord"],
+  "capabilities": ["registration.submit", "registration.verify", "registration.period.manage"],
+  "signature": "SHA-256:d5f2a1b9c3e4...",
+  "approvedBy": "Enterprise Architecture Board"
+}

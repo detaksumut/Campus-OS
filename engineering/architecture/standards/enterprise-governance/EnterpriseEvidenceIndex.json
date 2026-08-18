@@ -1,0 +1,18 @@
+{
+  "platform": "Campus OS",
+  "evidenceAggregator": [
+    {
+      "domain": "academic-master",
+      "evidencePaths": [
+        "packages/domains/academic-master/documentation/RuntimeManifest.json",
+        "packages/domains/academic-master/documentation/RepositoryCompatibility.json"
+      ]
+    },
+    {
+      "domain": "membership",
+      "evidencePaths": [
+        "packages/domains/membership/documentation/EntityCatalog.md"
+      ]
+    }
+  ]
+}

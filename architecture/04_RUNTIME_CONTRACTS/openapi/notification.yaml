@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info:
+  title: Notification Runtime API
+  version: 1.0.0
+  description: API specification for the Campus OS Notification Runtime.
+servers:
+  - url: https://api.campus-os.local/notification
+paths:
+  /send:
+    post:
+      summary: Enqueue a notification for delivery
+      operationId: sendNotification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/notification-send-request.json'
+      responses:
+        '202':
+          description: Notification enqueued
+  /preferences:
+    post:
+      summary: Update user notification preferences
+      operationId: updatePreferences
+      responses:
+        '200':
+          description: Preferences updated
+  /history:
+    get:
+      summary: Retrieve a user's notification history
+      operationId: getHistory
+      responses:
+        '200':
+          description: History retrieved
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

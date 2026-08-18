@@ -1,0 +1,14 @@
+{
+  "name": "@campus-os/platform-database",
+  "version": "1.0.0",
+  "description": "Campus OS Database Platform (Agnostic Executor & Connection Pool)",
+  "main": "src/index.ts",
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/pg": "^8.11.0"
+  }
+}

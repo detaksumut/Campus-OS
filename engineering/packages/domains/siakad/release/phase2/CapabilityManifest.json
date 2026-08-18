@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "capabilities": {
+    "course-offering": ["ManageCourseOfferings", "ViewCourseOfferings"],
+    "study-plan": ["SubmitStudyPlan", "ApproveStudyPlan"],
+    "enrollment": ["ConfirmEnrollment", "DropCourse"],
+    "attendance": ["RecordAttendance", "ViewAttendance"],
+    "gradebook": ["RecordGradeComponent", "PublishFinalGrade"],
+    "transcript": ["GenerateTranscript", "ViewTranscript"]
+  }
+}

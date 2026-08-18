@@ -1,0 +1,13 @@
+{
+  "name": "@campus-os/kernel-bootstrap",
+  "version": "1.0.0-beta",
+  "private": true,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/kernel-core": "*",
+    "@campus-os/kernel-container": "*",
+    "@campus-os/kernel-events": "*",
+    "@campus-os/kernel-configuration": "*",
+    "@campus-os/kernel-plugin-loader": "*"
+  }
+}

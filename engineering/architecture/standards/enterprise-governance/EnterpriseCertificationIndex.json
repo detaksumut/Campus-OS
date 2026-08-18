@@ -1,0 +1,18 @@
+{
+  "platform": "Campus OS",
+  "indexVersion": "1.0.0",
+  "certificates": [
+    {
+      "domain": "academic-master",
+      "certificate": "RuntimeReadyCertificate",
+      "status": "VALID",
+      "timestamp": "2026-07-21T06:10:00+07:00"
+    },
+    {
+      "domain": "membership",
+      "certificate": "DomainFoundationCertificate",
+      "status": "VALID",
+      "timestamp": "2026-07-20T14:00:00+07:00"
+    }
+  ]
+}

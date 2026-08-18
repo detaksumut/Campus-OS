@@ -1,0 +1,24 @@
+{
+  "capabilities": [
+    {
+      "id": "Student.Read",
+      "category": "Student",
+      "scope": "Read"
+    },
+    {
+      "id": "Student.Write",
+      "category": "Student",
+      "scope": "Write"
+    },
+    {
+      "id": "Finance.Post",
+      "category": "Finance",
+      "scope": "Post"
+    },
+    {
+      "id": "Publication.Publish",
+      "category": "Publication",
+      "scope": "Publish"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Identity Login Request",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "User identifier (email or username)"
+    },
+    "password": {
+      "type": "string",
+      "description": "Plaintext password to be authenticated"
+    }
+  },
+  "required": ["username", "password"],
+  "additionalProperties": false
+}

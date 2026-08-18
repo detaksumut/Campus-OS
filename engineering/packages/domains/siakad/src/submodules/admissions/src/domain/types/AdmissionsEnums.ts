@@ -1,0 +1,39 @@
+export enum AdmissionPeriodStatus {
+  PLANNING = 'PLANNING',
+  OPEN = 'OPEN',
+  EVALUATION = 'EVALUATION',
+  DECIDED = 'DECIDED',
+  CLOSED = 'CLOSED'
+}
+
+export enum AdmissionDecision {
+  PASSED = 'PASSED',
+  WAITLISTED = 'WAITLISTED',
+  FAILED = 'FAILED',
+  WITHDRAWN = 'WITHDRAWN',
+  PENDING = 'PENDING'
+}
+
+export enum OfferStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  DECLINED = 'DECLINED',
+  EXPIRED = 'EXPIRED'
+}
+
+export enum AdmissionRoute {
+  REGULAR = 'REGULAR',
+  SCHOLARSHIP = 'SCHOLARSHIP',
+  TRANSFER = 'TRANSFER',
+  INTERNATIONAL = 'INTERNATIONAL',
+  SPECIAL = 'SPECIAL'
+}
+
+export enum SelectionStageType {
+  ADMINISTRATION = 'ADMINISTRATION',
+  CBT = 'CBT',
+  INTERVIEW = 'INTERVIEW',
+  PORTFOLIO = 'PORTFOLIO',
+  MEDICAL = 'MEDICAL',
+  FINAL_REVIEW = 'FINAL_REVIEW'
+}

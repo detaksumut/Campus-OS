@@ -1,0 +1,17 @@
+{
+  "domain": "academic-master",
+  "capabilityVersion": "1.0.0",
+  "status": "COMPATIBLE",
+  "contracts": [
+    {
+      "name": "createFaculty",
+      "backwardsCompatible": true,
+      "breakingChanges": []
+    },
+    {
+      "name": "getFaculty",
+      "backwardsCompatible": true,
+      "breakingChanges": []
+    }
+  ]
+}

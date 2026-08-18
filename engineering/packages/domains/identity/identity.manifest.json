@@ -1,0 +1,28 @@
+{
+  "domainId": "Identity",
+  "domainName": "Identity & Access Gateway",
+  "domainVersion": "1.0.0",
+  "compatibilityVersion": "1",
+  "contracts": [
+    "IdentityContext",
+    "IIdentityProvider",
+    "IOrganizationUnitProvider"
+  ],
+  "exportedCapabilities": [
+    "Identity.Authenticate",
+    "Identity.Authorize",
+    "Identity.ResolveIdentity",
+    "Identity.ResolvePermission",
+    "Identity.ResolveOrganizationUnit",
+    "Identity.ResolveTenant",
+    "Identity.IssueIdentityContext"
+  ],
+  "publishedEvents": [
+    "IdentityProvisioned_v1",
+    "IdentityActivated_v1",
+    "IdentitySuspended_v1",
+    "RoleAssigned_v1",
+    "PermissionGranted_v1"
+  ],
+  "requiredCapabilities": []
+}

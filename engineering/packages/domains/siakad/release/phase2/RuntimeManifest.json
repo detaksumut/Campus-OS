@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "phase": 2,
+  "runtimes": [
+    "CourseOfferingRuntime",
+    "StudyPlanRuntime",
+    "EnrollmentRuntime",
+    "AttendanceRuntime",
+    "GradeBookRuntime",
+    "TranscriptRuntime"
+  ],
+  "status": "REGISTERED"
+}

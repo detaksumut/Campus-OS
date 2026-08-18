@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Notification Send Request",
+  "type": "object",
+  "properties": {
+    "recipientId": {
+      "type": "string",
+      "description": "UUID of the user to receive the notification"
+    },
+    "templateId": {
+      "type": "string",
+      "description": "Identifier of the notification template"
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["EMAIL", "SMS", "PUSH", "IN_APP"]
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Data payload to render the template"
+    }
+  },
+  "required": ["recipientId", "templateId"],
+  "additionalProperties": false
+}

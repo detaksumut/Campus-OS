@@ -1,0 +1,15 @@
+{
+  "registry": [
+    {
+      "entity": "Faculty",
+      "dto": "FacultyDTO",
+      "mapper": "FacultyMapper"
+    },
+    {
+      "entity": "StudyProgram",
+      "dto": "StudyProgramDTO",
+      "mapper": "StudyProgramMapper"
+    }
+  ],
+  "frameworkDependencies": 0
+}

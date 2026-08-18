@@ -1,0 +1,22 @@
+{
+  "phase": "Phase 3 Campus Kernel",
+  "version": "1.0.0",
+  "runtimes": [
+    { "id": "kernel.configuration", "layer": 1, "dependencies": [] },
+    { "id": "kernel.observability", "layer": 1, "dependencies": [] },
+    { "id": "kernel.policy", "layer": 1, "dependencies": ["kernel.configuration"] },
+    { "id": "kernel.identity", "layer": 2, "dependencies": ["kernel.configuration"] },
+    { "id": "kernel.academic-identity", "layer": 2, "dependencies": ["kernel.identity"] },
+    { "id": "kernel.credential", "layer": 2, "dependencies": ["kernel.identity"] },
+    { "id": "kernel.authorization", "layer": 2, "dependencies": ["kernel.identity", "kernel.policy"] },
+    { "id": "kernel.workflow", "layer": 3, "dependencies": ["kernel.configuration"] },
+    { "id": "kernel.scheduler", "layer": 3, "dependencies": ["kernel.workflow"] },
+    { "id": "kernel.storage", "layer": 3, "dependencies": ["kernel.configuration"] },
+    { "id": "kernel.document", "layer": 3, "dependencies": ["kernel.storage"] },
+    { "id": "kernel.search", "layer": 3, "dependencies": ["kernel.storage"] },
+    { "id": "kernel.notification", "layer": 3, "dependencies": ["kernel.configuration", "kernel.observability"] },
+    { "id": "kernel.integration", "layer": 3, "dependencies": ["kernel.configuration", "kernel.observability"] },
+    { "id": "kernel.knowledge", "layer": 4, "dependencies": ["kernel.search"] },
+    { "id": "kernel.ai", "layer": 4, "dependencies": ["kernel.knowledge"] }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "runtimeId": "kernel.configuration",
+  "capabilities": [
+    "ManageKernelConfiguration",
+    "ReadKernelConfiguration"
+  ],
+  "publishedEvents": [
+    "ConfigurationUpdatedEvent"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "name": "@campus-os/service-runtime",
+  "version": "1.0.0",
+  "description": "Campus OS Internal Service Orchestrator"
+}

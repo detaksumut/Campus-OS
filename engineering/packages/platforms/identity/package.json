@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-identity",
+  "version": "1.0.0",
+  "description": "Campus OS Identity Platform (User Identity, Principal, Claims, Tenant, Organization, Impersonation)",
+  "main": "src/index.ts"
+}

@@ -1,0 +1,11 @@
+{
+  "domain": "registration",
+  "certificateType": "DomainReleaseApproval",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:37:00+07:00",
+  "status": "PRODUCTION_READY",
+  "boardApproval": true,
+  "freezeStatus": "FROZEN",
+  "score": 100,
+  "signature": "U-REG-FINAL-001"
+}

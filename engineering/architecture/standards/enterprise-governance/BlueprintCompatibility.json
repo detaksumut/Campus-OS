@@ -1,0 +1,10 @@
+{
+  "blueprintVersion": "1.0.0",
+  "supportedDomainRuntimes": [
+    "v1",
+    "v2"
+  ],
+  "supportedEventBuses": [
+    "v1"
+  ]
+}

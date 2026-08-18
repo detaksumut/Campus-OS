@@ -1,0 +1,11 @@
+{
+  "domain": "academic-master",
+  "auditDate": "2026-07-21T06:27:00+07:00",
+  "status": "PASS",
+  "validations": {
+    "NoJWTDependency": true,
+    "NoExpressRequestObject": true,
+    "NoOAuthLibraryLeak": true,
+    "RoleAndPermissionDecoupled": true
+  }
+}

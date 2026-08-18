@@ -1,0 +1,13 @@
+{
+  "runtimeId": "kernel.workflow",
+  "capabilities": [
+    "StartWorkflow",
+    "CompleteWorkflowTask",
+    "QueryWorkflowState"
+  ],
+  "publishedEvents": [
+    "WorkflowStartedEvent",
+    "WorkflowCompletedEvent",
+    "TaskFailedEvent"
+  ]
+}

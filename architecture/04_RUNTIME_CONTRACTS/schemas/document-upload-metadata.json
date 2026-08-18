@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Document Upload Metadata",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "type": "string"
+    },
+    "mimeType": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["PUBLIC", "PRIVATE", "INTERNAL"]
+    },
+    "ownerId": {
+      "type": "string"
+    }
+  },
+  "required": ["filename", "mimeType", "visibility"],
+  "additionalProperties": false
+}

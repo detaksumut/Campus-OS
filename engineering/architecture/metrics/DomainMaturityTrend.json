@@ -1,0 +1,11 @@
+{
+  "platform": "Campus OS",
+  "auditDate": "2026-07-21T07:30:00+07:00",
+  "distribution": {
+    "LEVEL_1_PROJECT": 0,
+    "LEVEL_2_DOMAIN": 1,
+    "LEVEL_3_PLATFORM": 1,
+    "LEVEL_4_ENTERPRISE": 0,
+    "LEVEL_5_OPTIMIZED": 2
+  }
+}

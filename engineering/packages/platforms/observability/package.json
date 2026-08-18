@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-observability",
+  "version": "1.0.0",
+  "description": "Campus OS Observability Platform (OpenTelemetry, Prometheus)",
+  "main": "src/index.ts"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Configuration Key Request",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Unique identifier for the configuration setting"
+    },
+    "value": {
+      "type": "string",
+      "description": "Value for the configuration setting"
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["GLOBAL", "TENANT", "MODULE"],
+      "description": "Scope of the configuration setting"
+    }
+  },
+  "required": ["key", "value", "scope"],
+  "additionalProperties": false
+}

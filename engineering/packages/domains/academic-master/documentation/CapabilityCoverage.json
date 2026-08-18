@@ -1,0 +1,24 @@
+{
+  "domain": "academic-master",
+  "coverageStatus": "COMPLETE",
+  "capabilities": [
+    {
+      "name": "createFaculty",
+      "command": "CreateFacultyCommand",
+      "query": null,
+      "event": "FacultyCreatedEvent",
+      "useCase": "CreateFacultyUseCase",
+      "presentationWidget": "CreateFacultyFormWidget",
+      "status": "IMPLEMENTED"
+    },
+    {
+      "name": "getFaculty",
+      "command": null,
+      "query": "GetFacultyByIdQuery",
+      "event": null,
+      "useCase": "GetFacultyQueryHandler",
+      "presentationWidget": "FacultyDetailViewWidget",
+      "status": "IMPLEMENTED"
+    }
+  ]
+}

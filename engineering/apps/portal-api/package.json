@@ -1,0 +1,23 @@
+{
+  "name": "@campus-os/portal-api",
+  "version": "1.0.0",
+  "description": "Campus OS Portal API",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "dependencies": {
+    "fastify": "^4.0.0",
+    "fastify-cors": "^6.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "@campus-os/application-kernel": "^1.0.0",
+    "@campus-os/application-membership": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "@types/jsonwebtoken": "^9.0.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "domain": "registration",
+  "certificateType": "Compliance",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:18:00+07:00",
+  "status": "PASSED",
+  "checks": {
+    "auditLogReview": "PASSED",
+    "gdpr_pdp_compliance": "PASSED - Consent captured during registration",
+    "academicRegulations": "PASSED - Minimum age and document policy enforced"
+  },
+  "signature": "COMP-REG-88211"
+}

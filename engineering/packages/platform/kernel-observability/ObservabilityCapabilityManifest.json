@@ -1,0 +1,12 @@
+{
+  "runtimeId": "kernel.observability",
+  "capabilities": [
+    "WriteLog",
+    "ReadLog",
+    "PublishMetric",
+    "TraceExecution"
+  ],
+  "publishedEvents": [
+    "AlertTriggeredEvent"
+  ]
+}

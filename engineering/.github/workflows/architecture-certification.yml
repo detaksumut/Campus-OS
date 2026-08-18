@@ -1,0 +1,52 @@
+name: Campus OS Architecture Certification
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  certify-domain:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Architecture Validation
+      run: npm run validate:architecture
+      
+    - name: Dependency Validation
+      run: npm run validate:dependencies
+
+    - name: Contract Validation
+      run: npm run validate:contracts
+
+    - name: Security & Performance Scans
+      run: npm run validate:security && npm run validate:performance
+
+    - name: Evidence Collection
+      run: node tools/evidence-collector.js
+
+    - name: Generate Certificate
+      if: success()
+      run: node tools/certificate-generator.js
+
+    - name: Update Enterprise Score
+      if: success()
+      run: node tools/update-architecture-score.js
+
+    - name: Upload Certificates
+      uses: actions/upload-artifact@v4
+      with:
+        name: domain-certificates
+        path: packages/domains/**/documentation/*.json

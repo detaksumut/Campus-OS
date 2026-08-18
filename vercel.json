@@ -1,0 +1,12 @@
+{
+  "framework": "vite",
+  "buildCommand": "cd engineering && npm run build",
+  "outputDirectory": "engineering/apps/portal/dist",
+  "installCommand": "cd engineering && npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

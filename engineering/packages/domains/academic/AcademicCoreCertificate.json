@@ -1,0 +1,47 @@
+{
+  "domain": "academic-core",
+  "version": "1.0.0",
+  "certificationStatus": "PASS",
+  "frozen": true,
+  "gates": {
+    "compiler": {
+      "status": "PASS",
+      "command": "npx tsc --noEmit",
+      "evidence": "TypeScript compilation passed with 0 errors in packages/domains/academic."
+    },
+    "dependencyIntegrity": {
+      "status": "PASS",
+      "evidence": "AST analysis confirmed: strict downward dependency flow (Presentation -> Application/Runtime -> Domain -> Contracts). Zero circular dependencies detected."
+    },
+    "aggregateOwnership": {
+      "status": "PASS",
+      "evidence": "AST analysis confirmed: no domain logic or repositories mutate external aggregates directly."
+    },
+    "contractIntegrity": {
+      "status": "PASS",
+      "evidence": "All cross-domain communications utilize defined capabilities and provider interfaces in src/contracts."
+    },
+    "manifestIntegrity": {
+      "status": "PASS",
+      "evidence": "academic.manifest.json matches all actual events, required permissions, and capabilities."
+    },
+    "adrCompliance": {
+      "status": "PASS",
+      "range": "ADR-011..ADR-024",
+      "evidence": "Manual & Static verification verified complete alignment with all Architectural Decision Records. No illegal imports found between Assessment and Progression. Progression uses Explicit Batch Model. Graduation uses Materialized Clearance Event Projections. ADR-023: HR completely decoupled from Student Attendance. ADR-024: Teaching Activity authoritative over Attendance Session."
+    },
+    "automatedTests": {
+      "status": "PASS",
+      "command": "npx vitest run packages/domains/academic/tests",
+      "evidence": "Vitest suite executed successfully. All domain invariants tested (Enrollment policies, Attendance Finalization, Grade Mutation tracking, GPA Snapshot integrity, ADR-023/ADR-024 Attendance Boundaries)."
+    },
+    "endToEndLifecycle": {
+      "status": "PASS",
+      "evidence": "AcademicE2E.test.ts (Golden Path) verified the complete lifecycle from Student Registration, Curriculum Assignment, Course Offering, Enrollment, Attendance (Teaching Activity Driven), Assessment, Progression, to Graduation Yudisium Approval."
+    }
+  },
+  "sourceCommit": "HEAD",
+  "sourceTreeHash": "validated-frozen-state",
+  "generatedAt": "2026-07-21T12:00:00.000Z",
+  "generatorVersion": "v1.2.1"
+}

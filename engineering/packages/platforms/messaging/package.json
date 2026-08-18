@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-messaging",
+  "version": "1.0.0",
+  "description": "Campus OS Messaging Platform (RabbitMQ, Event Bus)",
+  "main": "src/index.ts"
+}

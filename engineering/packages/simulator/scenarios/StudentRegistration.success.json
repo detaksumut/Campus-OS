@@ -1,0 +1,14 @@
+{
+  "id": "student-reg-success",
+  "name": "Student Registration Success",
+  "targetWorkflow": "StudentRegistration",
+  "initialState": {},
+  "mockInjections": {
+    "repositories": {
+      "student-123": { "status": "draft" }
+    },
+    "services": {
+      "payment": { "status": "approved" }
+    }
+  }
+}

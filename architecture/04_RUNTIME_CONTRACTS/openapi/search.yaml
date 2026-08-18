@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Search Runtime API
+  version: 1.0.0
+  description: API specification for the Campus OS Search Runtime.
+servers:
+  - url: https://api.campus-os.local/search
+paths:
+  /query:
+    post:
+      summary: Perform a search query against indices
+      operationId: searchQuery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/search-query-request.json'
+      responses:
+        '200':
+          description: Search results
+  /index/{alias}:
+    post:
+      summary: Index a document
+      operationId: indexDocument
+      parameters:
+        - name: alias
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Document indexed
+    delete:
+      summary: Remove a document from index
+      operationId: deleteDocument
+      parameters:
+        - name: alias
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document removed
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

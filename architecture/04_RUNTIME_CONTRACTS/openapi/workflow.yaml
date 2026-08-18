@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: Workflow Runtime API
+  version: 1.0.0
+  description: API specification for the Campus OS Workflow Runtime.
+servers:
+  - url: https://api.campus-os.local/workflow
+paths:
+  /start:
+    post:
+      summary: Initiate a new workflow instance
+      operationId: startWorkflow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/workflow-start-request.json'
+      responses:
+        '201':
+          description: Workflow started
+  /{id}/approve:
+    post:
+      summary: Approve a workflow task
+      operationId: approveWorkflow
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Task approved
+  /{id}/reject:
+    post:
+      summary: Reject a workflow task
+      operationId: rejectWorkflow
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Task rejected
+  /{id}:
+    get:
+      summary: Retrieve workflow instance state
+      operationId: getWorkflow
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Workflow state retrieved
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

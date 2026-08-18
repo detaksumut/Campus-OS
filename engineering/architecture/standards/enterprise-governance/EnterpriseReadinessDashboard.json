@@ -1,0 +1,41 @@
+{
+  "platform": "Campus OS",
+  "auditDate": "2026-07-21T06:30:00+07:00",
+  "domains": [
+    {
+      "domain": "membership",
+      "readiness": 100,
+      "certificationCoverage": 100,
+      "architectureHealth": "EXCELLENT",
+      "evidenceCompleteness": 100
+    },
+    {
+      "domain": "academic-master",
+      "readiness": 100,
+      "certificationCoverage": 100,
+      "architectureHealth": "EXCELLENT",
+      "evidenceCompleteness": 100
+    },
+    {
+      "domain": "registration",
+      "readiness": 85,
+      "certificationCoverage": 60,
+      "architectureHealth": "GOOD",
+      "evidenceCompleteness": 85
+    },
+    {
+      "domain": "curriculum",
+      "readiness": 72,
+      "certificationCoverage": 40,
+      "architectureHealth": "NEEDS_IMPROVEMENT",
+      "evidenceCompleteness": 50
+    },
+    {
+      "domain": "finance",
+      "readiness": 30,
+      "certificationCoverage": 0,
+      "architectureHealth": "AT_RISK",
+      "evidenceCompleteness": 10
+    }
+  ]
+}

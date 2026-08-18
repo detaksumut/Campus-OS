@@ -1,0 +1,14 @@
+{
+  "identity": true,
+  "workflow": true,
+  "validation": true,
+  "configuration": true,
+  "security": true,
+  "plugin": true,
+  "logger": true,
+  "health": true,
+  "version": true,
+  "storage": false,
+  "document": false,
+  "notification": false
+}

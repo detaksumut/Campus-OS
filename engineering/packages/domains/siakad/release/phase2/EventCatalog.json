@@ -1,0 +1,13 @@
+{
+  "events": [
+    {"name": "CourseOfferingOpenedEvent", "version": 1, "context": "course-offering"},
+    {"name": "StudyPlanSubmittedEvent", "version": 1, "context": "study-plan"},
+    {"name": "StudyPlanApprovedEvent", "version": 1, "context": "study-plan"},
+    {"name": "EnrollmentConfirmedEvent", "version": 1, "context": "enrollment"},
+    {"name": "AttendanceRecordedEvent", "version": 1, "context": "attendance"},
+    {"name": "GradeComponentRecordedEvent", "version": 1, "context": "gradebook"},
+    {"name": "FinalGradePublishedEvent", "version": 1, "context": "gradebook"},
+    {"name": "TranscriptUpdatedEvent", "version": 1, "context": "transcript"}
+  ],
+  "policy": "SEMANTIC_VERSIONING"
+}

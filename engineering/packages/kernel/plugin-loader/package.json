@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/kernel-plugin-loader",
+  "version": "1.0.0-beta",
+  "private": true,
+  "main": "src/index.ts"
+}

@@ -1,0 +1,5 @@
+{
+  "sdkVersion": "1.0.0",
+  "name": "@campus-os/sdk",
+  "description": "Public API Façade for Campus OS Kernel."
+}

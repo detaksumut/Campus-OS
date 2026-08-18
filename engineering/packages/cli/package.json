@@ -1,0 +1,10 @@
+{
+  "name": "@campus-os/cli",
+  "version": "1.0.0",
+  "bin": {
+    "campus": "./src/index.ts"
+  },
+  "dependencies": {
+    "commander": "^11.0.0"
+  }
+}

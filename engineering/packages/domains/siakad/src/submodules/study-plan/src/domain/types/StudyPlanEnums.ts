@@ -1,0 +1,8 @@
+export enum StudyPlanStatus {
+  DRAFT = 'DRAFT',
+  SUBMITTED = 'SUBMITTED',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  REVISED = 'REVISED',
+  FINALIZED = 'FINALIZED'
+}

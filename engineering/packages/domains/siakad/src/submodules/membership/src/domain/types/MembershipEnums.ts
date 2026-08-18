@@ -1,0 +1,22 @@
+export enum MembershipStatus {
+  PENDING = 'PENDING',
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED',
+  REVOKED = 'REVOKED',
+  ALUMNI = 'ALUMNI'
+}
+
+export enum CardStatus {
+  ACTIVE = 'ACTIVE',
+  EXPIRED = 'EXPIRED',
+  REVOKED = 'REVOKED',
+  REISSUED = 'REISSUED'
+}
+
+export enum AcademicLevel {
+  UNDERGRADUATE = 'UNDERGRADUATE',
+  GRADUATE = 'GRADUATE',
+  POSTGRADUATE = 'POSTGRADUATE',
+  FACULTY = 'FACULTY',
+  REVIEWER = 'REVIEWER'
+}

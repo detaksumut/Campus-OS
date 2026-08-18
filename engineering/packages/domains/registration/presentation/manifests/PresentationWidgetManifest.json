@@ -1,0 +1,26 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "widgets": [
+    {
+      "id": "registration.dashboard",
+      "description": "Main PMB overview dashboard"
+    },
+    {
+      "id": "registration.status",
+      "description": "Displays current admission status"
+    },
+    {
+      "id": "registration.profile",
+      "description": "Applicant biodata summary"
+    },
+    {
+      "id": "registration.documents",
+      "description": "Document upload and verification status"
+    },
+    {
+      "id": "registration.timeline",
+      "description": "Registration events timeline"
+    }
+  ]
+}

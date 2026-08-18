@@ -1,0 +1,13 @@
+{
+  "platform": "Campus OS",
+  "version": "1.0.0",
+  "decisions": [
+    {
+      "id": "ADR-001",
+      "title": "Adopt Event-Driven Architecture for Cross-Domain Communication",
+      "date": "2026-07-01",
+      "status": "ACCEPTED",
+      "path": "Decisions/ADR-001.md"
+    }
+  ]
+}

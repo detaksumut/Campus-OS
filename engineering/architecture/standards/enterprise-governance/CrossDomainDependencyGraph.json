@@ -1,0 +1,28 @@
+{
+  "platform": "Campus OS",
+  "version": "1.0.0",
+  "nodes": [
+    "Membership",
+    "Identity",
+    "Academic Master",
+    "Registration",
+    "Scheduling",
+    "Assessment",
+    "Transcript",
+    "Graduation",
+    "Publication",
+    "Research",
+    "Certification"
+  ],
+  "edges": [
+    { "from": "Membership", "to": "Identity" },
+    { "from": "Identity", "to": "Academic Master" },
+    { "from": "Academic Master", "to": "Registration" },
+    { "from": "Registration", "to": "Scheduling" },
+    { "from": "Scheduling", "to": "Assessment" },
+    { "from": "Assessment", "to": "Transcript" },
+    { "from": "Transcript", "to": "Graduation" },
+    { "from": "Publication", "to": "Research" },
+    { "from": "Research", "to": "Certification" }
+  ]
+}

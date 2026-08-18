@@ -1,0 +1,15 @@
+{
+  "manifestVersion": "1.0.0",
+  "platform": "Campus OS",
+  "auditDate": "2026-07-21T06:30:00+07:00",
+  "status": "OPERATIONAL",
+  "certifiedDomains": [
+    "academic-master",
+    "membership"
+  ],
+  "pendingDomains": [
+    "registration",
+    "publication"
+  ],
+  "enterpriseScore": 92
+}

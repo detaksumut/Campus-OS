@@ -1,0 +1,7 @@
+{
+  "domain": "academic-master",
+  "eventDependencyMatrix": {
+    "CourseOffering": ["FacultyCreatedEvent", "StudyProgramRegisteredEvent"],
+    "Registration": ["StudyProgramRegisteredEvent"]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    "Course Offering",
+    "Study Plan",
+    "Enrollment",
+    "Attendance",
+    "GradeBook",
+    "Academic Transcript"
+  ],
+  "edges": [
+    {"from": "Course Offering", "to": "Study Plan"},
+    {"from": "Study Plan", "to": "Enrollment"},
+    {"from": "Enrollment", "to": "Attendance"},
+    {"from": "Attendance", "to": "GradeBook"},
+    {"from": "GradeBook", "to": "Academic Transcript"}
+  ],
+  "validation": {
+    "isAcyclic": true,
+    "crossSchemaQueries": 0,
+    "crossRepositoryCalls": 0
+  }
+}

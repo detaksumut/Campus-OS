@@ -1,0 +1,16 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "scores": {
+    "domainModel": 100,
+    "contracts": 100,
+    "runtime": 100,
+    "events": 100,
+    "presentation": 100,
+    "security": 100,
+    "testing": 100
+  },
+  "overall": 100,
+  "approvedBy": "Enterprise Architecture Board",
+  "timestamp": "2026-07-21T05:37:00+07:00"
+}

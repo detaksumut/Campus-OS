@@ -1,0 +1,32 @@
+{
+  "domain": "academic-master",
+  "version": "1.0.0",
+  "upstreamDependencies": [
+    {
+      "module": "registration",
+      "reason": "Referenced in BusinessScope.md section 7 (Upstream) for Program Studi validation during PMB",
+      "layer": "Business Domain"
+    },
+    {
+      "module": "kernel.identity",
+      "reason": "Authenticating admin users managing master data",
+      "layer": "Layer 2 - Platform"
+    }
+  ],
+  "downstreamDependencies": [
+    "student-lifecycle",
+    "course-offering",
+    "scheduling",
+    "examination",
+    "assessment",
+    "graduation",
+    "academic-reporting",
+    "finance",
+    "lms"
+  ],
+  "layerCompliance": {
+    "currentLayer": "Phase 4 - Business Modules (Root Reference Domain)",
+    "dependsOnlyOnLowerLayers": true,
+    "circularDependenciesFound": false
+  }
+}

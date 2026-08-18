@@ -1,0 +1,15 @@
+{
+  "domain": "registration",
+  "certificateType": "Performance",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:27:00+07:00",
+  "status": "PASSED",
+  "checks": {
+    "runtimeBoot": "PASSED - 450ms (Target: <= 2000ms)",
+    "query": "PASSED - 45ms (Target: <= 100ms)",
+    "command": "PASSED - 120ms (Target: <= 250ms)",
+    "eventPublish": "PASSED - 12ms (Target: <= 50ms)",
+    "memoryGrowth": "PASSED - Stable at 15MB/1000req",
+    "errorRate": "PASSED - 0.01% (Target: < 1%)"
+  }
+}

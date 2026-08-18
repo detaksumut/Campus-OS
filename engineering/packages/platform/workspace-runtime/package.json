@@ -1,0 +1,9 @@
+{
+  "name": "@campus-os/workspace-runtime",
+  "version": "1.0.0-beta",
+  "private": true,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/kernel": "*"
+  }
+}

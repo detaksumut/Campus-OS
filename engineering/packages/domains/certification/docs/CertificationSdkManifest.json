@@ -1,0 +1,65 @@
+{
+  "name": "@campus-os/certification",
+  "version": "1.0.0",
+  "status": "frozen",
+  "frozenAt": "2026-07-20T03:27:00Z",
+  "capabilities": [
+    "SchemeManagement",
+    "ApplicantRegistration",
+    "ApplicationProcessing",
+    "EligibilityDetermination",
+    "ExaminationManagement",
+    "InterviewManagement",
+    "AssessmentAggregation",
+    "CertificationDecisionIssuance",
+    "CertificateLifecycleManagement",
+    "CertificateVerification",
+    "CertificateRenewal",
+    "BadgeIssuance"
+  ],
+  "contracts": {
+    "interfaces": [
+      "ISchemeRuntime", "IApplicantRuntime", "IApplicationRuntime",
+      "IExamRuntime", "IInterviewRuntime", "IAssessmentRuntime",
+      "ICertificationDecisionRuntime", "ICertificateRuntime",
+      "IVerificationRuntime", "IRenewalRuntime", "IBadgeRuntime",
+      "ICertificateNumberGenerator", "IRuleProvider", "IAssessmentComponent"
+    ],
+    "dtos": [
+      "CertificationScheme", "ApplicantDto", "ApplicationDto",
+      "ExamDto", "InterviewDto", "AssessmentDto",
+      "CertificationDecisionDto", "CertificateRecord",
+      "CertificateVerificationReport", "RenewalRecord",
+      "BadgeDefinition", "IssuedBadge", "AssessmentResult",
+      "ComponentScore", "RuleEvidence", "RuleEvaluationResult",
+      "ConditionalRequirement", "CertificateProjectionDto"
+    ]
+  },
+  "projections": [
+    "CertificateProjection"
+  ],
+  "events": {
+    "domain": [
+      "certification.scheme.activated", "certification.scheme.deprecated",
+      "certification.application.submitted", "certification.eligibility.determined",
+      "certification.condition.fulfilled", "certification.condition.verified",
+      "certification.application.eligible",
+      "certification.exam.scheduled", "certification.exam.started",
+      "certification.exam.completed", "certification.exam.graded",
+      "certification.interview.scheduled", "certification.interview.conducted",
+      "certification.interview.evaluated",
+      "certification.assessment.completed", "certification.decision.issued",
+      "certification.certificate.generated", "certification.certificate.signed"
+    ],
+    "integration": [
+      "certification.certificate.issued",
+      "certification.certificate.expired",
+      "certification.certificate.revoked",
+      "certification.certificate.renewed"
+    ]
+  },
+  "consumes": {
+    "membership": ["IMembershipLookup", "IMembershipTierLookup"],
+    "publication": ["IPublicationLookup"]
+  }
+}

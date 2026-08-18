@@ -1,0 +1,21 @@
+{
+  "name": "@campus-os/ui",
+  "version": "1.0.0",
+  "description": "Campus OS Component Abstraction Layer",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

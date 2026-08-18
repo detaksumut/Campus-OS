@@ -1,0 +1,11 @@
+{
+  "name": "@campus-os/workspace-react",
+  "version": "1.0.0-beta",
+  "private": true,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/workspace-runtime": "*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

@@ -1,0 +1,17 @@
+export enum AcademicPeriodType {
+  REGISTRATION = 'REGISTRATION',
+  RE_REGISTRATION = 'RE_REGISTRATION',
+  KRS = 'KRS',
+  KPRS = 'KPRS',
+  UTS = 'UTS',
+  UAS = 'UAS',
+  GRADE_SUBMISSION = 'GRADE_SUBMISSION',
+  YUDICIUM = 'YUDICIUM',
+  GRADUATION = 'GRADUATION'
+}
+
+export enum CalendarStatus {
+  DRAFT = 'DRAFT',
+  PUBLISHED = 'PUBLISHED',
+  ARCHIVED = 'ARCHIVED'
+}

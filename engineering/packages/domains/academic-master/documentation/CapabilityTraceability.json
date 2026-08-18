@@ -1,0 +1,20 @@
+{
+  "domain": "academic-master",
+  "traceability": [
+    {
+      "capability": "createFaculty",
+      "command": "CreateFacultyCommand",
+      "query": null,
+      "event": "FacultyCreatedEvent",
+      "useCase": "CreateFacultyUseCase",
+      "presentation": {
+        "action": "CreateFacultyAction",
+        "widget": "CreateFacultyFormWidget"
+      },
+      "tests": {
+        "unit": "CreateFacultyUseCase.test.ts",
+        "integration": "FacultyRepository.test.ts"
+      }
+    }
+  ]
+}

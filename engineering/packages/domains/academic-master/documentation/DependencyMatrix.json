@@ -1,0 +1,21 @@
+{
+  "domain": "academic-master",
+  "version": "1.0.0",
+  "phaseDependencies": {
+    "A": [],
+    "B": ["A"],
+    "C": ["B"],
+    "D": ["C"],
+    "E": ["D"],
+    "F": ["E"],
+    "G": ["F"]
+  },
+  "deliverableDependencies": {
+    "EntityCatalog.md": ["BusinessScope.md"],
+    "FacultyCommands.ts": ["Faculty.ts", "StudyProgram.ts"],
+    "AcademicMasterRuntime.ts": ["FacultyCommands.ts", "FacultyQueries.ts", "CapabilityManifest.json"],
+    "AcademicEvents.ts": ["AcademicMasterRuntime.ts"],
+    "IFacultyRepository.ts": ["Faculty.ts"],
+    "CreateFacultyUseCase.ts": ["FacultyCommands.ts", "IFacultyRepository.ts"]
+  }
+}

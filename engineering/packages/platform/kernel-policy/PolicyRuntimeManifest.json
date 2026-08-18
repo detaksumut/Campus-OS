@@ -1,0 +1,11 @@
+{
+  "runtimeId": "kernel.policy",
+  "runtimeVersion": "1.0.0",
+  "capabilityVersion": "1.0.0",
+  "apiVersion": "v1",
+  "minimumKernelVersion": "1.0.0",
+  "compatibleKernelVersion": "^1.0.0",
+  "layer": 1,
+  "status": "Active",
+  "dependencies": ["kernel.configuration"]
+}

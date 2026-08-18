@@ -1,0 +1,16 @@
+{
+  "name": "@campus-os/kernel-identity",
+  "version": "1.0.0",
+  "description": "Layer 2 Identity Runtime for Campus OS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@campus-os/kernel-configuration": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "domain": "membership",
+  "description": "Membership Bounded Context managing profiles, enrollments, and identity bindings.",
+  "version": "1.0.0-beta",
+  "capabilities": [
+    "membership.enrollment.create",
+    "membership.enrollment.read",
+    "membership.identity.bind",
+    "membership.identity.unbind"
+  ]
+}

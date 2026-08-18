@@ -1,0 +1,19 @@
+{
+  "domain": "academic-master",
+  "version": "1.0.0",
+  "capabilities": [
+    {
+      "name": "createFaculty",
+      "type": "command",
+      "contract": "CreateFacultyCommand"
+    },
+    {
+      "name": "getFaculty",
+      "type": "query",
+      "contract": "GetFacultyByIdQuery",
+      "returns": "FacultyDTO"
+    }
+  ],
+  "contractCompatibility": "PASS",
+  "frameworkDependency": "ZERO"
+}

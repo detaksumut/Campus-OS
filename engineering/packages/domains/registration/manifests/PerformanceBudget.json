@@ -1,0 +1,30 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "budgets": {
+    "runtimeBoot": {
+      "target": "<= 2000ms",
+      "metric": "p99"
+    },
+    "query": {
+      "target": "<= 100ms",
+      "metric": "p95"
+    },
+    "command": {
+      "target": "<= 250ms",
+      "metric": "p95"
+    },
+    "eventPublish": {
+      "target": "<= 50ms",
+      "metric": "p99"
+    },
+    "memoryGrowth": {
+      "target": "stable",
+      "metric": "trend"
+    },
+    "errorRate": {
+      "target": "< 1%",
+      "metric": "count"
+    }
+  }
+}

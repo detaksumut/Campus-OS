@@ -1,0 +1,17 @@
+{
+  "domain": "academic-master",
+  "events": [
+    {
+      "name": "FacultyCreatedEvent",
+      "currentVersion": "v1.0.0",
+      "payloadSchema": "FacultyCreatedPayload",
+      "deprecated": false
+    },
+    {
+      "name": "StudyProgramRegisteredEvent",
+      "currentVersion": "v1.0.0",
+      "payloadSchema": "StudyProgramRegisteredPayload",
+      "deprecated": false
+    }
+  ]
+}

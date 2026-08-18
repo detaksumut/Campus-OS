@@ -1,0 +1,19 @@
+{
+  "domain": "academic-master",
+  "lastUpdated": "2026-07-21T06:13:00+07:00",
+  "scores": {
+    "Architecture": { "weight": 20, "score": 20, "maxScore": 20 },
+    "Contracts": { "weight": 10, "score": 10, "maxScore": 10 },
+    "Runtime": { "weight": 10, "score": 10, "maxScore": 10 },
+    "Events": { "weight": 8, "score": 8, "maxScore": 8 },
+    "Repository": { "weight": 7, "score": 7, "maxScore": 7 },
+    "Security": { "weight": 10, "score": 0, "maxScore": 10 },
+    "Observability": { "weight": 8, "score": 0, "maxScore": 8 },
+    "Performance": { "weight": 8, "score": 0, "maxScore": 8 },
+    "Testing": { "weight": 10, "score": 0, "maxScore": 10 },
+    "Documentation": { "weight": 5, "score": 0, "maxScore": 5 },
+    "Governance": { "weight": 4, "score": 4, "maxScore": 4 }
+  },
+  "overallScore": 59,
+  "maxOverallScore": 100
+}

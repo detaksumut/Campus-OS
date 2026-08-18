@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "capabilities": [
+    "ManageKernelConfiguration",
+    "ReadKernelConfiguration",
+    "WriteLog",
+    "PublishMetric",
+    "EvaluatePolicy",
+    "StartWorkflow",
+    "StoreDocument",
+    "ExecuteSearch"
+  ]
+}

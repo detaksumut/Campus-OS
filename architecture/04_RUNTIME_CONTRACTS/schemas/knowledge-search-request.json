@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Knowledge Search Request",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Natural language search query"
+    },
+    "filters": {
+      "type": "object",
+      "description": "Optional metadata filters (e.g., date, author, tags)"
+    },
+    "topK": {
+      "type": "integer",
+      "description": "Number of results to return",
+      "default": 5
+    }
+  },
+  "required": ["query"],
+  "additionalProperties": false
+}

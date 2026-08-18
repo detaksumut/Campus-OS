@@ -1,0 +1,25 @@
+{
+  "domainName": "Membership",
+  "version": "1.0.0",
+  "boundedContext": "MembershipBoundedContext",
+  "lifecycleStatus": "Frozen",
+  "dependencies": [
+    "@campus-os/kernel"
+  ],
+  "exposedSdk": [
+    "IMembershipLookup",
+    "IMembershipVerification",
+    "IMembershipTierLookup",
+    "IMembershipCardLookup",
+    "IDirectoryQuery"
+  ],
+  "events": [
+    "MembershipProfileEvents.ProfileUpdated",
+    "MembershipProfileEvents.AcademicProfileUpdated",
+    "MembershipWorkflowEvents.Verified"
+  ],
+  "projections": [
+    "PublicDirectoryEntryDto",
+    "ReviewerDirectoryEntryDto"
+  ]
+}

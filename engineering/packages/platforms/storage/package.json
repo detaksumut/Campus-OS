@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-storage",
+  "version": "1.0.0",
+  "description": "Campus OS Storage Platform (MinIO, S3)",
+  "main": "src/index.ts"
+}

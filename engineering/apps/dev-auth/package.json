@@ -1,0 +1,20 @@
+{
+  "name": "@campus-os/dev-auth",
+  "version": "1.0.0",
+  "description": "Campus OS Development Identity Provider",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "dependencies": {
+    "fastify": "^4.0.0",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "@types/jsonwebtoken": "^9.0.0"
+  }
+}

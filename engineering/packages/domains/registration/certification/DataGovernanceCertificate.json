@@ -1,0 +1,14 @@
+{
+  "domain": "registration",
+  "certificateType": "DataGovernance",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:18:00+07:00",
+  "status": "PASSED",
+  "checks": {
+    "dataOwnership": "PASSED - Admissions Office",
+    "retentionPolicy": "PASSED - 5 Years post-admission",
+    "piiClassification": "PASSED - National ID and DoB flagged as HIGH",
+    "dataLineage": "PASSED - Mapped to Academic Master Data"
+  },
+  "signature": "DGOV-REG-11002"
+}

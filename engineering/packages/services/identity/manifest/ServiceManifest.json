@@ -1,0 +1,17 @@
+{
+  "service": "Identity",
+  "version": "1.0.0",
+  "runtimeVersion": "1.0.0",
+  "healthContract": "Standard",
+  "sdkCompatibility": "1.x",
+  "kernelCompatibility": "1.x",
+  "capabilities": [
+    "Student.Read",
+    "Student.Write",
+    "Finance.Post",
+    "Publication.Publish"
+  ],
+  "dependencies": [],
+  "certificateId": "CERT-IDENTITY-PILOT-1",
+  "certificateVersion": "1.0.0"
+}

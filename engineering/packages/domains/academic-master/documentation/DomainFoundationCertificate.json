@@ -1,0 +1,15 @@
+{
+  "domain": "academic-master",
+  "certificateType": "DomainFoundation",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T06:00:00+07:00",
+  "status": "PASSED",
+  "score": 100,
+  "phasesCompleted": ["A", "B", "C"],
+  "evidence": {
+    "A": ["BusinessScope.md", "EntityCatalog.md", "DomainDependencyGraph.json"],
+    "B": ["aggregates/", "entities/", "value-objects/", "repositories/", "factories/", "policies/"],
+    "C": ["FacultyCommands.ts", "FacultyQueries.ts", "FacultyDTO.ts", "CapabilityManifest.json", "MapperRegistry.json"]
+  },
+  "signature": "DF-AM-001"
+}

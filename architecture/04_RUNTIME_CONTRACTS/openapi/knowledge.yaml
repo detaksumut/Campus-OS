@@ -1,0 +1,50 @@
+openapi: 3.1.0
+info:
+  title: Knowledge Runtime API
+  version: 1.0.0
+  description: API specification for the Campus OS Knowledge Runtime.
+servers:
+  - url: https://api.campus-os.local/knowledge
+paths:
+  /search:
+    post:
+      summary: Perform a semantic search query
+      operationId: searchKnowledge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/knowledge-search-request.json'
+      responses:
+        '200':
+          description: Search results returned
+  /ingest:
+    post:
+      summary: Ingest a new document or data point
+      operationId: ingestKnowledge
+      responses:
+        '202':
+          description: Ingestion started
+  /entity/{id}:
+    get:
+      summary: Retrieve graph nodes connected to a specific entity
+      operationId: getEntityGraph
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Graph nodes retrieved
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

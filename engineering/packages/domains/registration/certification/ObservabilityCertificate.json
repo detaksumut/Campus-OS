@@ -1,0 +1,17 @@
+{
+  "domain": "registration",
+  "certificateType": "Observability",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:27:00+07:00",
+  "status": "PASSED",
+  "checks": {
+    "structuredLogging": "PASSED",
+    "correlationId": "PASSED",
+    "distributedTraceContext": "PASSED",
+    "domainMetrics": "PASSED",
+    "runtimeMetrics": "PASSED",
+    "readinessProbe": "PASSED",
+    "livenessProbe": "PASSED",
+    "auditLogIntegration": "PASSED"
+  }
+}

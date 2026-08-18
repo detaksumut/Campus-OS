@@ -1,0 +1,14 @@
+{
+  "runtimeId": "kernel.authorization",
+  "status": "Certified",
+  "validations": {
+    "layerIsolation": true,
+    "runtimeIsolation": true,
+    "capabilityOwnership": true,
+    "schemaIsolation": true,
+    "observability": true,
+    "security": true,
+    "bootSimulation": true
+  },
+  "certifiedAt": "2026-07-20T21:18:00Z"
+}

@@ -1,0 +1,32 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "upstreamDependencies": [],
+  "downstreamDependencies": [
+    {
+      "module": "kernel.identity",
+      "reason": "Authenticating applicants and linking userId to applicantId",
+      "layer": "Layer 2 - Identity"
+    },
+    {
+      "module": "kernel.workflow",
+      "reason": "Routing document verification and applicant approval processes",
+      "layer": "Layer 3 - Platform"
+    },
+    {
+      "module": "kernel.document",
+      "reason": "Storing applicant uploaded documents securely",
+      "layer": "Layer 3 - Platform"
+    },
+    {
+      "module": "kernel.notification",
+      "reason": "Sending registration updates and admission status via email/SMS",
+      "layer": "Layer 3 - Platform"
+    }
+  ],
+  "layerCompliance": {
+    "currentLayer": "Phase 4 - Business Modules",
+    "dependsOnlyOnLowerLayers": true,
+    "circularDependenciesFound": false
+  }
+}

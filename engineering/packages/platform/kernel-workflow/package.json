@@ -1,0 +1,13 @@
+{
+  "name": "@campus-os/kernel-workflow",
+  "version": "1.0.0",
+  "description": "Layer 3 Workflow Runtime for Campus OS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@campus-os/kernel-configuration": "^1.0.0"
+  }
+}

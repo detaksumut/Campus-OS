@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-security",
+  "version": "1.0.0",
+  "description": "Campus OS Security Platform (JWT, OAuth)",
+  "main": "src/index.ts"
+}

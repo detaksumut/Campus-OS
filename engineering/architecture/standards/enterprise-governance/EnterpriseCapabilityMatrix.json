@@ -1,0 +1,29 @@
+{
+  "platform": "Campus OS",
+  "capabilities": [
+    {
+      "capability": "Identity",
+      "providerDomain": "membership",
+      "consumerDomains": ["academic-master", "registration", "finance"],
+      "apiContract": "IIdentityCapability",
+      "events": ["UserRegisteredEvent"],
+      "certificates": ["DomainFoundationCertificate"]
+    },
+    {
+      "capability": "Curriculum",
+      "providerDomain": "academic-master",
+      "consumerDomains": ["registration", "scheduling", "transcript"],
+      "apiContract": "ICurriculumCapability",
+      "events": ["CurriculumActivatedEvent"],
+      "certificates": ["RuntimeReadyCertificate"]
+    },
+    {
+      "capability": "Enrollment",
+      "providerDomain": "registration",
+      "consumerDomains": ["finance", "scheduling"],
+      "apiContract": "IEnrollmentCapability",
+      "events": ["StudentEnrolledEvent"],
+      "certificates": []
+    }
+  ]
+}

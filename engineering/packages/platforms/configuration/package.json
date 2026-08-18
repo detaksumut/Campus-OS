@@ -1,0 +1,6 @@
+{
+  "name": "@campus-os/platform-configuration",
+  "version": "1.0.0",
+  "description": "Campus OS Configuration Platform",
+  "main": "src/index.ts"
+}

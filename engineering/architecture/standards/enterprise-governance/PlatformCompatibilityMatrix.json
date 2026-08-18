@@ -1,0 +1,13 @@
+{
+  "platform": "Campus OS",
+  "version": "1.0.0",
+  "matrix": [
+    {
+      "providerDomain": "academic-master",
+      "providerVersion": "1.0.0",
+      "consumerDomain": "registration",
+      "consumerVersion": "1.0.0",
+      "status": "COMPATIBLE"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "registration",
+  "certificateType": "Security",
+  "version": "1.0.0",
+  "timestamp": "2026-07-21T05:18:00+07:00",
+  "status": "PASSED",
+  "checks": {
+    "authentication": "PASSED - Kernel Identity Integrated",
+    "authorization": "PASSED - Role based checks applied on Use Cases",
+    "inputValidation": "PASSED - Immutable Value Objects enforce constraints",
+    "piiProtection": "PASSED - PersonalData fields are encrypted at rest",
+    "auditTrail": "PASSED - Write operations log to kernel.observability"
+  },
+  "score": 15,
+  "maxScore": 15,
+  "signature": "SEC-REG-991823"
+}

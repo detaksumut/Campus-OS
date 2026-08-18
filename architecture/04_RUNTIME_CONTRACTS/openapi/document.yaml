@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Document Runtime API
+  version: 1.0.0
+  description: API specification for the Campus OS Document Runtime.
+servers:
+  - url: https://api.campus-os.local/document
+paths:
+  /upload:
+    post:
+      summary: Upload a new document
+      operationId: uploadDocument
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                metadata:
+                  $ref: '../schemas/document-upload-metadata.json'
+      responses:
+        '201':
+          description: Document uploaded successfully
+  /{id}:
+    delete:
+      summary: Delete a document
+      operationId: deleteDocument
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Document deleted
+  /{id}/download:
+    get:
+      summary: Generate a secure download URL
+      operationId: getDownloadUrl
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Download URL generated
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

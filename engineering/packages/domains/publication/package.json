@@ -1,0 +1,10 @@
+{
+  "name": "@campus-os/publication",
+  "version": "1.0.0",
+  "description": "Publication Bounded Context",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@campus-os/kernel": "^1.0.0",
+    "@campus-os/membership": "^1.0.0"
+  }
+}

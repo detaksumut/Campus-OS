@@ -1,0 +1,13 @@
+{
+  "domain": "registration",
+  "version": "1.0.0",
+  "capabilities": [
+    "registration.view",
+    "registration.submit",
+    "registration.edit",
+    "registration.cancel",
+    "registration.status",
+    "registration.documents",
+    "registration.verification"
+  ]
+}

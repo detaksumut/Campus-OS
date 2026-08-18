@@ -1,0 +1,40 @@
+export enum ConferenceStatus {
+  PLANNING = 'PLANNING',
+  CALL_FOR_PAPERS = 'CALL_FOR_PAPERS',
+  REVIEW_PHASE = 'REVIEW_PHASE',
+  SCHEDULED = 'SCHEDULED',
+  ONGOING = 'ONGOING',
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED'
+}
+
+export enum ReviewMode {
+  DOUBLE_BLIND = 'DOUBLE_BLIND',
+  SINGLE_BLIND = 'SINGLE_BLIND',
+  OPEN_REVIEW = 'OPEN_REVIEW'
+}
+
+export enum ConferenceType {
+  ONSITE = 'ONSITE',
+  ONLINE = 'ONLINE',
+  HYBRID = 'HYBRID'
+}
+
+export enum PaperStatus {
+  SUBMITTED = 'SUBMITTED',
+  IN_REVIEW = 'IN_REVIEW',
+  REVISION_REQUIRED = 'REVISION_REQUIRED',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED'
+}
+
+export enum PresenterIdentity {
+  MEMBER = 'MEMBER',
+  EXTERNAL = 'EXTERNAL'
+}
+
+export enum CommitteeRole {
+  CHAIR = 'CHAIR',
+  TRACK_DIRECTOR = 'TRACK_DIRECTOR',
+  REVIEWER = 'REVIEWER'
+}

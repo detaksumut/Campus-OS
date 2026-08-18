@@ -1,0 +1,14 @@
+{
+  "name": "@campus-os/infrastructure",
+  "version": "1.0.0",
+  "description": "Campus OS Generic Infrastructure Providers (Database, Messaging, Storage)",
+  "main": "src/index.ts",
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/pg": "^8.11.0"
+  }
+}

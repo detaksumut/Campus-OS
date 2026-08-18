@@ -1,0 +1,11 @@
+{
+  "name": "campus-os-root",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd engineering && npm install && npm run build && cd .. && node -e \"const fs=require('fs'); fs.mkdirSync('apps/portal', {recursive: true}); fs.cpSync('engineering/apps/portal/dist', 'apps/portal/dist', {recursive: true}); fs.cpSync('engineering/apps/portal/dist', 'dist', {recursive: true});\"",
+    "dev": "cd engineering && npm run dev",
+    "lint": "cd engineering && npm run lint",
+    "test": "cd engineering && npm run test"
+  }
+}

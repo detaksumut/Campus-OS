@@ -1,0 +1,26 @@
+{
+  "releaseId": "REG-P4-1.0.0",
+  "domain": "registration",
+  "version": "1.0.0",
+  "releaseDate": "2026-07-21T05:37:00+07:00",
+  "status": "RELEASED",
+  "includedManifests": [
+    "DomainManifest.json",
+    "CapabilityManifest.json",
+    "EventCompatibility.json"
+  ],
+  "dependencies": {
+    "kernel.identity": ">=1.0.0",
+    "kernel.workflow": ">=1.0.0",
+    "kernel.document": ">=1.0.0"
+  },
+  "certificationMatrix": {
+    "Architecture": "PASSED",
+    "Security": "PASSED",
+    "Performance": "PASSED",
+    "Testing": "PASSED",
+    "Operational": "PASSED",
+    "Compliance": "PASSED",
+    "DataGovernance": "PASSED"
+  }
+}

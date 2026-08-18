@@ -1,0 +1,14 @@
+{
+  "domain": "academic-master",
+  "auditDate": "2026-07-21T06:17:00+07:00",
+  "certificationDependencies": {
+    "RuntimeReadyCertificate": ["DomainFoundationCertificate"],
+    "QualityReadyCertificate": ["RuntimeReadyCertificate"],
+    "ReleaseReadyCertificate": ["QualityReadyCertificate"],
+    "EnterpriseGovernanceCertificate": ["ReleaseReadyCertificate"]
+  },
+  "validations": {
+    "DependencyChainIntact": true,
+    "NoCircularDependencies": true
+  }
+}
