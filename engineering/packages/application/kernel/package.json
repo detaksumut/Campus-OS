@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@campus-os/events": "^1.0.0"
+    "@campus-os/kernel-events": "*"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
