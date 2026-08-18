@@ -61,16 +61,15 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
           <img 
             src="/hero-campuos.png" 
             alt="Campus Hero Banner" 
-            className="w-full h-full object-cover object-center filter brightness-[0.35] contrast-125 scale-105"
+            className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
           />
-          {/* Multi-Layer Dark Gradient Overlay for Maximum Contrast & Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/50" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/90" />
+          {/* Subtle Clean Vignette Overlay so image is vivid & clear */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-slate-950/50" />
         </div>
 
         {/* Background Glowing Gradients */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-6 text-center space-y-8 relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/90 border border-blue-500/40 text-blue-300 text-xs font-bold shadow-lg shadow-blue-500/10 backdrop-blur-md">
