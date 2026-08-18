@@ -56,35 +56,31 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
 
       {/* 2. HERO SECTION */}
       <section className="relative pt-20 pb-28 overflow-hidden min-h-[85vh] flex items-center justify-center">
-        {/* Real Campus Hero Background Image from public/hero-campuos.png */}
+        {/* Pure Original Campus Hero Background Image without any blue tint */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/hero-campuos.png" 
             alt="Campus Hero Banner" 
-            className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
+            className="w-full h-full object-cover object-center"
           />
-          {/* Subtle Clean Vignette Overlay so image is vivid & clear */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-slate-950/50" />
+          {/* Subtle neutral bottom transition into dark section */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-slate-950" />
         </div>
 
-        {/* Background Glowing Gradients */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
-
         <div className="max-w-6xl mx-auto px-6 text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/90 border border-blue-500/40 text-blue-300 text-xs font-bold shadow-lg shadow-blue-500/10 backdrop-blur-md">
-            <Sparkles size={14} className="text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-white/20 text-white text-xs font-bold shadow-lg backdrop-blur-md">
+            <Sparkles size={14} className="text-amber-400" />
             <span>Smart Enterprise Higher Education Operating System</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-4xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
+            <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {profile.institutionName}
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="text-sm sm:text-base text-white max-w-2xl mx-auto leading-relaxed font-semibold drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek. Menghubungkan Kurikulum OBE, Perkuliahan Hybrid WebRTC, Wisuda PIN Dikti SIVIL, Jurnal Ilmiah OJS, dan Keuangan Multi-Bank dalam satu ekosistem digital.
           </p>
 
