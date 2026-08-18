@@ -1,5 +1,5 @@
 {
-  "name": "@campus-os/cli",
+  "name": "@campus-os/campus-cli",
   "version": "1.0.0",
   "description": "Campus OS CLI Tool",
   "bin": {
