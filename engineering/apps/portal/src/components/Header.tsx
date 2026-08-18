@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Search, Bell, Mail, HelpCircle, User, ChevronDown, CheckCircle, ShieldCheck, 
-  GraduationCap, BookOpen, LogIn, UserPlus, Lock, Key, LogOut, Sparkles, Building2, CheckCircle2
+  Search, Bell, Mail, ChevronDown, CheckCircle, ShieldCheck, 
+  GraduationCap, BookOpen, LogIn, UserPlus, Lock, Key, LogOut, CheckCircle2
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
@@ -15,7 +15,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSettings }) => {
   const { profile } = useTenant();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Default true for live demo, can be toggled
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Default true for demo, toggleable
   const [showNotifications, setShowNotifications] = useState(false);
   const [showRoleMenu, setShowRoleMenu] = useState(false);
   const [showSSOModal, setShowSSOModal] = useState(false);
