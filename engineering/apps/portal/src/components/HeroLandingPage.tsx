@@ -55,7 +55,7 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
       </nav>
 
       {/* 2. HERO SECTION */}
-      <section className="relative pt-20 pb-28 overflow-hidden min-h-[85vh] flex items-center justify-center">
+      <section className="relative pt-6 pb-20 overflow-hidden min-h-[88vh] flex flex-col justify-between items-center">
         {/* Pure Original Campus Hero Background Image without any blue tint */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -63,28 +63,32 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
             alt="Campus Hero Banner" 
             className="w-full h-full object-cover object-center"
           />
-          {/* Subtle neutral bottom transition into dark section */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-slate-950" />
+          {/* Subtle neutral top & bottom transition into dark section */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-slate-950" />
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-white/20 text-white text-xs font-bold shadow-lg backdrop-blur-md">
-            <Sparkles size={14} className="text-amber-400" />
+        {/* 🌟 BAGIAN ATAS: Tepat di bagian langit di ATAS tulisan besar CAMPUS OS */}
+        <div className="max-w-4xl mx-auto px-6 text-center space-y-2 relative z-10 pt-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/70 border border-white/20 text-white text-[11px] font-bold shadow-lg backdrop-blur-md">
+            <Sparkles size={13} className="text-amber-400" />
             <span>Smart Enterprise Higher Education Operating System</span>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-            Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek. Menghubungkan Kurikulum OBE, Perkuliahan Hybrid WebRTC, Wisuda PIN Dikti SIVIL, Jurnal Ilmiah OJS, dan Keuangan Multi-Bank dalam satu ekosistem digital.
+          <p className="text-xs sm:text-sm text-slate-100 max-w-2xl mx-auto leading-relaxed font-semibold drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+            Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek (Kurikulum OBE, LMS WebRTC, PIN Dikti SIVIL, Jurnal OJS 3.x, Keuangan Multi-Bank)
           </p>
+        </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-snug max-w-3xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+        {/* 🏆 BAGIAN BAWAH: Tepat di BAWAH grafis teks CAMPUS OS */}
+        <div className="max-w-6xl w-full mx-auto px-6 text-center space-y-6 relative z-10 pt-24 pb-4">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white leading-snug max-w-3xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
             <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {profile.institutionName}
             </span>
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
               onClick={onOpenLogin}
               className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 hover:scale-105 transition-all"
@@ -102,24 +106,24 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
           </div>
 
           {/* 4 Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
-            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
-              <p className="text-xl sm:text-2xl font-black text-blue-400 font-mono">98.5%</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+            <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-lg sm:text-xl font-black text-blue-400 font-mono">98.5%</p>
               <p className="text-xs font-bold text-slate-300">Lulusan Bekerja & Berwirausaha</p>
               <p className="text-[10px] text-slate-400">Standar Dikti IKU-1</p>
             </div>
-            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
-              <p className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">16 Sesi</p>
+            <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-lg sm:text-xl font-black text-emerald-400 font-mono">16 Sesi</p>
               <p className="text-xs font-bold text-slate-300">BAP Digital & Presensi Realtime</p>
               <p className="text-[10px] text-slate-400">100% Paperless</p>
             </div>
-            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
-              <p className="text-xl sm:text-2xl font-black text-purple-400 font-mono">PIN & SIVIL</p>
+            <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-lg sm:text-xl font-black text-purple-400 font-mono">PIN & SIVIL</p>
               <p className="text-xs font-bold text-slate-300">Ijazah Terverifikasi Nasional</p>
               <p className="text-[10px] text-slate-400">Anti-Pemalsuan QR Dikti</p>
             </div>
-            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
-              <p className="text-xl sm:text-2xl font-black text-amber-400 font-mono">SINTA 1-6</p>
+            <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-lg sm:text-xl font-black text-amber-400 font-mono">SINTA 1-6</p>
               <p className="text-xs font-bold text-slate-300">Publikasi Jurnal OJS 3.x</p>
               <p className="text-[10px] text-slate-400">Akreditasi ARJUNA Dikti</p>
             </div>
