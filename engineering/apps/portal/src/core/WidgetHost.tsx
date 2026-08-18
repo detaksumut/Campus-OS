@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { WidgetErrorBoundary } from './WidgetErrorBoundary';
 import { WidgetSuspense } from './WidgetSuspense';
-import { WidgetRuntime } from '../../../../packages/presentation-kernel/src/runtime/WidgetRuntime';
-import { GlobalRegistry } from '../../../../packages/presentation-kernel/src/registry/PresentationRegistry';
-import { ActionRuntime } from '../../../../packages/presentation-kernel/src/runtime/ActionRuntime';
-import { IWidgetContext } from '../../../../packages/presentation-kernel/src/runtime/IWidgetContext';
+import { WidgetRuntime, GlobalRegistry, ActionRuntime, IWidgetContext } from '@campus-os/presentation-kernel';
 
 // Initialize the stateless runtime once
 const runtime = new WidgetRuntime(GlobalRegistry);

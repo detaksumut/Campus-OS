@@ -6,7 +6,7 @@ import { ZoneRenderer } from './core/ZoneRenderer';
 import { KernelDevTools } from './core/KernelDevTools';
 
 // In a real app, this would be injected via PluginLoader
-import { RegistrationPluginABI } from '../../../packages/domains/siakad/src/submodules/registration/src/presentation/plugin';
+import { RegistrationPluginABI } from '@campus-os/registration-plugin';
 import { PresentationCompiler, GlobalRegistry, RegistryBuilder } from '@campus-os/presentation-kernel';
 
 // Compile and Register the ABI once on load

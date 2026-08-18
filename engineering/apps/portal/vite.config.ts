@@ -15,7 +15,8 @@ export default defineConfig({
       '@campus-os/observability-runtime': path.resolve(__dirname, '../../packages/platform/observability-runtime/src'),
       '@campus-os/workspace-runtime': path.resolve(__dirname, '../../packages/platform/workspace-runtime/src'),
       '@campus-os/presentation-kernel': path.resolve(__dirname, '../../packages/presentation-kernel/src'),
-      '@campus-os/presentation-core': path.resolve(__dirname, '../../packages/presentation-core/src')
+      '@campus-os/presentation-core': path.resolve(__dirname, '../../packages/presentation-core/src'),
+      '@campus-os/registration-plugin': path.resolve(__dirname, '../../packages/domains/siakad/src/submodules/registration/src/presentation/plugin/index.ts')
     },
   },
 })
