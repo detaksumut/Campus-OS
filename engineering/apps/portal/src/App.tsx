@@ -188,10 +188,7 @@ function PortalMainLayout() {
             </div>
           )}
 
-          {/* 13. KANAL DROPSHIP & MIGRASI DATA MASTER */}
-          {activeTab === 'migrasi' && <DataMigrationWorkspaceView />}
-
-          {/* 14. PENGATURAN SISTEM (WHITE-LABEL IDENTITY) */}
+          {/* 18. PENGATURAN SISTEM (WHITE-LABEL IDENTITY) */}
           {activeTab === 'pengaturan' && <SettingsView />}
         </main>
 
