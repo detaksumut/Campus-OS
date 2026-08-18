@@ -647,30 +647,30 @@ export const PMBWorkspaceView: React.FC = () => {
         <div className="space-y-6">
           {/* KPI Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Total Pendaftar</p>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-300">Total Pendaftar</p>
               <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{applicants.length + 1445}</p>
-              <span className="text-[10px] font-bold text-emerald-600">+18% dari tahun lalu</span>
+              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">+18% dari tahun lalu</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Berkas Lengkap Tervalidasi</p>
-              <p className="text-2xl font-black text-blue-600 mt-1">1.240</p>
-              <span className="text-[10px] font-bold text-slate-400">Ijazah & Foto Terverifikasi</span>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-300">Berkas Lengkap Tervalidasi</p>
+              <p className="text-2xl font-black text-blue-600 dark:text-blue-400 mt-1">1.240</p>
+              <span className="text-[10px] font-bold text-slate-500 dark:text-slate-300">Ijazah & Foto Terverifikasi</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Lolos & Terbit NIM</p>
-              <p className="text-2xl font-black text-emerald-600 mt-1">680 Mahasiswa</p>
-              <span className="text-[10px] font-bold text-emerald-600">82.9% Konfirmasi Registrasi</span>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-300">Lolos & Terbit NIM</p>
+              <p className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">680 Mahasiswa</p>
+              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">82.9% Konfirmasi Registrasi</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Daya Tampung Kampus</p>
-              <p className="text-2xl font-black text-purple-600 mt-1">850</p>
-              <span className="text-[10px] font-bold text-purple-600">Sisa Kuota: 170 Kursi</span>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-300">Daya Tampung Kampus</p>
+              <p className="text-2xl font-black text-purple-600 dark:text-purple-400 mt-1">850</p>
+              <span className="text-[10px] font-bold text-purple-600 dark:text-purple-300">Sisa Kuota: 170 Kursi</span>
             </div>
           </div>
 
           {/* Table & Filtering */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
+          <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="relative flex-1 max-w-md">
                 <input
@@ -678,7 +678,7 @@ export const PMBWorkspaceView: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Cari nama calon mahasiswa, no pendaftaran..."
-                  className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
               </div>
@@ -687,12 +687,12 @@ export const PMBWorkspaceView: React.FC = () => {
                 <select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-bold focus:outline-none"
+                  className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold shadow-sm focus:outline-none cursor-pointer"
                 >
-                  <option value="ALL">Semua Status</option>
-                  <option value="SUBMITTED">Submitted</option>
-                  <option value="VERIFIED">Berkas Terverifikasi</option>
-                  <option value="ACCEPTED">Lolos / Diterima</option>
+                  <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Semua Status Pendaftaran</option>
+                  <option value="SUBMITTED" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Submitted (Menunggu Verifikasi)</option>
+                  <option value="VERIFIED" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Berkas Terverifikasi</option>
+                  <option value="ACCEPTED" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Lolos / Diterima (NIM)</option>
                 </select>
               </div>
             </div>
@@ -700,16 +700,16 @@ export const PMBWorkspaceView: React.FC = () => {
             {/* Table Records */}
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-900/60 text-slate-500 border-b border-slate-200 dark:border-slate-700">
+                <thead className="bg-slate-100 dark:bg-slate-900/90 text-slate-700 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700">
                   <tr>
-                    <th className="p-3 font-bold">No. Registrasi</th>
-                    <th className="p-3 font-bold">Nama Calon Mahasiswa</th>
-                    <th className="p-3 font-bold">Identitas / Asal Sekolah</th>
-                    <th className="p-3 font-bold">Program Studi Pilihan</th>
-                    <th className="p-3 font-bold text-center">Status Berkas</th>
-                    <th className="p-3 font-bold">Status Seleksi</th>
-                    <th className="p-3 font-bold">NIM Resmi</th>
-                    <th className="p-3 font-bold text-center">Aksi Seleksi</th>
+                    <th className="p-3 font-bold text-slate-900 dark:text-white">No. Registrasi</th>
+                    <th className="p-3 font-bold text-slate-900 dark:text-white">Nama Calon Mahasiswa</th>
+                    <th className="p-3 font-bold text-slate-900 dark:text-white">Identitas / Asal Sekolah</th>
+                    <th className="p-3 font-bold text-slate-900 dark:text-white">Program Studi Pilihan</th>
+                    <th className="p-3 font-bold text-center text-slate-900 dark:text-white">Status Berkas</th>
+                    <th className="p-3 font-bold text-slate-900 dark:text-white">Status Seleksi</th>
+                    <th className="p-3 font-bold text-slate-900 dark:text-white">NIM Resmi</th>
+                    <th className="p-3 font-bold text-center text-slate-900 dark:text-white">Aksi Seleksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700/60">
