@@ -73,55 +73,55 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
             <span>Smart Enterprise Higher Education Operating System</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] max-w-4xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-snug max-w-3xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
             <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {profile.institutionName}
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base text-white max-w-2xl mx-auto leading-relaxed font-semibold drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+          <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
             Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek. Menghubungkan Kurikulum OBE, Perkuliahan Hybrid WebRTC, Wisuda PIN Dikti SIVIL, Jurnal Ilmiah OJS, dan Keuangan Multi-Bank dalam satu ekosistem digital.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
               onClick={onOpenLogin}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2.5 hover:scale-105 transition-all"
+              className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 hover:scale-105 transition-all"
             >
               <span>🚀 Masuk ke Portal Sivitas Akademika</span>
-              <ArrowRight size={16} />
+              <ArrowRight size={14} />
             </button>
             <a
               href="#keunggulan"
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm flex items-center justify-center gap-2 transition-all"
+              className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
             >
               <span>Eksplorasi Fitur Kampus</span>
-              <ChevronRight size={16} />
+              <ChevronRight size={14} />
             </a>
           </div>
 
           {/* 4 Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12">
-            <div className="p-5 rounded-3xl bg-slate-900/60 border border-slate-800 backdrop-blur-md space-y-1">
-              <p className="text-2xl sm:text-3xl font-black text-blue-400 font-mono">98.5%</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
+            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-xl sm:text-2xl font-black text-blue-400 font-mono">98.5%</p>
               <p className="text-xs font-bold text-slate-300">Lulusan Bekerja & Berwirausaha</p>
-              <p className="text-[10px] text-slate-500">Standar Dikti IKU-1</p>
+              <p className="text-[10px] text-slate-400">Standar Dikti IKU-1</p>
             </div>
-            <div className="p-5 rounded-3xl bg-slate-900/60 border border-slate-800 backdrop-blur-md space-y-1">
-              <p className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">16 Sesi</p>
+            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">16 Sesi</p>
               <p className="text-xs font-bold text-slate-300">BAP Digital & Presensi Realtime</p>
-              <p className="text-[10px] text-slate-500">100% Paperless</p>
+              <p className="text-[10px] text-slate-400">100% Paperless</p>
             </div>
-            <div className="p-5 rounded-3xl bg-slate-900/60 border border-slate-800 backdrop-blur-md space-y-1">
-              <p className="text-2xl sm:text-3xl font-black text-purple-400 font-mono">PIN & SIVIL</p>
+            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-xl sm:text-2xl font-black text-purple-400 font-mono">PIN & SIVIL</p>
               <p className="text-xs font-bold text-slate-300">Ijazah Terverifikasi Nasional</p>
-              <p className="text-[10px] text-slate-500">Anti-Pemalsuan QR Dikti</p>
+              <p className="text-[10px] text-slate-400">Anti-Pemalsuan QR Dikti</p>
             </div>
-            <div className="p-5 rounded-3xl bg-slate-900/60 border border-slate-800 backdrop-blur-md space-y-1">
-              <p className="text-2xl sm:text-3xl font-black text-amber-400 font-mono">SINTA 2-4</p>
+            <div className="p-4 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
+              <p className="text-xl sm:text-2xl font-black text-amber-400 font-mono">SINTA 1-6</p>
               <p className="text-xs font-bold text-slate-300">Publikasi Jurnal OJS 3.x</p>
-              <p className="text-[10px] text-slate-500">Akreditasi ARJUNA Dikti</p>
+              <p className="text-[10px] text-slate-400">Akreditasi ARJUNA Dikti</p>
             </div>
           </div>
         </div>
