@@ -55,13 +55,25 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
       </nav>
 
       {/* 2. HERO SECTION */}
-      <section className="relative pt-20 pb-28 overflow-hidden">
+      <section className="relative pt-20 pb-28 overflow-hidden min-h-[85vh] flex items-center justify-center">
+        {/* Real Campus Hero Background Image from public/hero-campuos.png */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/hero-campuos.png" 
+            alt="Campus Hero Banner" 
+            className="w-full h-full object-cover object-center filter brightness-[0.35] contrast-125 scale-105"
+          />
+          {/* Multi-Layer Dark Gradient Overlay for Maximum Contrast & Readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/90" />
+        </div>
+
         {/* Background Glowing Gradients */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/3 right-10 w-[400px] h-[400px] bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-6 text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-bold shadow-inner">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/90 border border-blue-500/40 text-blue-300 text-xs font-bold shadow-lg shadow-blue-500/10 backdrop-blur-md">
             <Sparkles size={14} className="text-blue-400" />
             <span>Smart Enterprise Higher Education Operating System</span>
           </div>
