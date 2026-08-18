@@ -635,41 +635,286 @@ export const PerpustakaanWorkspaceView: React.FC<{ defaultSub?: 'perpustakaan' |
       {/* 3. SUB-VIEW: ALUMNI & TRACER STUDY */}
       {/* ========================================================================= */}
       {subTab === 'alumni' && (
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 shadow-sm space-y-4">
-          <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <UserCheck size={16} className="text-emerald-500" />
-            <span>Direktori Tracer Study & Penelusuran Lulusan (IKU-1 Dikti)</span>
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-slate-900/60 text-slate-500 border-b border-slate-200 dark:border-slate-700 font-bold">
-                <tr>
-                  <th className="p-3">NIM</th>
-                  <th className="p-3">Nama Alumni</th>
-                  <th className="p-3">Program Studi</th>
-                  <th className="p-3">Tempat Bekerja & Posisi</th>
-                  <th className="p-3">Masa Tunggu</th>
-                  <th className="p-3">Status IKU-1</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-700/60 font-medium">
-                {alumniList.map(a => (
-                  <tr key={a.id}>
-                    <td className="p-3 font-mono font-bold text-emerald-600">{a.nim}</td>
-                    <td className="p-3 font-bold text-slate-900 dark:text-white">{a.name}</td>
-                    <td className="p-3 text-slate-600 dark:text-slate-300">{a.prodi}</td>
-                    <td className="p-3 font-semibold text-slate-800 dark:text-slate-200">{a.company} - {a.jobTitle}</td>
-                    <td className="p-3 text-slate-500">{a.waitTimeMonths} Bulan</td>
-                    <td className="p-3">
-                      <span className="px-2.5 py-1 text-[10px] font-bold rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
-                        ✓ Memenuhi IKU-1
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="space-y-6">
+          {/* KPI Tracer Study IKU 1 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Tingkat Respon Tracer</p>
+              <p className="text-2xl font-black text-emerald-600 font-mono">92.4%</p>
+              <span className="text-[10px] font-bold text-emerald-600">Memenuhi Target IKU-1</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Masa Tunggu Rata-rata</p>
+              <p className="text-2xl font-black text-blue-600 font-mono">1.2 Bulan</p>
+              <span className="text-[10px] text-slate-400 font-medium">&lt; 6 Bulan Standar Dikti</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Penghasilan &gt; 1.2x UMR</p>
+              <p className="text-2xl font-black text-purple-600 font-mono">86.8%</p>
+              <span className="text-[10px] font-bold text-purple-600">Gaji Layak Lulusan</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-1">
+              <p className="text-xs text-slate-500 font-medium">Kesesuaian Bidang Studi</p>
+              <p className="text-2xl font-black text-amber-500 font-mono">94.2%</p>
+              <span className="text-[10px] text-emerald-600 font-bold">Linear dengan Kurikulum</span>
+            </div>
           </div>
+
+          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div>
+                <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
+                  <UserCheck size={18} className="text-emerald-500" />
+                  <span>Direktori Tracer Study & Penelusuran Lulusan (IKU-1 Dikti)</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Basis data karir lulusan, perusahaan tempat bekerja, wirausaha, dan evaluasi relevansi kurikulum.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setAlumniViewMode('FORM_DAFTAR')}
+                className="px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 flex items-center gap-1.5 hover:scale-105 transition-all shrink-0"
+              >
+                <Plus size={14} />
+                <span>🎓 Isi / Daftarkan Tracer Study Alumni</span>
+              </button>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 border-b border-slate-200 dark:border-slate-800 font-bold">
+                  <tr>
+                    <th className="p-3">NIM & Nama Alumni</th>
+                    <th className="p-3">Program Studi & Tahun</th>
+                    <th className="p-3">Tempat Bekerja & Posisi</th>
+                    <th className="p-3">Kisaran Pendapatan</th>
+                    <th className="p-3">Masa Tunggu</th>
+                    <th className="p-3 text-center">Status IKU-1</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
+                  {alumniList.map(a => (
+                    <tr key={a.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                      <td className="p-3">
+                        <span className="font-mono font-bold text-emerald-600 block">{a.nim}</span>
+                        <span className="font-bold text-slate-900 dark:text-white">{a.name}</span>
+                        <span className="text-[10px] text-slate-400 block">{a.email}</span>
+                      </td>
+                      <td className="p-3">
+                        <span className="font-semibold text-slate-800 dark:text-slate-200 block">{a.prodi}</span>
+                        <span className="text-[10px] text-slate-400">Lulus Tahun {a.gradYear}</span>
+                      </td>
+                      <td className="p-3">
+                        <span className="font-bold text-blue-600 block">{a.company}</span>
+                        <span className="text-slate-700 dark:text-slate-300 font-medium">{a.jobTitle}</span>
+                        <span className="text-[10px] text-slate-400 block uppercase font-bold">{a.employmentStatus}</span>
+                      </td>
+                      <td className="p-3 font-mono font-bold text-slate-900 dark:text-white">
+                        {a.salaryRange || 'Sesuai Standar'}
+                      </td>
+                      <td className="p-3 font-semibold text-slate-600 dark:text-slate-300">
+                        {a.waitTimeMonths} Bulan
+                      </td>
+                      <td className="p-3 text-center">
+                        <span className="px-2.5 py-1 text-[10px] font-black rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 flex items-center justify-center gap-1">
+                          <CheckCircle2 size={12} /> Memenuhi IKU-1
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 🎓 MODAL FORM PENDAFTARAN & TRACER STUDY ALUMNI */}
+          {alumniViewMode === 'FORM_DAFTAR' && (
+            <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-xl w-full p-6 space-y-4 shadow-2xl animate-in zoom-in-95 text-slate-900 dark:text-white max-h-[90vh] overflow-y-auto custom-scrollbar">
+                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <div className="flex items-center gap-2">
+                    <UserCheck className="text-emerald-500" size={20} />
+                    <div>
+                      <h3 className="font-black text-sm">Formulir Kuesioner Tracer Study Alumni (IKU-1 Dikti)</h3>
+                      <p className="text-[10px] text-slate-400">Pembaruan data karir & pelacakan jejak lulusan kampus</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setAlumniViewMode('DIREKTORI')} className="text-slate-400 hover:text-slate-600">
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const formTarget = e.currentTarget;
+                    const formData = new FormData(formTarget);
+                    const newAlumni: AlumniItem = {
+                      id: `alm-${Date.now()}`,
+                      nim: formData.get('nim') as string,
+                      name: formData.get('name') as string,
+                      prodi: formData.get('prodi') as string,
+                      gradYear: Number(formData.get('gradYear') || 2024),
+                      employmentStatus: formData.get('employmentStatus') as any,
+                      company: formData.get('company') as string,
+                      jobTitle: formData.get('jobTitle') as string,
+                      waitTimeMonths: Number(formData.get('waitTimeMonths') || 1.0),
+                      salaryRange: formData.get('salaryRange') as string,
+                      email: formData.get('email') as string,
+                      phone: formData.get('phone') as string
+                    };
+                    setAlumniList(prev => [newAlumni, ...prev]);
+                    setAlumniViewMode('DIREKTORI');
+                  }}
+                  className="space-y-3.5 text-xs"
+                >
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">NIM Mahasiswa: *</label>
+                      <input
+                        name="nim"
+                        type="text"
+                        required
+                        placeholder="Contoh: 200101012"
+                        defaultValue="200101012"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono font-bold focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nama Lengkap & Gelar: *</label>
+                      <input
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Nama dan gelar lulusan..."
+                        defaultValue="Rian Hidayat, S.Tr.Par."
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-semibold focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Program Studi: *</label>
+                      <select
+                        name="prodi"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold focus:outline-none"
+                      >
+                        <option value="D4 Usaha Perjalanan Wisata">D4 Usaha Perjalanan Wisata</option>
+                        <option value="D4 Perhotelan">D4 Perhotelan</option>
+                        <option value="D3 Seni Kuliner & Gastronomi">D3 Seni Kuliner & Gastronomi</option>
+                        <option value="S1 Teknologi Informasi">S1 Teknologi Informasi</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Tahun Kelulusan: *</label>
+                      <input
+                        name="gradYear"
+                        type="number"
+                        defaultValue={2024}
+                        required
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Status Karir Saat Ini: *</label>
+                      <select
+                        name="employmentStatus"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold focus:outline-none"
+                      >
+                        <option value="BEKERJA">Bekerja Penuh Waktu (Full-Time)</option>
+                        <option value="WIRAUSAHA">Wiraswasta / Founder Usaha Mandiri</option>
+                        <option value="STUDI_LANJUT">Melanjutkan Studi (S2 / Spesialis)</option>
+                        <option value="MENCARI_KERJA">Sedang Proses Seleksi / Interview</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Masa Tunggu Kerja (Bulan):</label>
+                      <input
+                        name="waitTimeMonths"
+                        type="number"
+                        step="0.1"
+                        defaultValue="1.5"
+                        placeholder="Contoh: 1.5"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-mono focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nama Perusahaan / Instansi / Usaha: *</label>
+                      <input
+                        name="company"
+                        type="text"
+                        required
+                        placeholder="Contoh: PT Garuda Indonesia / Usaha Kuliner"
+                        defaultValue="Garuda Indonesia Holiday Tour"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Posisi / Jabatan Pekerjaan: *</label>
+                      <input
+                        name="jobTitle"
+                        type="text"
+                        required
+                        placeholder="Contoh: Senior Tour Product Manager"
+                        defaultValue="Senior Tour Product Manager"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Rentang Penghasilan Bulanan:</label>
+                      <select
+                        name="salaryRange"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold focus:outline-none"
+                      >
+                        <option value="Rp 8.000.000 - Rp 12.000.000">Rp 8.000.000 - Rp 12.000.000 (&gt; 1.2x UMR)</option>
+                        <option value="Rp 12.000.000 - Rp 20.000.000">Rp 12.000.000 - Rp 20.000.000</option>
+                        <option value="Rp 5.000.000 - Rp 8.000.000">Rp 5.000.000 - Rp 8.000.000</option>
+                        <option value="> Rp 20.000.000">&gt; Rp 20.000.000</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nomor WhatsApp / Email:</label>
+                      <input
+                        name="email"
+                        type="text"
+                        placeholder="Email / No HP..."
+                        defaultValue="rian.hidayat@gmail.com"
+                        className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setAlumniViewMode('DIREKTORI')}
+                      className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold"
+                    >
+                      Batal
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold shadow-lg shadow-emerald-600/30 flex items-center gap-1.5 hover:scale-105 transition-all"
+                    >
+                      <CheckCircle2 size={14} />
+                      <span>Simpan & Verifikasi Tracer IKU-1</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
