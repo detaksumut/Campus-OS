@@ -203,6 +203,9 @@ function PortalMainLayout() {
           {/* 2. SISTEM AKADEMIK (KURIKULUM OBE & MATA KULIAH) */}
           {activeTab === 'akademik' && <AcademicWorkspaceView defaultSubTab="KURIKULUM_OBE" />}
 
+          {/* 2b. KONTRAK PERKULIAHAN & RPS SESI 1 */}
+          {activeTab === 'kontrak_kuliah' && <AcademicWorkspaceView defaultSubTab="KONTRAK_KULIAH" />}
+
           {/* 3. KARTU RENCANA STUDI (KRS & BATAS SKS) */}
           {activeTab === 'krs' && <AcademicWorkspaceView defaultSubTab="KRS_PORTAL" />}
 

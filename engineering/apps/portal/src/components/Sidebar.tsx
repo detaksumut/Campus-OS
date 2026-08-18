@@ -40,6 +40,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectM
       items: [
         { id: 'pmb', label: 'PMB (Penerimaan Mhs Baru)', icon: UserPlus, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'PEGAWAI'] },
         { id: 'akademik', label: 'Sistem Akademik & Kurikulum', icon: GraduationCap, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
+        { id: 'kontrak_kuliah', label: 'Kontrak Perkuliahan & RPS', icon: FileCheck, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
         { id: 'krs', label: userRole === 'MAHASISWA' ? 'KRS Mandiri' : 'KRS & Perwalian', icon: FileText, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },
         { id: 'perkuliahan', label: 'Perkuliahan (16 Sesi BAP)', icon: CalendarCheck, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN'] },
         { id: 'ujian', label: 'Ujian Online (CBT)', icon: CheckSquare, roles: ['ADMIN', 'REKTOR', 'YAYASAN', 'DOSEN', 'MAHASISWA'] },

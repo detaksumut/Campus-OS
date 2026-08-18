@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { KRSSKSLimitEngine, useTenant } from '@campus-os/shared';
 
-type AcademicSubTab = 'KURIKULUM_OBE' | 'JADWAL_KELAS' | 'KRS_PORTAL' | 'PENILAIAN_KHS';
+type AcademicSubTab = 'KURIKULUM_OBE' | 'KONTRAK_KULIAH' | 'JADWAL_KELAS' | 'KRS_PORTAL' | 'PENILAIAN_KHS';
 
 interface CourseItem {
   id: string;
@@ -193,8 +193,8 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
         </div>
       </div>
 
-      {/* 4 Navigasi Sub-Modul Akademik */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {/* 5 Navigasi Sub-Modul Akademik */}
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <button
           onClick={() => setActiveSubTab('KURIKULUM_OBE')}
           className={`p-3.5 rounded-2xl border transition-all text-left flex flex-col justify-between ${
@@ -214,6 +214,24 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
         </button>
 
         <button
+          onClick={() => setActiveSubTab('KONTRAK_KULIAH')}
+          className={`p-3.5 rounded-2xl border transition-all text-left flex flex-col justify-between ${
+            activeSubTab === 'KONTRAK_KULIAH'
+              ? 'bg-indigo-600/15 border-indigo-500 shadow-md ring-2 ring-indigo-500/30 dark:bg-indigo-950/40'
+              : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-slate-400'
+          }`}
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-bold text-slate-500">Sub 2</span>
+            <FileCheck size={16} className={activeSubTab === 'KONTRAK_KULIAH' ? 'text-indigo-500' : 'text-slate-400'} />
+          </div>
+          <div className="mt-1.5">
+            <p className="font-black text-xs text-slate-900 dark:text-white">Kontrak Perkuliahan</p>
+            <p className="text-[10px] text-indigo-500 font-bold">Kesepakatan Sesi 1 (RPS)</p>
+          </div>
+        </button>
+
+        <button
           onClick={() => setActiveSubTab('JADWAL_KELAS')}
           className={`p-3.5 rounded-2xl border transition-all text-left flex flex-col justify-between ${
             activeSubTab === 'JADWAL_KELAS'
@@ -222,7 +240,7 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold text-slate-500">Sub 2</span>
+            <span className="text-[10px] font-bold text-slate-500">Sub 3</span>
             <Calendar size={16} className={activeSubTab === 'JADWAL_KELAS' ? 'text-purple-500' : 'text-slate-400'} />
           </div>
           <div className="mt-1.5">
@@ -240,7 +258,7 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold text-slate-500">Sub 3</span>
+            <span className="text-[10px] font-bold text-slate-500">Sub 4</span>
             <Calculator size={16} className={activeSubTab === 'KRS_PORTAL' ? 'text-emerald-500' : 'text-slate-400'} />
           </div>
           <div className="mt-1.5">
@@ -258,7 +276,7 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold text-slate-500">Sub 4</span>
+            <span className="text-[10px] font-bold text-slate-500">Sub 5</span>
             <Award size={16} className={activeSubTab === 'PENILAIAN_KHS' ? 'text-amber-500' : 'text-slate-400'} />
           </div>
           <div className="mt-1.5">
@@ -373,6 +391,112 @@ export const AcademicWorkspaceView: React.FC<AcademicWorkspaceViewProps> = ({ de
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 2. SUB-MODUL KONTRAK PERKULIAHAN & RPS RESMI (KESEPAKATAN SESI 1) */}
+      {/* ========================================================================= */}
+      {activeSubTab === 'KONTRAK_KULIAH' && (
+        <div className="space-y-6">
+          <div className="p-6 rounded-3xl bg-gradient-to-r from-indigo-950 via-slate-900 to-blue-950 text-white border border-indigo-500/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <FileCheck size={20} className="text-indigo-400" />
+                <h3 className="text-lg font-black tracking-tight">Lembar Kontrak Perkuliahan & Kesepakatan Belajar (RPS Sesi 1)</h3>
+              </div>
+              <p className="text-xs text-indigo-200 max-w-2xl">
+                Dokumen kesepakatan resmi antara Dosen Pengampu dan Perwakilan Mahasiswa (Komti) mengenai rencana 16 sesi, tata tertib, presensi minimum 75%, dan bobot penilaian.
+              </p>
+            </div>
+
+            <button
+              onClick={() => window.print()}
+              className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 flex items-center gap-2 transition-all hover:scale-105 shrink-0"
+            >
+              <span>🖨️ Cetak Lembar Kontrak (PDF)</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Kolom Kiri: Form Kesepakatan Kontrak */}
+            <div className="lg:col-span-7 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+              <div className="pb-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <h4 className="font-black text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                  <span>Butir Kesepakatan Perkuliahan Semester Genap 2024</span>
+                </h4>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                  ✓ Berstatus Sah & Terkunci
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <span className="text-slate-400 font-bold block mb-1">Mata Kuliah:</span>
+                  <p className="font-black text-slate-900 dark:text-white">UPW-201 - Manajemen Operasional Pariwisata (3 SKS)</p>
+                </div>
+                <div>
+                  <span className="text-slate-400 font-bold block mb-1">Dosen Pengampu Utama:</span>
+                  <p className="font-bold text-indigo-600 dark:text-indigo-400">Dr. Hendra Wijaya, M.T. (NIDN: 0012057801)</p>
+                </div>
+                <div>
+                  <span className="text-slate-400 font-bold block mb-1">Ketua Tingkat (Komti Mahasiswa):</span>
+                  <p className="font-bold text-slate-800 dark:text-slate-200">Rian Hidayat (NIM: 200101012)</p>
+                </div>
+                <div>
+                  <span className="text-slate-400 font-bold block mb-1">Syarat Kehadiran Minimum:</span>
+                  <p className="font-black text-emerald-600">75% Presensi (Minimal 12 dari 16 Sesi)</p>
+                </div>
+              </div>
+
+              {/* 5 Pasal Kesepakatan Kontrak */}
+              <div className="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
+                <h5 className="font-bold text-slate-700 dark:text-slate-300">Pasal Ketentuan Perkuliahan:</h5>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5 leading-relaxed">
+                  <p><b>1. Toleransi Keterlambatan:</b> Maksimal 15 menit setelah jadwal perkuliahan dimulai.</p>
+                  <p><b>2. Hak Mahasiswa:</b> Berhak mendapatkan RPS, Silabus, bahan tayang modul, dan transparansi nilai.</p>
+                  <p><b>3. Tugas Terstruktur:</b> Pengumpulan tugas melalui portal LMS dengan batas waktu tegas.</p>
+                  <p><b>4. Bebas Plagiarisme:</b> Pelanggaran kecurangan ujian dikenakan sanksi nilai E (Gagal).</p>
+                  <p><b>5. Komposisi Nilai:</b> Kehadiran 10% + Tugas 20% + Praktikum 20% + UTS 25% + UAS 25% = 100%.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Kolom Kanan: Preview Dokumen Sah & Tanda Tangan Ganda */}
+            <div className="lg:col-span-5 p-6 rounded-3xl bg-amber-50/50 dark:bg-slate-900 border-2 border-dashed border-amber-300 dark:border-slate-700 shadow-sm space-y-4 text-xs">
+              <div className="text-center pb-2 border-b border-amber-200 dark:border-slate-700">
+                <p className="font-black text-[10px] text-amber-800 dark:text-amber-400 uppercase tracking-widest">{profile.institutionName}</p>
+                <h4 className="font-black text-xs text-slate-900 dark:text-white uppercase mt-0.5">LEMBAR PENGESAHAN KONTRAK PERKULIAHAN</h4>
+              </div>
+
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-[11px]">
+                Dengan ini menyatakan bahwa seluruh butir kesepakatan perkuliahan pada mata kuliah ini telah dibahas, disetujui, dan ditandatangani bersama secara sadar pada Pertemuan Pertama (Sesi 1).
+              </p>
+
+              {/* Dual Digital Signature Box */}
+              <div className="grid grid-cols-2 gap-3 pt-4 border-t border-amber-200 dark:border-slate-700 text-center">
+                <div className="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+                  <span className="text-[10px] text-slate-400 block">Dosen Pengampu:</span>
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-600 mx-auto flex items-center justify-center font-bold text-xs">
+                    ✓
+                  </div>
+                  <p className="font-bold text-[11px] text-slate-900 dark:text-white">Dr. Hendra Wijaya, M.T.</p>
+                  <p className="text-[9px] text-slate-400 font-mono">NIDN: 0012057801</p>
+                  <span className="text-[8px] text-emerald-600 font-bold block">✓ TTD Digital BSrE</span>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+                  <span className="text-[10px] text-slate-400 block">Perwakilan Mahasiswa:</span>
+                  <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-600 mx-auto flex items-center justify-center font-bold text-xs">
+                    ✓
+                  </div>
+                  <p className="font-bold text-[11px] text-slate-900 dark:text-white">Rian Hidayat</p>
+                  <p className="text-[9px] text-slate-400 font-mono">NIM: 200101012 (Komti)</p>
+                  <span className="text-[8px] text-blue-600 font-bold block">✓ Disepakati Komti</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

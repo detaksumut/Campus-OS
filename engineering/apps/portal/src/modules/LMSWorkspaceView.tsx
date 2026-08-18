@@ -262,9 +262,15 @@ export const LMSWorkspaceView: React.FC<LMSWorkspaceViewProps> = ({ defaultSub =
                   Live Video Conference & Hybrid Teleconference Studio
                 </h3>
               </div>
-              <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-blue-600/30 border border-blue-500/40 text-blue-300">
-                Server: HD 1080p Ultra-Low Latency
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 flex items-center gap-1.5 font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>LiveKit Cloud: campuos-q1jfsujn.livekit.cloud</span>
+                </span>
+                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-blue-600/30 border border-blue-500/40 text-blue-300">
+                  HD 1080p SFU Ultra-Low Latency
+                </span>
+              </div>
             </div>
 
             <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
