@@ -68,16 +68,16 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
         </div>
 
         {/* 🌟 BAGIAN ATAS: Tepat di langit biru di atas tulisan CAMPUS OS */}
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10 pt-1">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-950/80 border border-amber-400/40 text-amber-200 text-xs font-bold shadow-xl backdrop-blur-md">
-            <Sparkles size={14} className="text-amber-400" />
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 text-center relative z-10 pt-1">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-950/80 border border-amber-400/40 text-amber-200 text-[10px] sm:text-xs font-bold shadow-xl backdrop-blur-md">
+            <Sparkles size={13} className="text-amber-400 shrink-0" />
             <span>Platform Akademik Terintegrasi Standar SN-Dikti & Kemendikbudristek RI</span>
           </div>
         </div>
 
         {/* 🏆 BAGIAN BAWAH: Tepat di bawah grafis ONE CAMPUS INFINITE POSSIBILITIES */}
-        <div className="max-w-6xl w-full mx-auto px-6 text-center space-y-4 relative z-10 pt-36 pb-3">
-          <h1 className="text-lg sm:text-xl lg:text-2xl font-black tracking-tight leading-snug max-w-2xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+        <div className="max-w-6xl w-full mx-auto px-3 sm:px-6 text-center space-y-4 relative z-10 pt-20 sm:pt-36 pb-3">
+          <h1 className="text-base sm:text-xl lg:text-2xl font-black tracking-tight leading-snug max-w-2xl mx-auto drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             <span className="text-amber-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               Membangun Generasi Unggul Berdaya Saing Global Bersama{' '}
             </span>
@@ -86,17 +86,17 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
             </span>
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">
             <button
               onClick={onOpenLogin}
-              className="w-full sm:w-auto px-6 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 hover:scale-105 transition-all"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 hover:scale-105 transition-all"
             >
               <span>🚀 Masuk ke Portal Sivitas Akademika</span>
               <ArrowRight size={14} />
             </button>
             <a
               href="#keunggulan"
-              className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
+              className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-2xl bg-black/60 hover:bg-black/80 text-slate-200 border border-white/20 font-bold text-xs flex items-center justify-center gap-1.5 transition-all backdrop-blur-md"
             >
               <span>Eksplorasi Fitur Kampus</span>
               <ChevronRight size={14} />
@@ -104,7 +104,7 @@ export const HeroLandingPage: React.FC<HeroLandingPageProps> = ({ onOpenLogin, o
           </div>
 
           {/* 4 Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 pt-3 sm:pt-4">
             <div className="p-3.5 rounded-3xl bg-slate-950/70 border border-slate-800/80 backdrop-blur-md space-y-1 shadow-lg">
               <p className="text-lg sm:text-xl font-black text-blue-400 font-mono">98.5%</p>
               <p className="text-xs font-bold text-slate-300">Lulusan Bekerja & Berwirausaha</p>

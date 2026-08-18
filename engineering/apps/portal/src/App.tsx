@@ -51,25 +51,25 @@ function PortalMainLayout() {
   const [activeTabTitle, setActiveTabTitle] = useState<string>('Beranda');
   const [showCustomizer, setShowCustomizer] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSelectMenu = (menuId: string, title: string) => {
     setActiveTab(menuId);
     setActiveTabTitle(title);
+    setMobileMenuOpen(false);
     if (typeof window !== 'undefined') {
       window.location.hash = `#/${menuId}`;
     }
   };
 
+  // Sync state with URL Hash on Mount & HashChange
   React.useEffect(() => {
     const handleHashSync = () => {
-      const hash = window.location.hash.replace('#/', '').replace('#', '');
-      if (hash && hash !== '') {
+      const hash = window.location.hash.replace('#/', '');
+      if (hash && hash !== activeTab) {
         setActiveTab(hash);
-      } else {
-        setActiveTab('dashboard');
       }
     };
-
     handleHashSync();
     window.addEventListener('hashchange', handleHashSync);
     return () => window.removeEventListener('hashchange', handleHashSync);
@@ -101,24 +101,27 @@ function PortalMainLayout() {
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden font-sans ${mode === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
-      {/* 1. Top Header with 6-Role Switcher & Logout */}
+      {/* 1. Top Header with 6-Role Switcher & Logout & Mobile Drawer Toggle */}
       <Header 
         userRole={userRole} 
         onChangeRole={setUserRole} 
         onOpenSettings={() => handleSelectMenu('pengaturan', 'Pengaturan Sistem')} 
         onLogout={() => setIsLoggedIn(false)}
+        onToggleMobileMenu={() => setMobileMenuOpen(prev => !prev)}
       />
 
-      <div className="flex flex-1 overflow-hidden">
-        {/* 2. Left Sidebar (Dynamic RBAC Filtered) */}
+      <div className="flex flex-1 overflow-hidden relative">
+        {/* 2. Left Sidebar (Responsive Mobile Drawer & Desktop Static) */}
         <Sidebar 
           userRole={userRole} 
           activeTab={activeTab} 
           onSelectMenu={handleSelectMenu} 
+          isOpenMobile={mobileMenuOpen}
+          onCloseMobile={() => setMobileMenuOpen(false)}
         />
 
         {/* 3. Main Center Workspace */}
-        <main className="flex-1 overflow-y-auto p-5 custom-scrollbar space-y-6">
+        <main className="flex-1 overflow-y-auto p-3.5 sm:p-5 md:p-6 custom-scrollbar space-y-4 sm:space-y-6 min-w-0">
           {/* Breadcrumb / Tab Indicator */}
           {activeTab !== 'dashboard' && (
             <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">

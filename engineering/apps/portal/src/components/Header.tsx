@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Search, Bell, Mail, ChevronDown, CheckCircle, ShieldCheck, 
   GraduationCap, BookOpen, LogIn, UserPlus, Lock, Key, LogOut, CheckCircle2,
-  ShieldAlert, Landmark, Briefcase, Building2
+  ShieldAlert, Landmark, Briefcase, Building2, Menu
 } from 'lucide-react';
 import { useTenant } from '@campus-os/shared';
 
@@ -13,9 +13,10 @@ interface HeaderProps {
   onChangeRole: (role: UserRole) => void;
   onOpenSettings?: () => void;
   onLogout?: () => void;
+  onToggleMobileMenu?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSettings, onLogout }) => {
+export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSettings, onLogout, onToggleMobileMenu }) => {
   const { profile } = useTenant();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -117,45 +118,54 @@ export const Header: React.FC<HeaderProps> = ({ userRole, onChangeRole, onOpenSe
   };
 
   return (
-    <header className="h-16 bg-slate-900 border-b border-slate-800 text-white px-6 flex items-center justify-between sticky top-0 z-40 shadow-sm">
-      {/* Left: Campus Dynamic Branding */}
-      <div className="flex items-center gap-3 min-w-[280px]">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md border border-blue-400/30">
-          <div className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+    <header className="h-16 bg-slate-900 border-b border-slate-800 text-white px-3 sm:px-6 flex items-center justify-between sticky top-0 z-40 shadow-sm">
+      {/* Left: Hamburger Button (Mobile) + Campus Branding */}
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0 max-w-[200px] sm:max-w-[320px] md:max-w-none">
+        <button
+          onClick={onToggleMobileMenu}
+          className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white lg:hidden transition-colors flex items-center justify-center shrink-0 border border-slate-700/80 shadow-sm"
+          title="Buka Menu"
+          aria-label="Toggle Menu"
+        >
+          <Menu size={18} />
+        </button>
+
+        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md border border-blue-400/30 shrink-0">
+          <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-white flex items-center justify-center">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white animate-pulse" />
           </div>
         </div>
-        <div>
-          <h1 className="font-extrabold text-sm tracking-wide text-white uppercase leading-tight line-clamp-1">
+        <div className="min-w-0">
+          <h1 className="font-extrabold text-xs sm:text-sm tracking-wide text-white uppercase leading-tight truncate">
             {profile.institutionName}
           </h1>
-          <p className="text-[11px] text-blue-300 font-medium tracking-tight">
+          <p className="text-[10px] sm:text-[11px] text-blue-300 font-medium tracking-tight truncate hidden sm:block">
             {profile.tagline}
           </p>
         </div>
       </div>
 
-      {/* Center: Global Search Bar */}
-      <div className="flex-1 max-w-xl mx-8">
+      {/* Center: Global Search Bar (Hidden on Mobile) */}
+      <div className="hidden md:block flex-1 max-w-xl mx-4 lg:mx-8">
         <div className="relative">
           <input 
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari menu, data, mahasiswa, dosen, dll..." 
-            className="w-full bg-slate-800/80 border border-slate-700 text-sm text-slate-100 rounded-full pl-10 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-slate-400"
+            className="w-full bg-slate-800/80 border border-slate-700 text-xs sm:text-sm text-slate-100 rounded-full pl-9 pr-9 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder:text-slate-400"
           />
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white">
+            <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white">
               ✕
             </button>
           )}
         </div>
       </div>
 
-      {/* Right: Actions, Notifications & SSO Login/Register */}
-      <div className="flex items-center gap-3">
+      {/* Right: Actions, Notifications & Profile */}
+      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
         {/* Notifications */}
         <div className="relative">
           <button 
