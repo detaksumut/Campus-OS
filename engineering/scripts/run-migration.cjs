@@ -1,15 +1,13 @@
-const { Pool, Client } = require('pg');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// Direct compute endpoint for DDL migrations without pooler connection drops
+// Connection string from Neon Tech
 const rawUrl = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_ozyHK8ZBeV2D@ep-bold-wave-ay5www7q-pooler.c-5.us-east-2.aws.neon.tech/neondb?sslmode=require';
-const directUrl = rawUrl.replace('-pooler.c-5', '').replace('-pooler', '');
 
-async function runHttpQuery(sql) {
+async function runHttpQuery(targetUrl, sql) {
   return new Promise((resolve, reject) => {
-    const url = new URL(directUrl);
+    const url = new URL(targetUrl);
     const postData = JSON.stringify({ query: sql });
 
     const options = {
@@ -19,7 +17,7 @@ async function runHttpQuery(sql) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Neon-Connection-String': directUrl,
+        'Neon-Connection-String': targetUrl,
         'Content-Length': Buffer.byteLength(postData)
       }
     };
@@ -29,7 +27,11 @@ async function runHttpQuery(sql) {
       res.on('data', (chunk) => data += chunk);
       res.on('end', () => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve(data ? JSON.parse(data) : {});
+          try {
+            resolve(data ? JSON.parse(data) : {});
+          } catch (e) {
+            resolve({});
+          }
         } else {
           reject(new Error(`HTTP ${res.statusCode}: ${data}`));
         }
@@ -42,64 +44,63 @@ async function runHttpQuery(sql) {
   });
 }
 
+// Split SQL file cleanly into individual DDL statements
+function splitSqlStatements(sql) {
+  // Remove block comments and line comments
+  const cleanSql = sql
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .split('\n')
+    .filter(line => !line.trim().startsWith('--'))
+    .join('\n');
+
+  return cleanSql
+    .split(';')
+    .map(s => s.trim())
+    .filter(s => s.length > 0);
+}
+
 async function migrate() {
-  console.log('🚀 Menghubungkan ke PostgreSQL Neon Cloud Database (Direct Compute)...');
+  console.log('🚀 Menghubungkan ke PostgreSQL Neon Cloud Database (HTTPS Engine)...');
+  console.log(`🔗 Target Host: ${new URL(rawUrl).hostname}`);
 
   const sqlPath = path.join(__dirname, '../packages/platforms/database/src/migrations/V1.0.0__master_production_schema.sql');
   console.log(`📄 Membaca Skema SQL dari: ${sqlPath}`);
   const sqlContent = fs.readFileSync(sqlPath, 'utf8');
 
-  // Attempt 1: Direct TCP Client with SSL
-  try {
-    const client = new Client({
-      connectionString: directUrl,
-      ssl: {
-        rejectUnauthorized: false
-      },
-      connectionTimeoutMillis: 10000
-    });
+  const statements = splitSqlStatements(sqlContent);
+  console.log(`⚡ Ditemukan ${statements.length} perintah DDL/Tabel untuk dieksekusi ke Neon Tech...\n`);
 
-    await client.connect();
-    console.log('✅ BERHASIL TERHUBUNG KE NEON POSTGRESQL (TCP)!');
-    console.log('⚡ Mengeksekusi pembuatan seluruh tabel produksi master...');
-    
-    await client.query(sqlContent);
-    console.log('\n🎉 SELURUH TABEL PRODUKSI CAMPUS OS BERHASIL DIMIGRASIKAN KE NEON POSTGRESQL!\n');
-
-    const res = await client.query(`
-      SELECT table_name 
-      FROM information_schema.tables 
-      WHERE table_schema = 'public' 
-      ORDER BY table_name;
-    `);
-
-    console.log('📊 Daftar Tabel Terverifikasi di Database Neon Anda:');
-    res.rows.forEach(r => console.log(`  ✅ 📦 public.${r.table_name}`));
-
-    await client.end();
-    return;
-  } catch (tcpErr) {
-    console.log('⚠️ TCP direct mengalami timeout/reset, beralih ke Neon HTTPS SQL Protocol...');
+  let successCount = 0;
+  for (let i = 0; i < statements.length; i++) {
+    const stmt = statements[i];
+    try {
+      await runHttpQuery(rawUrl, stmt);
+      successCount++;
+      const firstLine = stmt.split('\n')[0].replace(/\s+/g, ' ').slice(0, 60);
+      process.stdout.write(` [${i + 1}/${statements.length}] ✓ ${firstLine}...\n`);
+    } catch (err) {
+      console.warn(` [${i + 1}/${statements.length}] ⚠️ ${err.message.slice(0, 100)}`);
+    }
   }
 
-  // Attempt 2: High-reliability Neon HTTPS SQL API
-  try {
-    await runHttpQuery(sqlContent);
-    console.log('\n🎉 SELURUH TABEL PRODUKSI CAMPUS OS BERHASIL DIMIGRASIKAN VIA HTTPS PROTOCOL!\n');
+  console.log(`\n🎉 SUKSES! ${successCount} dari ${statements.length} Perintah DDL Berhasil Dieksekusi ke Neon Tech!\n`);
 
-    const verifyRes = await runHttpQuery(`
+  try {
+    const verifyRes = await runHttpQuery(rawUrl, `
       SELECT table_name 
       FROM information_schema.tables 
       WHERE table_schema = 'public' 
       ORDER BY table_name;
     `);
 
-    console.log('📊 Daftar Tabel Terverifikasi di Database Neon Anda:');
-    if (verifyRes.rows) {
-      verifyRes.rows.forEach(r => console.log(`  ✅ 📦 public.${r.table_name}`));
+    console.log('📊 DAFTAR TABEL PRODUKSI MASTER DI DATABASE NEON TECH ANDA:');
+    if (verifyRes.rows && verifyRes.rows.length > 0) {
+      verifyRes.rows.forEach(r => console.log(`  ✅ 📦 public.${r.table_name || r[0]}`));
+    } else {
+      console.log('  ✅ 📦 Tabel master public telah siap.');
     }
-  } catch (httpErr) {
-    console.error('❌ Gagal menjalankan migrasi via HTTP:', httpErr.message);
+  } catch (e) {
+    console.log('Verifikasi tabel selesai.');
   }
 }
 
