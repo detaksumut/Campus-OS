@@ -3,82 +3,106 @@ import {
   LayoutDashboard, UserPlus, GraduationCap, FileText, CalendarCheck, 
   CheckSquare, Award, ScrollText, BookOpen, Video, FolderOpen, MessageSquare, 
   DollarSign, Users, Package, Library, UserCheck, Microscope, HeartHandshake, 
-  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database
+  BookMarked, Newspaper, Cloud, ShieldCheck, BarChart3, Settings, Moon, Sun, Database, Lock
 } from 'lucide-react';
 import { useThemeRuntime } from '@campus-os/shared';
+import { UserRole } from './Header';
 
 interface SidebarProps {
+  userRole: UserRole;
   activeTab: string;
   onSelectMenu: (menuId: string, title: string) => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onSelectMenu }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ userRole, activeTab, onSelectMenu }) => {
   const { mode, toggleTheme } = useThemeRuntime();
 
-  const menuSections = [
+  const allSections = [
     {
       category: 'AKADEMIK',
+      roles: ['ADMIN', 'DOSEN', 'MAHASISWA'],
       items: [
-        { id: 'pmb', label: 'PMB (Penerimaan Mhs Baru)', icon: UserPlus },
-        { id: 'akademik', label: 'Sistem Akademik', icon: GraduationCap },
-        { id: 'krs', label: 'KRS', icon: FileText },
-        { id: 'perkuliahan', label: 'Perkuliahan', icon: CalendarCheck },
-        { id: 'ujian', label: 'Ujian Online', icon: CheckSquare },
-        { id: 'penilaian', label: 'Penilaian', icon: Award },
-        { id: 'wisuda', label: 'Wisuda', icon: ScrollText },
+        { id: 'pmb', label: 'PMB (Penerimaan Mhs Baru)', icon: UserPlus, roles: ['ADMIN'] },
+        { id: 'akademik', label: 'Sistem Akademik', icon: GraduationCap, roles: ['ADMIN', 'DOSEN'] },
+        { id: 'krs', label: 'KRS', icon: FileText, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'perkuliahan', label: 'Perkuliahan (16 Sesi)', icon: CalendarCheck, roles: ['ADMIN', 'DOSEN'] },
+        { id: 'ujian', label: 'Ujian Online (CBT)', icon: CheckSquare, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'penilaian', label: 'Penilaian & KHS', icon: Award, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'wisuda', label: 'Wisuda & SIVIL', icon: ScrollText, roles: ['ADMIN', 'MAHASISWA'] },
       ]
     },
     {
       category: 'PEMBELAJARAN',
+      roles: ['ADMIN', 'DOSEN', 'MAHASISWA'],
       items: [
-        { id: 'lms', label: 'LMS (E-Learning)', icon: BookOpen },
-        { id: 'kelas_online', label: 'Kelas Online', icon: Video },
-        { id: 'materi', label: 'Materi Digital', icon: FolderOpen },
-        { id: 'tugas', label: 'Tugas & Diskusi', icon: MessageSquare },
+        { id: 'lms', label: 'LMS (E-Learning)', icon: BookOpen, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'kelas_online', label: 'Kelas Online', icon: Video, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'materi', label: 'Materi Digital', icon: FolderOpen, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'tugas', label: 'Tugas & Diskusi', icon: MessageSquare, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
       ]
     },
     {
       category: 'NON-AKADEMIK',
+      roles: ['ADMIN', 'DOSEN', 'MAHASISWA'],
       items: [
-        { id: 'keuangan', label: 'Keuangan', icon: DollarSign },
-        { id: 'sdm', label: 'SDM & Kepegawaian', icon: Users },
-        { id: 'aset', label: 'Inventaris & Aset', icon: Package },
-        { id: 'perpustakaan', label: 'Perpustakaan', icon: Library },
-        { id: 'alumni', label: 'Alumni & Tracer Study', icon: UserCheck },
+        { id: 'keuangan', label: 'Keuangan & UKT', icon: DollarSign, roles: ['ADMIN', 'MAHASISWA'] },
+        { id: 'sdm', label: 'SDM & BKD Dosen', icon: Users, roles: ['ADMIN', 'DOSEN'] },
+        { id: 'aset', label: 'Inventaris & Aset', icon: Package, roles: ['ADMIN'] },
+        { id: 'perpustakaan', label: 'Perpustakaan', icon: Library, roles: ['ADMIN', 'DOSEN', 'MAHASISWA'] },
+        { id: 'alumni', label: 'Alumni & Tracer Study', icon: UserCheck, roles: ['ADMIN', 'MAHASISWA'] },
       ]
     },
     {
       category: 'PENELITIAN & PENGABDIAN',
+      roles: ['ADMIN', 'DOSEN'],
       items: [
-        { id: 'penelitian', label: 'Penelitian', icon: Microscope },
-        { id: 'pengabdian', label: 'Pengabdian Masyarakat', icon: HeartHandshake },
-        { id: 'publikasi', label: 'Publikasi', icon: BookMarked },
-        { id: 'ojs', label: 'Jurnal Sistem (OJS)', icon: Newspaper, badge: 'New' },
+        { id: 'penelitian', label: 'Penelitian', icon: Microscope, roles: ['ADMIN', 'DOSEN'] },
+        { id: 'pengabdian', label: 'Pengabdian Masyarakat', icon: HeartHandshake, roles: ['ADMIN', 'DOSEN'] },
+        { id: 'publikasi', label: 'Publikasi & HKI', icon: BookMarked, roles: ['ADMIN', 'DOSEN'] },
+        { id: 'ojs', label: 'Jurnal Sistem (OJS)', icon: Newspaper, badge: 'New', roles: ['ADMIN', 'DOSEN'] },
       ]
     },
     {
-      category: 'SISTEM PENDUKUNG',
+      category: 'KONSOL ADMINISTRATOR (BACKEND)',
+      roles: ['ADMIN'], // HANYA MUNCUL KETIKA ADMIN LOGIN!
       items: [
-        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Auto-Map' },
-        { id: 'pddikti', label: 'PDDIKTI', icon: Cloud },
-        { id: 'akreditasi', label: 'Akreditasi', icon: ShieldCheck },
-        { id: 'laporan', label: 'Laporan & Dashboard', icon: BarChart3 },
-        { id: 'pengaturan', label: 'Pengaturan Sistem', icon: Settings },
+        { id: 'migrasi', label: 'Dropship & Migrasi Data', icon: Database, badge: 'Auto-Map', roles: ['ADMIN'] },
+        { id: 'pddikti', label: 'PDDIKTI Neo Feeder', icon: Cloud, roles: ['ADMIN'] },
+        { id: 'akreditasi', label: 'Akreditasi 9 Kriteria', icon: ShieldCheck, roles: ['ADMIN'] },
+        { id: 'laporan', label: 'Laporan & Dashboard', icon: BarChart3, roles: ['ADMIN'] },
+        { id: 'pengaturan', label: 'Pengaturan Sistem', icon: Settings, roles: ['ADMIN'] },
       ]
     }
   ];
 
+  // Filter sections and items based on active userRole
+  const visibleSections = allSections
+    .filter(sec => sec.roles.includes(userRole))
+    .map(sec => ({
+      ...sec,
+      items: sec.items.filter(item => item.roles.includes(userRole))
+    }))
+    .filter(sec => sec.items.length > 0);
+
   return (
     <aside className="w-64 bg-slate-900 border-r border-slate-800 text-slate-300 flex flex-col h-full select-none shrink-0 z-30">
       {/* Brand Header */}
-      <div className="p-4 border-b border-slate-800 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-sm shadow-md">
-          🧠
+      <div className="p-4 border-b border-slate-800 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-sm shadow-md">
+            🧠
+          </div>
+          <div>
+            <h2 className="font-black text-sm text-white tracking-wide">Campus OS</h2>
+            <p className="text-[10px] text-slate-400 font-medium">Integrated Digital Campus</p>
+          </div>
         </div>
-        <div>
-          <h2 className="font-black text-sm text-white tracking-wide">Campus OS</h2>
-          <p className="text-[10px] text-slate-400 font-medium">Integrated Digital Campus</p>
-        </div>
+
+        {userRole === 'ADMIN' && (
+          <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded">
+            Admin
+          </span>
+        )}
       </div>
 
       {/* Nav Items (Scrollable) */}
@@ -97,11 +121,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onSelectMenu }) => 
         </button>
 
         {/* Categorized Sections */}
-        {menuSections.map(sec => (
+        {visibleSections.map(sec => (
           <div key={sec.category} className="space-y-1">
-            <p className="px-3 text-[10px] font-bold text-slate-400 tracking-wider uppercase mb-1">
-              {sec.category}
-            </p>
+            <div className="flex items-center justify-between px-3 mb-1">
+              <p className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
+                {sec.category}
+              </p>
+              {sec.category.includes('ADMINISTRATOR') && (
+                <Lock size={11} className="text-emerald-500" />
+              )}
+            </div>
             {sec.items.map(item => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;

@@ -30,9 +30,12 @@ import { PerpustakaanWorkspaceView } from './modules/PerpustakaanWorkspaceView';
 import { DataMigrationWorkspaceView } from './modules/DataMigrationWorkspaceView';
 import { SettingsView } from './modules/SettingsView';
 
+import { UserRole } from './components/Header';
+
 function PortalMainLayout() {
   const { mode } = useThemeRuntime();
   const { profile } = useTenant();
+  const [userRole, setUserRole] = useState<UserRole>('ADMIN');
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [activeTabTitle, setActiveTabTitle] = useState<string>('Beranda');
 
@@ -61,12 +64,20 @@ function PortalMainLayout() {
 
   return (
     <div className={`flex flex-col h-screen overflow-hidden font-sans ${mode === 'dark' ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
-      {/* 1. Top Header */}
-      <Header onOpenSettings={() => handleSelectMenu('pengaturan', 'Pengaturan Sistem')} />
+      {/* 1. Top Header with RBAC Switcher */}
+      <Header 
+        userRole={userRole} 
+        onChangeRole={setUserRole} 
+        onOpenSettings={() => handleSelectMenu('pengaturan', 'Pengaturan Sistem')} 
+      />
 
       <div className="flex flex-1 overflow-hidden">
-        {/* 2. Left Sidebar (21+ Menus) */}
-        <Sidebar activeTab={activeTab} onSelectMenu={handleSelectMenu} />
+        {/* 2. Left Sidebar (Dynamic RBAC Filtered) */}
+        <Sidebar 
+          userRole={userRole} 
+          activeTab={activeTab} 
+          onSelectMenu={handleSelectMenu} 
+        />
 
         {/* 3. Main Center Workspace */}
         <main className="flex-1 overflow-y-auto p-5 custom-scrollbar space-y-6">
