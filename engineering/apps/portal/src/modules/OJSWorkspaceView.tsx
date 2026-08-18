@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Newspaper, Send, CheckCircle, FileText, Upload, Award, ExternalLink, RefreshCw, Layers } from 'lucide-react';
+import { Newspaper, Send, CheckCircle, FileText, Upload, Award, ExternalLink, RefreshCw, Layers, X, Plus, BookOpen } from 'lucide-react';
 import { OJSWorkflowEngine, OJSSubmissionArticle, OJSEditorialStage } from '@campus-os/shared';
 
 export const OJSWorkspaceView: React.FC = () => {
@@ -48,6 +48,57 @@ export const OJSWorkspaceView: React.FC = () => {
   const [activeStageFilter, setActiveStageFilter] = useState<string>('ALL');
   const [selectedArticle, setSelectedArticle] = useState<OJSSubmissionArticle | null>(articles[0]);
   const [showJATSXML, setShowJATSXML] = useState(false);
+  const [showNewSubmissionModal, setShowNewSubmissionModal] = useState(false);
+
+  // Form State Pengajuan Naskah Jurnal Baru (OJS 3.x)
+  const [newSubmissionForm, setNewSubmissionForm] = useState({
+    journalTitle: 'Jurnal Teknologi Informasi dan Pariwisata (JTIP)',
+    sintaGrade: 'SINTA 2',
+    title: '',
+    abstract: '',
+    authors: 'Dr. Hendra Wijaya, M.T., Rian Hidayat',
+    section: 'Artikel Penelitian Asli (Original Research)',
+    keywords: 'Pariwisata 5.0, Machine Learning, Manajemen Destinasi',
+    fileName: 'Naskah_Lengkap_Jurnal_2024.docx'
+  });
+
+  const handleCreateSubmission = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newSubmissionForm.title.trim() || !newSubmissionForm.abstract.trim()) return;
+
+    const authorsList = newSubmissionForm.authors
+      .split(',')
+      .map(a => a.trim())
+      .filter(a => a.length > 0);
+
+    const newArticle: OJSSubmissionArticle = {
+      id: `sub-${Date.now().toString().slice(-4)}`,
+      journalTitle: newSubmissionForm.journalTitle,
+      sintaGrade: newSubmissionForm.sintaGrade,
+      title: newSubmissionForm.title.trim(),
+      abstract: newSubmissionForm.abstract.trim(),
+      authors: authorsList.length > 0 ? authorsList : ['Penulis Utama'],
+      currentStage: 'SUBMISSION',
+      similarityScore: 8.9,
+      reviewRound: 1,
+      reviewersAssigned: []
+    };
+
+    setArticles(prev => [newArticle, ...prev]);
+    setSelectedArticle(newArticle);
+    setShowNewSubmissionModal(false);
+    setActiveStageFilter('ALL');
+    setNewSubmissionForm({
+      journalTitle: 'Jurnal Teknologi Informasi dan Pariwisata (JTIP)',
+      sintaGrade: 'SINTA 2',
+      title: '',
+      abstract: '',
+      authors: 'Dr. Hendra Wijaya, M.T., Rian Hidayat',
+      section: 'Artikel Penelitian Asli (Original Research)',
+      keywords: '',
+      fileName: 'Naskah_Lengkap_Jurnal_2024.docx'
+    });
+  };
 
   const stages: { key: OJSEditorialStage; label: string }[] = [
     { key: 'SUBMISSION', label: '1. Submission' },
@@ -98,7 +149,10 @@ export const OJSWorkspaceView: React.FC = () => {
           >
             {showJATSXML ? 'Tutup XML' : 'Lihat JATS XML'}
           </button>
-          <button className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold shadow-lg shadow-blue-500/30 transition-all flex items-center gap-1.5">
+          <button 
+            onClick={() => setShowNewSubmissionModal(true)}
+            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold shadow-lg shadow-blue-500/30 transition-all flex items-center gap-1.5 hover:scale-105"
+          >
             <Upload size={14} />
             <span>Kirim Naskah Baru</span>
           </button>
@@ -280,6 +334,138 @@ export const OJSWorkspaceView: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* 📄 MODAL PENGAJUAN NASKAH JURNAL BARU (OJS 3.x PKP SUBMISSION) */}
+      {showNewSubmissionModal && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl animate-in zoom-in-95 text-slate-900 dark:text-white max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <Upload className="text-blue-500" size={20} />
+                <div>
+                  <h3 className="font-black text-sm">Pengajuan Naskah Jurnal Ilmiah Baru (OJS 3.x)</h3>
+                  <p className="text-[10px] text-slate-400">Standar Akreditasi Jurnal Nasional (ARJUNA & SINTA Dikti)</p>
+                </div>
+              </div>
+              <button onClick={() => setShowNewSubmissionModal(false)} className="text-slate-400 hover:text-slate-600">
+                <X size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateSubmission} className="space-y-3.5 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Target Jurnal Ilmiah Kampus: *</label>
+                <select
+                  value={newSubmissionForm.journalTitle}
+                  onChange={(e) => {
+                    const jTitle = e.target.value;
+                    let sGrade = 'SINTA 2';
+                    if (jTitle.includes('JMPB')) sGrade = 'SINTA 3';
+                    if (jTitle.includes('Kuliner')) sGrade = 'SINTA 4';
+                    setNewSubmissionForm({ ...newSubmissionForm, journalTitle: jTitle, sintaGrade: sGrade });
+                  }}
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold focus:outline-none"
+                >
+                  <option value="Jurnal Teknologi Informasi dan Pariwisata (JTIP)">Jurnal Teknologi Informasi dan Pariwisata (JTIP) [Akreditasi SINTA 2]</option>
+                  <option value="Jurnal Manajemen Perhotelan dan Bisnis (JMPB)">Jurnal Manajemen Perhotelan dan Bisnis (JMPB) [Akreditasi SINTA 3]</option>
+                  <option value="Jurnal Kuliner Nusantara & Gastronomi">Jurnal Kuliner Nusantara & Gastronomi [Akreditasi SINTA 4]</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Judul Lengkap Naskah Artikel (Title): *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Contoh: Strategi Pengembangan Smart Tourism Destination Berbasis IoT..."
+                  value={newSubmissionForm.title}
+                  onChange={(e) => setNewSubmissionForm({ ...newSubmissionForm, title: e.target.value })}
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-bold focus:outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Nama Penulis & Rekan (Pisahkan Koma): *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Contoh: Dr. Hendra Wijaya, Rian Hidayat"
+                    value={newSubmissionForm.authors}
+                    onChange={(e) => setNewSubmissionForm({ ...newSubmissionForm, authors: e.target.value })}
+                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-medium focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Kategori Bagian (Section):</label>
+                  <select
+                    value={newSubmissionForm.section}
+                    onChange={(e) => setNewSubmissionForm({ ...newSubmissionForm, section: e.target.value })}
+                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold focus:outline-none"
+                  >
+                    <option value="Artikel Penelitian Asli (Original Research)">Artikel Penelitian Asli (Original Research)</option>
+                    <option value="Review Artikel Ilmiah (Systematic Review)">Review Artikel Ilmiah (Systematic Review)</option>
+                    <option value="Studi Kasus Industri & Terapan">Studi Kasus Industri & Terapan</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Abstrak Naskah (Abstract): *</label>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Tuliskan latar belakang, tujuan, metode penelitian, dan temuan utama..."
+                  value={newSubmissionForm.abstract}
+                  onChange={(e) => setNewSubmissionForm({ ...newSubmissionForm, abstract: e.target.value })}
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 font-normal focus:outline-none leading-relaxed"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1">Kata Kunci (Keywords):</label>
+                <input
+                  type="text"
+                  placeholder="Contoh: Pariwisata 5.0, Machine Learning, Manajemen Destinasi"
+                  value={newSubmissionForm.keywords}
+                  onChange={(e) => setNewSubmissionForm({ ...newSubmissionForm, keywords: e.target.value })}
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none"
+                />
+              </div>
+
+              <div className="p-3.5 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <FileText className="text-blue-500" size={18} />
+                  <div>
+                    <p className="font-bold text-blue-900 dark:text-blue-200 text-xs">File Naskah Lengkap (Manuscript Document)</p>
+                    <p className="text-[10px] text-slate-500 font-mono">Format: .DOCX / .PDF (Maks 15 MB)</p>
+                  </div>
+                </div>
+                <span className="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-blue-600 text-white shadow-sm">
+                  ✓ Siap Diupload
+                </span>
+              </div>
+
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowNewSubmissionModal(false)}
+                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-lg shadow-blue-600/30 flex items-center gap-1.5 hover:scale-105 transition-all"
+                >
+                  <Send size={14} />
+                  <span>Kirim Naskah ke Dewan Editor OJS</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
